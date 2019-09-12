@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+// Configuracion Jenkins
+compileJava { 
+  options.encoding = "Cp1251" 
+}
+
+dependencies {
+	compile fileTree(dir: '../SmartDogServicesLibs/lib', include: ['*.jar'])
+}
+
+compileJava.dependsOn(clean)

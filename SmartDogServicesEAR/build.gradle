@@ -1,0 +1,16 @@
+apply plugin: 'ear'
+
+project.archivesBaseName = 'SmartDogServices'
+
+dependencies {
+	deploy project(path: ':SmartDogServicesEJB', configuration: 'archives')
+	deploy project(path: ':SmartDogServices', configuration: 'archives')
+    earlib (fileTree(dir: '../SmartDogServicesLibs/lib', include: ['*.jar'])){  
+		transitive = false  
+	}
+}
+
+allprojects {
+	project.ext['commons-apache'] = fileTree(dir: '../SmartDogServicesEAR/src/main/application/APP-INF/lib', include: ['*.jar'])
+}
+ear.dependsOn(clean)

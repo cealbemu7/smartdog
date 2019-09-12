@@ -1,0 +1,23 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+repositories {
+	mavenCentral()
+}
+// Configuracion para Jenkins
+compileJava { 
+  options.encoding = "Cp1251" 
+}
+
+dependencies {
+  providedCompile fileTree(dir: '../SmartDogWeb/src/main/webapp/WEB-INF/lib', include: '*.jar')
+}
+
+tasks.withType(Compile) {
+    options.encoding = 'iso-8859-1'
+}
+
+compileJava.dependsOn(clean)

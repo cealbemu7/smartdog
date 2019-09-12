@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>SmartDogServices</display-name>
+	<servlet>
+		<description>SmartGeneratorReport</description>
+		<display-name>SmartGeneratorReport</display-name>
+		<servlet-name>SmartGeneratorReport</servlet-name>
+		<servlet-class>co.com.smart.dog.services.attachment.report.base.SmartGeneratorReport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SmartGeneratorReport</servlet-name>
+		<url-pattern>/SmartGeneratorReport</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>SmartAuthenticationFilter</filter-name>
+		<filter-class>co.com.smart.dog.services.filters.SmartAuthenticationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SmartAuthenticationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>

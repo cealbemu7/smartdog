@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
+import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.utility.SmartConstant;
 
 /**
@@ -149,6 +150,11 @@ public class JDBCResourceManager implements Serializable{
 	 */
 	public static String getString(String key){
 		return "{ "+PROPERTIES.getString(key)+" }";
+	}
+
+	public MensajeSQLDTO getResponseSQL(String response) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

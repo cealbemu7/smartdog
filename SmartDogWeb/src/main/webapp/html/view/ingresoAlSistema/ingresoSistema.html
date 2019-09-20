@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'
+	rel='stylesheet' type='text/css'>
+<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
+<title>Ingreso al sistema</title>
+</head>
+<body>
+	<div class="container">
+		<div class="card card-container">
+			<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+			<img id="profile-img" class="profile-img-card"
+				src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+			<p id="profile-name" class="profile-name-card"></p>
+			<div class="row">
+				<div class="col-xl-8 offset-xl-2">				
+					<form id="contact-form" method="post" action="" role="form">
+						<div class="messages"></div>
+						<div class="controls">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_email">Email *</label> <input id="form_email"
+											type="email" name="email" class="form-control"
+											placeholder="Ingrese su email *" required="required"
+											data-error="El email es obligatorio.">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Contraseña *</label> <input
+											id="form_lastname" type="password" name="contrasena"
+											class="form-control" placeholder="Ingrese su contrasena *"
+											required="required"
+											data-error="La contrasena es obligatoria.">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="form-group">
+										<div class="g-recaptcha"
+											data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
+											data-callback="verifyRecaptchaCallback"
+											data-expired-callback="expiredRecaptchaCallback"></div>
+										<input class="form-control d-none" data-recaptcha="true"
+											required data-error="Porfavor complete el Captcha">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<input type="submit" class="btn btn-success btn-send"
+										value="Iniciar Sesiòn"> <a href="#"
+										class="forgot-password"> Recuperar Contraseña? </a>
+
+								</div>
+								<div class="col-lg-6">
+									<a class="btn btn-primary" data-toggle="collapse"
+										href="#collapseExample" role="button" aria-expanded="false"
+										aria-controls="collapseExample"> Incribirse ahora </a>
+								</div>
+							</div>
+							<div class="collapse" id="collapseExample">
+								<div class="card card-body">
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="form_email">Correo *</label> <input
+													id="form_email" type="email" name="email"
+													class="form-control" placeholder="Ingrese su email *"
+													required="required" data-error="El email es obligatorio.">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="form_email">Confirmación *</label> <input id="form_email" type="email"
+													name="email" class="form-control"
+													placeholder="Ingrese su email *" required="required"
+													data-error="Confirmar su email es obligatorio">
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+																			
+											<input type="submit" class="btn btn-success btn-send"
+											value="Registrarme">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src="../../../js/js/validator.js"></script>
+	<script src="../../../js/js/contact.js"></script>
+</body>
+</html>

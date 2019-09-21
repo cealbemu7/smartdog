@@ -47,3 +47,13 @@ RemoteSystemsTempFiles/
 #SmartDogServicesEJB/.classpath
 #SmartDogServicesEJB/.classpath
 #SmartDogServicesEJB/.classpath
+SmartDogWeb/.tern-project
+.project
+SmartDogServicesEJB/.classpath
+SmartDogServices/.classpath
+SmartDogWeb/.classpath
+SmartDogServicesEJB/.classpath
+SmartDogServicesEAR/.classpath
+SmartDogServices/.classpath
+SmartDogAdminWeb/.classpath
+SmartDogWeb/.classpath

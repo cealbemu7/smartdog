@@ -5,11 +5,13 @@ import co.com.smart.dog.bean.DatosMaestroBeanLocal;
 import co.com.smart.dog.bean.DepartamentoBeanLocal;
 import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
+import co.com.smart.dog.bean.UsuarioBeanLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
 import co.com.smart.dog.persistence.DepartamentoFacadeLocal;
 import co.com.smart.dog.persistence.MaestroFacadeLocal;
 import co.com.smart.dog.persistence.PaisFacadeLocal;
+import co.com.smart.dog.persistence.UsuarioFacadeLocal;
 import co.com.smart.dog.session.base.SmartContextLookUp;
 
 
@@ -32,7 +34,8 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static CiudadBeanLocal getCiudadBean;
 	private static MaestroBeanLocal getMaestroBean;
 	private static DatosMaestroBeanLocal getDatosMaestroBean;
-
+	private static UsuarioBeanLocal getUsuarioBean;
+	
 	 /**
 	  * Instancia unica del bean getPaisBean
 	  * @return
@@ -94,6 +97,19 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 		return getDatosMaestroBean;
 	}
 	
+	 /**
+	  * Instancia unica del bean getUsuarioBean
+	  * @return
+	  */
+	 public static synchronized UsuarioBeanLocal getUsuarioBean() {
+
+	  if (getUsuarioBean == null) {
+		  getUsuarioBean = (UsuarioBeanLocal) getSmartContext("UsuarioBean");
+	  }
+
+	  return getUsuarioBean;
+	 }
+	
 	/**
 	 * Facade
 	 */
@@ -103,6 +119,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static CiudadFacadeLocal getCiudadFacade;
 	private static MaestroFacadeLocal getMaestroFacade;
 	private static DatosMaestroFacadeLocal getDatosMaestroFacade;
+	private static UsuarioFacadeLocal getUsuarioFacade;
 	
 	 /**
 	  * Instancia unica de la facade getPaisFacade
@@ -167,6 +184,18 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 		}
 
 		return getDatosMaestroFacade;
+	}
+	/**
+	 * Instancia unica de la fachada getUsuarioFacade
+	 * @return
+	 */
+	public static synchronized UsuarioFacadeLocal getUsuarioFacade() {
+
+		if (getUsuarioFacade == null) {
+			getUsuarioFacade = (UsuarioFacadeLocal) getSmartContext("UsuarioFacade");
+		}
+
+		return getUsuarioFacade;
 	}
 
 

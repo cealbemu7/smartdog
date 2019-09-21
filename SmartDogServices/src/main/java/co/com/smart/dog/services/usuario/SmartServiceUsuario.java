@@ -1,0 +1,31 @@
+package co.com.smart.dog.services.usuario;
+
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
+import co.com.smart.dog.services.base.SmartResponseBase;
+import co.com.smart.dog.session.DelegateContextEJB;
+
+@Path("/SmartServiceUsuario")
+public class SmartServiceUsuario extends SmartResponseBase{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Servicio que permite consultar usuario
+	 * @param json
+	 * @return
+	 */	
+	@POST
+	@Path("/consultarUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response consultarUsuario (UsuarioDTO json){
+		return getResponse(DelegateContextEJB.getUsuarioBean().consultarUsuario(json));
+	}
+}

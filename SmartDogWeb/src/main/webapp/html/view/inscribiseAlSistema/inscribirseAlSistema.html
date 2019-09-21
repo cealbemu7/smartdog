@@ -2,9 +2,79 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'
+	rel='stylesheet' type='text/css'>
+<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
+<title>Ingreso al sistema</title>
 </head>
 <body>
+	<div class="container">
+		<div class="card card-container">
+			<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+			<img id="profile-img" class="profile-img-card"
+				src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+			<p id="profile-name" class="profile-name-card"></p>
+			<div class="row">
+				<div class="col-xl-8 offset-xl-2">
+					<form id="contact-form" method="post" action="" role="form">
+						<div class="messages"></div>
+						<div class="controls">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_email">Email</label> <input id="form_email"
+											disabled="disabled" type="email" name="email"
+											class="form-control" required="required"
+											data-error="El email es obligatorio.">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Código confirmacion*</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Ingrese su codigo"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Constraseña *</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Ingrese su codigo"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Confirma contraseña *</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Confirmar contraseña"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+							<input type="submit" class="btn btn-success"value="Guardar">
+						</div>
+					</form>
+				</div>
 
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src="../../../js/js/validator.js"></script>
+	<script src="../../../js/js/contact.js"></script>
 </body>
 </html>

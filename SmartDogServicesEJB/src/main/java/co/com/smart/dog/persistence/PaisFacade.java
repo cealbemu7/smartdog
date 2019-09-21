@@ -21,7 +21,7 @@ import co.com.smart.dog.utility.SmartConstant;
 		   mappedName = "ejb/PaisFacade")
 public class PaisFacade extends AbstractBean implements PaisFacadeLocal{
 	
-	@PersistenceContext(unitName = "SmartParrotPU")
+	@PersistenceContext(unitName = "SmartDogPU")
 	private EntityManager em;
 	protected EntityManager getEntityManager() {
 		return em;

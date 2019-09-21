@@ -17,7 +17,7 @@ public class CiudadDTO extends SmartBaseDTO implements Serializable{
     private Date fhingreso;
     private Date fhmodificacion;
     private Date fhretiro;    
-    private DepartamentoDTO departamentoDTO;
+    private DepartamentoDTO departamento;
     
 	public BigDecimal getScciudad() {
 		return scciudad;
@@ -61,10 +61,11 @@ public class CiudadDTO extends SmartBaseDTO implements Serializable{
 	public void setFhretiro(Date fhretiro) {
 		this.fhretiro = fhretiro;
 	}
-	public DepartamentoDTO getDepartamentoDTO() {
-		return departamentoDTO;
+	public DepartamentoDTO getDepartamento() {
+		return departamento;
 	}
-	public void setDepartamentoDTO(DepartamentoDTO departamentoDTO) {
-		this.departamentoDTO = departamentoDTO;
+	public void setDepartamento(DepartamentoDTO departamento) {
+		this.departamento = departamento;
 	}
+
 }

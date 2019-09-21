@@ -42,7 +42,7 @@ public class CiudadCaller extends JDBCResourceManager implements Serializable{
 			conn = getConnection();
 			call = conn.prepareCall(getString("CiudadCaller.fn_consultarCiudad"));
 			call.registerOutParameter(1, Types.OTHER);
-			call.setInt(2, filtro.getDepartamentoDTO().getPais().getScpais().intValue());
+			call.setInt(2, filtro.getDepartamento().getPais().getScpais().intValue());
 			
 			if(filtro.getCociudad() != null){
 				call.setString(3,filtro.getCociudad());
@@ -61,7 +61,7 @@ public class CiudadCaller extends JDBCResourceManager implements Serializable{
 	        	 ciudadDTO.setCociudad(rs.getString("sp_cociudad"));
 	        	 ciudadDTO.setDsciudad(rs.getString("sp_dsciudad"));
 	        	 departamentoDTO.setScdepartamento(rs.getBigDecimal("sp_scdepartamento"));
-	        	 ciudadDTO.setDepartamentoDTO(departamentoDTO);      	 
+	        	 ciudadDTO.setDepartamento(departamentoDTO);      	 
 	        	 ciudad.add(ciudadDTO);
         	 
                 }

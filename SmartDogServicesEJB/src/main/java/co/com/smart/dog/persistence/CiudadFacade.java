@@ -19,7 +19,7 @@ import co.com.smart.dog.utility.SmartConstant;
 @Stateless(name = "CiudadFacade",
 mappedName = "ejb/CiudadFacade")
 public class CiudadFacade extends AbstractBean implements CiudadFacadeLocal{
-	@PersistenceContext(unitName = "SmartParrotPU")
+	@PersistenceContext(unitName = "SmartDogPU")
 	private EntityManager em;
 	protected EntityManager getEntityManager() {
 		return em;

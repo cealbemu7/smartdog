@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
-import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
+import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
 public class UsuarioCaller extends JDBCResourceManager implements Serializable{
@@ -42,9 +42,15 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 			call = conn.prepareCall(getString("UsuarioCaller.fn_consultarusuario"));
 			call.registerOutParameter(1, Types.OTHER);
 			call.setString(2, usuario.getDsemail());
+			call.setString(3, usuario.getDscontrasena());	
 			
 			if(usuario.getDsemail() != null){
-				call.setString(3,usuario.getDsemail());
+				call.setString(2,usuario.getDsemail());
+			}else{
+				call.setNull(2, java.sql.Types.NULL);
+			}
+			if(usuario.getDscontrasena() != null){
+				call.setString(3,usuario.getDscontrasena());
 			}else{
 				call.setNull(3, java.sql.Types.NULL);
 			}
@@ -53,13 +59,13 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 			rs = (ResultSet) call.getObject(1);
          
 	         while(rs.next()){
-	        	 UsuarioDTO UsuarioDTO = new UsuarioDTO();       	
+	        	 UsuarioDTO usuarioDTO = new UsuarioDTO();       	
 	        	        	 
-	        	 UsuarioDTO.setScusuario(rs.getBigDecimal("sm_scusuario"));
-	        	 UsuarioDTO.setDsusuario(rs.getString("sm_dsusuario"));
-	        	 UsuarioDTO.setDscontrasena(rs.getString("sm_dscontrasena"));
-	        	 UsuarioDTO.setDsemail(rs.getString("sm_dsemail"));	        	     	 
-	        	 usuarios.add(UsuarioDTO);
+	        	 usuarioDTO.setScusuario(rs.getBigDecimal("sm_scusuario"));
+	        	 usuarioDTO.setDsusuario(rs.getString("sm_dsusuario"));
+	        	 usuarioDTO.setDscontrasena(rs.getString("sm_dscontrasena"));
+	        	 usuarioDTO.setDsemail(rs.getString("sm_dsemail"));	        	     	 
+	        	 usuarios.add(usuarioDTO);
         	 
                 }
         }finally{

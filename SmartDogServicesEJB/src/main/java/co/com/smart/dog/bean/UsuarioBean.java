@@ -15,7 +15,7 @@ import co.com.smart.dog.session.DelegateContextEJB;
  */
 @Stateless(name = "UsuarioBean",
 mappedName = "ejb/UsuarioBean")
-public class UsuarioBean extends AbstractBean implements UsuarioFacadeLocal {
+public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	private UsuarioFacadeLocal facade;
 	/**
 	 * Default constructor
@@ -24,19 +24,20 @@ public class UsuarioBean extends AbstractBean implements UsuarioFacadeLocal {
 		facade = DelegateContextEJB.getUsuarioFacade();
 	}
 	@Override
-	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario) throws Throwable {
+	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario) throws SmartExcepcionSerializada {
 		List<UsuarioDTO> usuarios = new ArrayList<>();
 		try {
-			usuarios = facade.consultarUsuario(usuario);
-		} catch(Throwable ex){
-			ex.printStackTrace(System.err);
+			
+			usuarios=facade.consultarUsuario(usuario);
+		}catch(Throwable ex){
 			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
-			smartException.setCode(0);
-			smartException.setMensaje(ex.getMessage());
+			smartException.setCode(0);			
 			smartException.setStackTrace(ex.getStackTrace());
 			throw smartException;
 		}
 		return usuarios;
+	
+
 	}
 
 }

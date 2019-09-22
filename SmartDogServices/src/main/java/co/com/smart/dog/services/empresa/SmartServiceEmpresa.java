@@ -24,10 +24,21 @@ public class SmartServiceEmpresa extends SmartResponseBase{
 	 * @return
 	 */	
 	@POST
-	@Path("/consultarUsuario")
+	@Path("/consultarEmpresa")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultarEmpresa (EmpresaDTO json){
 		return getResponse(DelegateContextEJB.getEmpresaBean().consultarEmpresa(json));
+	}
+	/**
+	 * Servicio que permite grabar Empresa
+	 * @param json
+	 * @return
+	 */	
+	@POST
+	@Path("/grabarEmpresa")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response grabarEmpresa (EmpresaDTO json){
+		return getResponse(DelegateContextEJB.getEmpresaBean().grabarEmpresa(json));
 	}
 
 }

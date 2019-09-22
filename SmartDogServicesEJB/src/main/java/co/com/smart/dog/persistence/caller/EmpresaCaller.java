@@ -29,7 +29,7 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws SQLException, NamingException, IOException{
 		try { 
 			conn = getConnection();
-			call = conn.prepareCall(getString("EmpresaCaller.fn_grabarEmpresa"));
+			call = conn.prepareCall(getString("EmpresaCaller.fn_grabar_empresa"));
 			if (empresa.getScempresa() != null) {
                 call.setBigDecimal(1, empresa.getScempresa());
             } else {

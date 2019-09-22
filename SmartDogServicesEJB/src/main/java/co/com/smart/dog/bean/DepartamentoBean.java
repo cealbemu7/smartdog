@@ -1,12 +1,9 @@
 package co.com.smart.dog.bean;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.naming.NamingException;
 
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;

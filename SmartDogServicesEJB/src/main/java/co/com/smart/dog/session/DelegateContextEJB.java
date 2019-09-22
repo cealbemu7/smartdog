@@ -3,12 +3,14 @@ package co.com.smart.dog.session;
 import co.com.smart.dog.bean.CiudadBeanLocal;
 import co.com.smart.dog.bean.DatosMaestroBeanLocal;
 import co.com.smart.dog.bean.DepartamentoBeanLocal;
+import co.com.smart.dog.bean.EmpresaBeanLocal;
 import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
 import co.com.smart.dog.bean.UsuarioBeanLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
 import co.com.smart.dog.persistence.DepartamentoFacadeLocal;
+import co.com.smart.dog.persistence.EmpresaFacadeLocal;
 import co.com.smart.dog.persistence.MaestroFacadeLocal;
 import co.com.smart.dog.persistence.PaisFacadeLocal;
 import co.com.smart.dog.persistence.UsuarioFacadeLocal;
@@ -35,6 +37,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static MaestroBeanLocal getMaestroBean;
 	private static DatosMaestroBeanLocal getDatosMaestroBean;
 	private static UsuarioBeanLocal getUsuarioBean;
+	private static EmpresaBeanLocal getEmpresaBean;
 	
 	 /**
 	  * Instancia unica del bean getPaisBean
@@ -109,9 +112,21 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 
 	  return getUsuarioBean;
 	 }
+	 /**
+	  * Instancia unica del bean getEmpresaBean
+	  * @return
+	  */
+	 public static synchronized EmpresaBeanLocal getEmpresaBean() {
+
+	  if (getEmpresaBean == null) {
+		  getEmpresaBean = (EmpresaBeanLocal) getSmartContext("EmpresaBean");
+	  }
+
+	  return getEmpresaBean;
+	 }
 	
 	/**
-	 * Facade
+	 * Facade ----------------------------------------------
 	 */
 	
 	private static PaisFacadeLocal getPaisFacade;
@@ -120,6 +135,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static MaestroFacadeLocal getMaestroFacade;
 	private static DatosMaestroFacadeLocal getDatosMaestroFacade;
 	private static UsuarioFacadeLocal getUsuarioFacade;
+	private static EmpresaFacadeLocal getEmpresaFacade;
 	
 	 /**
 	  * Instancia unica de la facade getPaisFacade
@@ -197,6 +213,19 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 
 		return getUsuarioFacade;
 	}
+	
+	/**
+	 * Instancia unica de la fachada getEmpresaFacade
+	 * @return
+	 */
+	public static synchronized EmpresaFacadeLocal getEmpresaFacade() {
+		if (getEmpresaFacade() == null) {
+			getEmpresaFacade=(EmpresaFacadeLocal) getSmartContext("EmpresaFacade");
+		}
+		return getEmpresaFacade;
+	}
+
+
 
 
 }

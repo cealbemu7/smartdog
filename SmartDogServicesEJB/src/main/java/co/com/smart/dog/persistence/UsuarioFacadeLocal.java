@@ -11,4 +11,11 @@ public interface UsuarioFacadeLocal {
 	 * @return usuario
 	 */
 	public List<UsuarioDTO> consultarUsuario (UsuarioDTO usuario)throws Throwable;
+	/**
+	 * Metodo utilizado para grabar usuario
+	 * @param usuario
+	 * @return
+	 * @throws Throwable
+	 */
+	public UsuarioDTO grabarUsuario(UsuarioDTO usuario)throws Throwable;
 }

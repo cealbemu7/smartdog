@@ -28,4 +28,15 @@ public class SmartServiceUsuario extends SmartResponseBase{
 	public Response consultarUsuario (UsuarioDTO json){
 		return getResponse(DelegateContextEJB.getUsuarioBean().consultarUsuario(json));
 	}
+	/**
+	 * Servicio que permite grabar usuario
+	 * @param json
+	 * @return
+	 */	
+	@POST
+	@Path("/grabarUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response grabarUsuario (UsuarioDTO json){
+		return getResponse(DelegateContextEJB.getUsuarioBean().grabarUsuario(json));
+	}
 }

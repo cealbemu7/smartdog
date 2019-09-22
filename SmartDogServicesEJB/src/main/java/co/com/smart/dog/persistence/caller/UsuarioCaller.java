@@ -8,13 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.NamingException;
 
-import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
+import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
 public class UsuarioCaller extends JDBCResourceManager implements Serializable{
@@ -35,6 +35,14 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 	public UsuarioCaller(String jdniData) {
 		super(jdniData);
 	}
+	/**
+	 * Metodo utilizado para consultar usuario
+	 * @param usuario
+	 * @return usuarios
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
 	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario)throws SQLException, NamingException, IOException{
 		List<UsuarioDTO> usuarios = new ArrayList<>();
 		try {
@@ -73,6 +81,34 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
         }
 		
 		return usuarios;
+	}
+	/**
+	 * Metodo utilizado para grabar usuario
+	 * @param usuario
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
+	
+	public UsuarioDTO grabarUsuario(UsuarioDTO usuario) throws SQLException, NamingException, IOException{
+		try { 
+			conn = getConnection();
+			call = conn.prepareCall(getString("UsuarioCaller.fn_grabar_usuario"));
+			if (usuario.getScusuario() != null) {
+                call.setBigDecimal(1, usuario.getScusuario());
+            } else {
+                call.setNull(1, java.sql.Types.NULL);
+            }
+				call.setBigDecimal(2, usuario.getScusuario());
+				call.setString(3, usuario.getDsusuario());
+				call.setString(4, usuario.getDscontrasena());
+				call.setString(5, usuario.getDsemail());
+						
+		}finally {
+			closeResources(conn, call);
+		}
+		return usuario;
 	}
 	@Override
 	public MensajeSQLDTO getResponseSQL(String response) {

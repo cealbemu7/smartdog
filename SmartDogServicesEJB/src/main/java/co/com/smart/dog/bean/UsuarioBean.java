@@ -23,6 +23,9 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	public UsuarioBean(){
 		facade = DelegateContextEJB.getUsuarioFacade();
 	}
+	/**
+	 * metodo utilizado para consultar usuario
+	 */
 	@Override
 	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario) throws SmartExcepcionSerializada {
 		List<UsuarioDTO> usuarios = new ArrayList<>();
@@ -38,6 +41,25 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 		return usuarios;
 	
 
+	}
+	/**
+	 * metodo utilizado para grabar usuario
+	 */
+	
+	@Override
+	public UsuarioDTO grabarUsuario(UsuarioDTO usuario) throws SmartExcepcionSerializada {
+		UsuarioDTO usuarios = new UsuarioDTO();
+		try {
+			usuarios = facade.grabarUsuario(usuario);
+		} catch (Throwable ex) {
+			ex.printStackTrace(System.err);
+			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
+			smartException.setCode(0);
+			smartException.setMensaje(ex.getMessage());
+			smartException.setStackTrace(ex.getStackTrace());
+			throw smartException;
+		}
+		return usuarios;
 	}
 
 }

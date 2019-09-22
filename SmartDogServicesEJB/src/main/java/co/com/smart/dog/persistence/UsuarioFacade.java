@@ -15,10 +15,8 @@ import co.com.smart.dog.persistence.caller.UsuarioCaller;
 import co.com.smart.dog.utility.SmartConstant;
 
 /**
- * Session Bean implementation class UsuarioFacade
- * 
+ * Session Bean implementation class UsuarioFacade 
  * @author deymer
- *
  */
 @Stateless(name = "UsuarioFacade", mappedName = "ejb/UsuarioFacade")
 public class UsuarioFacade extends AbstractBean implements UsuarioFacadeLocal {
@@ -40,6 +38,23 @@ public class UsuarioFacade extends AbstractBean implements UsuarioFacadeLocal {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return usuarios;
+	}
+	/**
+	 * metodo utilizado para grabar usuario
+	 */
+	@Override
+	public UsuarioDTO grabarUsuario(UsuarioDTO usuario) throws Throwable {
+		UsuarioDTO usuarios = new UsuarioDTO();
+		 try {
+				UsuarioCaller caller = new UsuarioCaller(SmartConstant.JDNI_CONNECTION);
+				usuarios = caller.grabarUsuario(usuario);
+				
+			} catch (NamingException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		return usuarios;
 	}
 

@@ -6,7 +6,8 @@ import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 
 public interface EmpresaFacadeLocal {
 	
-	public List<EmpresaDTO> consultarEmpresa (EmpresaDTO empresa ) throws Throwable;
+	public List<EmpresaDTO> consultarEmpresa (EmpresaDTO empresalist ) throws Throwable;
+	
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa ) throws Throwable;
 	
 }

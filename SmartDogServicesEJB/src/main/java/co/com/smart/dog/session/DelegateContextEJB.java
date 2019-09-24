@@ -219,7 +219,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	 * @return
 	 */
 	public static synchronized EmpresaFacadeLocal getEmpresaFacade() {
-		if (getEmpresaFacade() == null) {
+		if (getEmpresaFacade== null) {
 			getEmpresaFacade=(EmpresaFacadeLocal) getSmartContext("EmpresaFacade");
 		}
 		return getEmpresaFacade;

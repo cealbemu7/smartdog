@@ -1,11 +1,18 @@
 package co.com.smart.dog.infraestructure.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
-public class EmpresaDTO {
+public class EmpresaDTO extends SmartBaseDTO implements Serializable{
 
 		
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String nitempresa;
 	private String dsrazonsocial;
 	private String cousuario;
@@ -17,6 +24,8 @@ public class EmpresaDTO {
 	private String dstelefono;
 	private String dsemail;
 	private BigDecimal scempresa;
+	
+	
 	public String getNitempresa() {
 		return nitempresa;
 	}
@@ -82,6 +91,9 @@ public class EmpresaDTO {
 	}
 	public void setScempresa(BigDecimal scempresa) {
 		this.scempresa = scempresa;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

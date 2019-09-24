@@ -23,6 +23,9 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 	CallableStatement call = null;
 	ResultSet rs = null;
 	PreparedStatement pst = null;
+	public EmpresaCaller(String jdniConnection) {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * 
 	 */

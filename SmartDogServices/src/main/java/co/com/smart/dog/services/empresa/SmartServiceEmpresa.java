@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
+import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 import co.com.smart.dog.services.base.SmartResponseBase;
 import co.com.smart.dog.session.DelegateContextEJB;
 
@@ -22,6 +23,8 @@ public class SmartServiceEmpresa extends SmartResponseBase{
 	 * Servicio que permite consultar Empresa
 	 * @param json
 	 * @return
+	 * @throws Throwable 
+	 * @throws SmartExcepcionSerializada 
 	 */	
 	@POST
 	@Path("/consultarEmpresa")

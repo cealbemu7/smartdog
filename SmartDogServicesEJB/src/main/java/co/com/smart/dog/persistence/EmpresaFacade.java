@@ -4,41 +4,58 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import co.com.smart.dog.bean.AbstractBean;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 import co.com.smart.dog.persistence.caller.EmpresaCaller;
-
-
-
-public class EmpresaFacade implements EmpresaFacadeLocal {
-
-	@Override
-	public List<EmpresaDTO> consultarEmpresa(EmpresaDTO empresa) throws Throwable {
-		List<EmpresaDTO> empresacon = new ArrayList<>();
-		try {
-			EmpresaCaller caller = new EmpresaCaller ();
-			empresacon = caller.consultarEmpresa(empresa);
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+import co.com.smart.dog.utility.SmartConstant;
+@Stateless(name = "EmpresaFacade",
+mappedName = "ejb/EmpresaFacade")
+public class EmpresaFacade extends AbstractBean implements EmpresaFacadeLocal{
+	@PersistenceContext(unitName = "SmartDogPU")
+	private EntityManager em;
+	
+	protected EntityManager getEntityManager() {
+		return em;
 	}
 
 	@Override
-	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws Throwable {
-		EmpresaDTO empresacon = new EmpresaDTO();
+	public List<EmpresaDTO> consultarEmpresa(EmpresaDTO empresa)
+			throws Throwable {
+		List<EmpresaDTO> empresalist = new ArrayList<>();
 		 try {
-				EmpresaCaller caller = new EmpresaCaller();
-				empresacon = caller.grabarEmpresa(empresa);
+				EmpresaCaller caller = new EmpresaCaller(SmartConstant.JDNI_CONNECTION);
+				empresalist = caller.consultarEmpresa(empresa);
 				
 			} catch (NamingException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		return empresacon;
+		return empresalist;
+	}
+
+	
+	
+	
+	
+	@Override
+	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws Throwable {
+		
+		EmpresaDTO findempresa = new EmpresaDTO();
+		 try {
+				EmpresaCaller caller = new EmpresaCaller(SmartConstant.JDNI_CONNECTION);
+				findempresa = caller.grabarEmpresa(empresa);
+				
+			} catch (NamingException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return findempresa;
 	}
 }

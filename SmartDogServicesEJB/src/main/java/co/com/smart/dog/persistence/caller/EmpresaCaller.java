@@ -23,8 +23,9 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 	CallableStatement call = null;
 	ResultSet rs = null;
 	PreparedStatement pst = null;
-	public EmpresaCaller(String jdniConnection) {
-		// TODO Auto-generated constructor stub
+	
+	public EmpresaCaller(String jdniData) {
+		super(jdniData);
 	}
 	/**
 	 * 
@@ -72,7 +73,7 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 				
 				empresaDTO.setNitempresa(rs.getString("sm_nitempresa"));
 				empresaDTO.setDsrazonsocial(rs.getString("sm_dsrazonsocial"));
-				empresaDTO.setCousuario(rs.getNString("sm_cousuario"));
+				empresaDTO.setCousuario(rs.getString("sm_cousuario"));
 				empresaDTO.setFhingreso(rs.getDate("sm_fhingreso"));
 				empresaDTO.setFhmodificacion(rs.getDate("sm_fhmodificacion"));
 				empresaDTO.setFhretiro(rs.getDate("sm_fhretiro"));

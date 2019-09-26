@@ -221,7 +221,7 @@ angular
 		});
 
 
- ///
+ /**
 $(document).ready(function(){
 	var defaults = {
 			closeText: "Cerrar",
@@ -242,4 +242,4 @@ $(document).ready(function(){
 
 	$.datepicker.setDefaults(defaults);
 
-});
+});**/

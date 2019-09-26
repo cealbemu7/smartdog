@@ -1,10 +1,13 @@
 /**
- * Inicializa la aplicacion. Los demas datos son implementaciones angular
+ * @Descripcion: Inicializa la aplicacion. Los demas datos son implementaciones angular
  * 
  * (ui.router es para manejar las opciones de la aplicacion web...)
  * (ui.bootstrap es para programar por javascript componentes bootstrap) (ngGrid
  * es para crear tablas "conocidas como grid") (angularFileUpload es para crear
  * componentes para subir archivos al servidor)
+ * @Author: SmartJungle
+ * @Date: 11-07-2019
+ * @Date Modifi: 11-07-2019
  */
 angular
 		.module(
@@ -221,7 +224,8 @@ angular
 		});
 
 
- /**
+ ///
+/*
 $(document).ready(function(){
 	var defaults = {
 			closeText: "Cerrar",
@@ -242,4 +246,4 @@ $(document).ready(function(){
 
 	$.datepicker.setDefaults(defaults);
 
-});**/
+});*/

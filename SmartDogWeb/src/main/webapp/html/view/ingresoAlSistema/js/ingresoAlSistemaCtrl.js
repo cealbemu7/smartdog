@@ -5,7 +5,7 @@
  * @Date Modificación: 25-09-2019
  */
 
-angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, smartServices, $compile, $timeout) {
+angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, smartServices) {
 
 	
 	/**
@@ -14,7 +14,6 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	 * @Date: 25-09-2019
 	 */
 	$scope.onInit = function(){
-		alert("listo");
 		
 		$scope.usuario = {
 				"scusuario": null,
@@ -22,7 +21,7 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 			    "dscontrasena": null,
 			    "dsemail": null
 		}
-		$( "#dsemail" ).focus();		
+		
 	}	
 		
 	/**
@@ -33,7 +32,7 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 
 		  try {	  
 			  
-			  if ($scope.swcc != false){
+
 				  var exito = function(response) {
 					  	if(response.data != null){
 							$scope.usuarios = new Array();
@@ -42,48 +41,43 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 								$.each(usuarios, function( index , usuario ) {						
 									$scope.usuario.dsemail = usuario.dsemail;
 									$scope.usuario.dscontrasena = usuario.dscontrasena;
-																
-									$scope.mensaje("Informativo", "Usuario consultado con éxito", "");
+										
+									alert("exito usuario con este correo");
 								});
 							}else{
-								$scope.mensaje("Informativo", "No se encontro usuario con este correo", "");
-								$( "#dsemail" ).focus();
+								alert("No se encontro usuario con este correo");
 							}
 						}else{
-							$scope.mensaje("Informativo", "No se encontro usuario con este correo", "");
-							$( "#dsemail" ).focus();
+							alert("No se encontro usuario con este correo");
 						}
 					    
 				    }
 		 
 				    var error = function(response) {
 					    var reponsoObject = angular.fromJson(response.data);
-					    $scope.mensaje("Error", "Ha ocurrido un error al consultar usuario",reponsoObject);
 				    }
-		 
-				   
 				    
 				    var sendObject = {
 				    		dsemail : $scope.usuario.dsemail,
 				    		dscontrasena : $scope.usuario.dscontrasena,				    		
 				    };
+
+				    alert(sendObject.dsemail);
+				    alert(sendObject.dscontrasena);
+				    alert(angular.toJson(sendObject));
 				    
 				    smartServices.sendPost(
 				      angular.toJson(sendObject),
 				      hostSmart+context+methodConsultarUsuario,
 				      exito,
 				      error);
-			  }
+
 		   
 		  } catch (error) {
-		   $scope.mensaje("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
+			 // $scope.mensaje("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
 		  }
 	 }
 			
-	// Función en el botón consultar usuario en evento click 
-	$( "#btnIniciarSesion" ).click(function() {
-		$scope.consultarUsuario();
-	});		
 		
 });
 

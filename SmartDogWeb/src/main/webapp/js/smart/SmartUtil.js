@@ -20,15 +20,42 @@ var protocol = 'http';
 var server = 'localhost';
 var hostSmart = protocol+'://'+server+':'+port;
 var context = '/Smart'+app+'Services/SmartBussServices';
-var reportsContext = '/Smart'+app+'Services/SmartGeneratorReport?';
 
+/**
+ * @Descripcion: Definicion de los servicios a consumir para el login de la aplicacion y el menu principal.
+ * @Author: SmartJungle
+ * @Date: 30-06-2018
+ * @Date Modifi: 30-06-2018
+ */
+var serviceNameLogin = '/SmartServiceLogin';
+var application =   'Smart'+app+'Web';
+var contextLogin = '/'+application+'/SmartWebService';
+
+var methodLogin = serviceNameLogin+'/login';
+var methodResource = serviceNameLogin+'/resources';
+var methodEntitiesUser = serviceNameLogin+'/entitiesUser';
+var methodLogout = serviceNameLogin+'/logout';
+var methodInfoSession = serviceNameLogin+'/infoSession';
+var methodEmpresaEntity = serviceNameLogin+'/getEmpresaEntidad';
+
+
+
+/**
+ * @Descripcion: Definicion de los servicios a consumir para la solicitud de usuario al sistema
+ * @Author: SmartJungle
+ * @Date: 29-07-2019
+ * @Date Modifi: 29-07-2019
+ */
+var serviceNameRequestUsersCreate = '/SmartCreateUsersService';
+var methodRequestCreateUser = serviceNameRequestUsersCreate+'/requestCreateUser';
+var methodConfirmCreateUser = serviceNameRequestUsersCreate+'/confirmCreateUser';
 
 var userSession = {};
 var appProperties = {
     developer: "SmartJungle S.A.S",
     version: "1.0.0",
-    environment: "D",
-    releaseDate: "2019-09-11",
+    environment: "P",
+    releaseDate: "2019-07-11",
     printServer: "127.0.0.1",
     printPort: "5000"
 }

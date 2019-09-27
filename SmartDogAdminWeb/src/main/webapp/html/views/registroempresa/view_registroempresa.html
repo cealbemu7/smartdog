@@ -1,84 +1,137 @@
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html ng-app="smartApp">
+
 <head>
+<meta charset="utf-8">
 <meta charset="ISO-8859-1">
-<title>SmartJungle S.A.S</title>
-<link rel="stylesheet" href="../../../js/bootstrap-3.2.0/css/bootstrap.css">
+<title>Ingreso al sistema</title>
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet"
+	href="../../../js/bootstrap-3.2.0/css/bootstrap.css">
+
+
+<!-- Importarmos angular JS -->
+
+<script type="text/javascript"
+	src="../../../js/angular-1.4.7/angular.min.js"></script>
+
+<script type="text/javascript"
+	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/angucomplete/angucomplete.js"></script>
+<script type="text/javascript"
+	src="../../../js/smartmessagebox/app.min.js"> </script>
+<script type="text/javascript"
+	src="../../../js/smart/SmartConstantes.js"></script>
+
+<!-- Smart javascript framework -->
+<script type="text/javascript"
+	src="../../../js/smart/angular-websocket.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
+<script type="text/javascript" src="js/registroempresaCtrl.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+
+<!-- Importarmos Resources Services JS -->
+<script type="text/javascript"
+	src="js/resourceServicesRegistroempresa.js"></script>
+
+
 </head>
-<body>
+<body ng-controller="registroempresaCtrl" ng-init="onInit()">
 
-<div class="col-lg-6 mx-auto animate-in-down">
-  <form class="p-4">
-    <div class="form-group">
-     <label >Nit</label>
-     <input class="form-control" placeholder="Ingrese Nit" required>
-    </div>
+	<link rel="stylesheet" href="../../../js/bootstrap-3.2.0/css/bootstrap.css">
 
-    <div class="form-group"> <label>Raz髇 Social</label>
-      <input type="" class="form-control" placeholder="Ingrese Raz髇 Social" required > 
-    </div>
+	<div class="col-lg-6 mx-auto animate-in-down">
+		<form class="p-4 smart-form" >
+			<div class="form-group">
+				<label>Nit*</label> <input id="idnitempresa"
+					ng-model="empresa.nitempresa" class="form-control"
+					placeholder="Ingrese Nit" required>
+			</div>
 
-    <div   class="form-group"> <label>Correo</label>
-      <input class="form-control" placeholder="Ingrese Correo" required> 
-    </div>
-    <div class="form-group"> <label>Telefono Celular</label>
-      <input type="" class="form-control" placeholder="Ingrese Telefono Celular" required> 
-    </div>
+			<div class="form-group">
+				<label>Raz贸n Social*</label> <input id="idrazonsocialempresa"
+					type="text" ng-model="empresa.dsrazonsocial" class="form-control"
+					placeholder="Ingrese Raz贸n Social" required>
+			</div>
 
-    <div class="form-group"> <label>Departamento</label>
-      <select class="custom-select">
-  <option selected>--------</option>
-  <option value="1"></option>
-  <option value="2"></option>
-  <option value="3"></option>
-</select> 
-    </div>
+			<div class="form-group">
+				<label>Email*</label> <input id="idemailempresa" type="text"
+					ng-model="empresa.dsemail" class="form-control"
+					placeholder="Ingrese Email" required>
+			</div>
+			<div class="form-group">
+				<label>Telefono*</label> <input id="idtelefonoempresa" type="text"
+					ng-model="empresa.dstelefono" class="form-control"
+					placeholder="Ingrese Telefono Celular" required>
+			</div>
 
-    <div class="form-group"> <label>Ciudad</label>
-      <select class="custom-select" required="required">
-  <option selected>-----------</option>
-  <option value="1"></option>
-  <option value="2"></option>
-  <option value="3"></option>
-</select> 
-    </div>
+			<div class="form-group">
+				<label class="label">Departamento*</label> 
+					<select class="custom-select" id="iddepartamentoempresa" ng-model="departamento" ng-options="departamento as departamento.dsdepartamento for departamento in departamentos" ng-change="consultarCiudadEmpresa()" tabindex=3>
+						<option value="">Seleccionar</option>
+				</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
+				
+			</div>
 
-    <div class="form-group"> <label>Direcci髇</label>
-      <input type="" class="form-control" placeholder="Direcci髇" required> 
-    </div>
-    <button  type="submit" class="btn-primary  mt-4 btn-block p-2 "><b>Guardar</b></button>
-  </form>
-</div>
+					<div class="form-group">
+						<label class="label" >Ciudad*</label>
+							<select  class="custom-select" id="idciudadempresa" ng-model="ciudad" ng-options="ciudad as ciudad.dsciudad for ciudad in ciudades" tabindex=3>
+							<option value="">Seleccionar</option>
+						</select>
+						<i class="icon-append txt-color-teal fa fa-question-circle"></i>
+					
+				</div>
 
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr> 
-      <th scope="col">Nit</th>
-      <th scope="col">Raz髇 social</th>
-      <th scope="col">Acci髇</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-     <td></td>
-     <td></td>
-     <td></td>
-    
-    
-   </tr>
-   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-</tbody>
-</table>
- 
+			<div class="form-group">
+				<label>Direcci贸n*</label> <input id="iddireccionempresa" type="text"
+					ng-model="empresa.dsdireccion" class="form-control"
+					placeholder="Direcci贸n" required>
+			</div>
+			<button type="submit" class="btn-primary  mt-4 btn-block p-2 " href="javascript:void(0);"  id="btnguardar" title="Guardar Empresa" data-toggle="tooltip" data-original-title='Guardar Empresa' ng-click="grabarEmpresa()" tabindex=3>
+				<b>Guardar</b>
+			</button>
+		</form>
+	</div>
+
+
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Nit</th>
+				<th scope="col">Raz贸n social</th>
+				<th scope="col">Acci贸n</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+
+
+			</tr>
+			<tr>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+
 </body>
 </html>

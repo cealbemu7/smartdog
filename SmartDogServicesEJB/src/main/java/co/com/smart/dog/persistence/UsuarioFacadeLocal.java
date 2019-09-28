@@ -1,6 +1,10 @@
 package co.com.smart.dog.persistence;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
+
+import javax.naming.NamingException;
 
 import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
 
@@ -18,4 +22,14 @@ public interface UsuarioFacadeLocal {
 	 * @throws Throwable
 	 */
 	public UsuarioDTO grabarUsuario(UsuarioDTO usuario)throws Throwable;
+	/**
+	 * getParams
+	 * @param dsparameter
+	 * @return
+	 * @throws NamingException
+	 * @throws SQLException
+	 */
+	Map<String, String> getParams(String dsparameter) throws NamingException,
+			SQLException;
+
 }

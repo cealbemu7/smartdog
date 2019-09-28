@@ -1,5 +1,8 @@
 package co.com.smart.dog.bean;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+
 import java.util.List;
 
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
@@ -21,4 +24,21 @@ public interface UsuarioBeanLocal {
 	 * @throws SmartExcepcionSerializada
 	 */
 	public UsuarioDTO grabarUsuario(UsuarioDTO usuario)throws SmartExcepcionSerializada;
+	
+	/**
+	 * generateSecureToken
+	 * @param json
+	 * @return
+	 * @throws SmartExcepcionSerializada
+	 */
+	String generateSecureToken(UsuarioDTO json) throws SmartExcepcionSerializada;
+	
+	/**
+	 * getInfoSecureToken
+	 * @param token
+	 * @return
+	 * @throws SmartExcepcionSerializada
+	 */
+	Jws<Claims> getInfoSecureToken(String token);
+	
 }

@@ -2,41 +2,63 @@
 <html ng-app="smartApp">
 <head>
 <meta charset="utf-8">
-<meta name="viewport"content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ingreso al sistema</title>
 
-<link	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'
+	rel='stylesheet' type='text/css'>
 <link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="../../../js/js/validator.js"></script>
 <script src="../../../js/js/contact.js"></script>
 
 
-<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
 <!-- Importarmos angular JS -->
-<script type="text/javascript"src="../../../js/angular-1.4.7/angular.min.js"></script>
-<script type="text/javascript"src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
-<script type="text/javascript"src="../../../js/angucomplete/angucomplete.js"></script>
-<script type="text/javascript"src="../../../js/smartmessagebox/app.min.js"> </script>
-<script type="text/javascript"src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
-<script type="text/javascript"src="../../../js/smart/SmartConstantes.js"></script>
+<script type="text/javascript"
+	src="../../../js/angular-1.4.7/angular.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/angucomplete/angucomplete.js"></script>
+<script type="text/javascript"
+	src="../../../js/smartmessagebox/app.min.js"> </script>
+<script type="text/javascript"
+	src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
+<script type="text/javascript"
+	src="../../../js/smart/SmartConstantes.js"></script>
 
 <!-- Smart javascript framework -->
-<script type="text/javascript"src="../../../js/smart/angular-websocket.js"></script>
+<script type="text/javascript"
+	src="../../../js/smart/angular-websocket.js"></script>
 <script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
 <script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
 <script type="text/javascript" src="js/ingresoAlSistemaCtrl.js"></script>
 <script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
 
 <!-- Importarmos Resources Services JS -->
-<script type="text/javascript"src="js/resourceServicesIngresoAlSistema.js"></script>
+<script type="text/javascript"
+	src="js/resourceServicesIngresoAlSistema.js"></script>
 
 
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
+	{{message}}
 	<div class="container">
 		<div class="card card-container">
 			<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
@@ -82,7 +104,9 @@
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
-
+							</div>
+							<div ng-show="formVisibility" class="row">
+							<h2>desde el inicio</h2>
 							</div>
 							<div class="row">
 								<div class="col-lg-6">

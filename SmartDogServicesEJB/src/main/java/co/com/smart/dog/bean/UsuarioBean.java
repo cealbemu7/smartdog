@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,10 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	 */
 	public UsuarioBean() {
 		facade = DelegateContextEJB.getUsuarioFacade();
+		props = new Properties();
+		props.setProperty("resource.loader", "class");
+		props.setProperty("class.resource.loader.class","org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+		configs = new HashMap<>();
 	}
 
 	/**
@@ -73,7 +78,7 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 			Jws<Claims> claims = getInfoSecureToken(json.getSecureToken());
 
 			Date expire = claims.getBody().getExpiration();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss a");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a");
 
 			context.put("token", json.getSecureToken());
 			context.put("expire", dateFormat.format(expire.getTime()));

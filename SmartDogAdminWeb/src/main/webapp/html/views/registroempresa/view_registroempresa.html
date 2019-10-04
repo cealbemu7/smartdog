@@ -36,6 +36,7 @@
 <script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
 <script type="text/javascript" src="js/registroempresaCtrl.js"></script>
 <script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+		<script type="text/javascript" src="../../../js/smart/SmartConstantes.js"></script>
 
 <!-- Importarmos Resources Services JS -->
 		<script type="text/javascript" src="js/resourceServicesRegistroempresa.js"></script>
@@ -74,7 +75,7 @@
 
 			<div class="form-group">
 				<label class="label">Departamento*</label> 
-					<select class="custom-select" id="iddepartamentoempresa" ng-model="departamento" ng-options="departamento as departamento.dsdepartamento for departamento in departamentos" ng-change="consultarCiudadEmpresa()" tabindex=3>
+					<select class="custom-select" id="iddepartamentoempresa" ng-model="departamento" ng-options="departamento as departamento.dsdepartamento for departamento in departamento" ng-change="consultarCiudadEmpresa()" tabindex=3>
 						<option value="">Seleccionar</option>
 				</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
 				

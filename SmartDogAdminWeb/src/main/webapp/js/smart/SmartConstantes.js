@@ -4,3 +4,5 @@
  * @Date: 13-08-2018
  * @Date Modifi: 13-08-2018
  */
+
+var SmartMaestroPais = "01";

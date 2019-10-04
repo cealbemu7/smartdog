@@ -1,137 +1,382 @@
 <!doctype html>
-<html ng-app="smartApp">
-  <head>
-   <meta charset="utf-8">
-<title>Ingreso al sistema</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css">
-
-<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'
-	rel='stylesheet' type='text/css'>
-<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
-
-<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
-<!-- Importarmos angular JS -->
+<html ng-app="smartApp" lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>Ingreso al sistema</title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">		
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
+	<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>	
+	<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+	
+	<!-- Importarmos angular JS -->
 	<script type="text/javascript" src="../../../js/angular-1.4.7/angular.min.js"></script>
 	<script type="text/javascript" src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
 	<script type="text/javascript" src="../../../js/angucomplete/angucomplete.js"></script>
 	<script type="text/javascript" src="../../../js/smartmessagebox/app.min.js"> </script>
 	<script type="text/javascript" src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
 	<script type="text/javascript" src="../../../js/smart/SmartConstantes.js"></script>
-
- <!-- Smart javascript framework -->
-    <script type="text/javascript" src="../../../js/smart/angular-websocket.js"></script>
+	
+	<!-- Smart javascript framework -->
+	<script type="text/javascript" src="../../../js/smart/angular-websocket.js"></script>
 	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
 	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
 	<script type="text/javascript" src="js/ingresoAlSistemaCtrl.js"></script>
 	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
-
+	
 	<!-- Importarmos Resources Services JS -->
 	<script type="text/javascript" src="js/resourceServicesIngresoAlSistema.js"></script>
-
+	
 
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
-
-<body ng-controller="autorizarcolaboradorCtrl" ng-init="onInit()">
-
-	<div class="container">
-		<div class="card card-container">
-			<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-			<img id="profile-img" class="profile-img-card"
-				src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-			<p id="profile-name" class="profile-name-card"></p>
-			<div class="row">
-				<div class="col-xl-8 offset-xl-2">
-					<form id="contact-form" method="post" action="" role="form">
-						<div class="messages"></div>
-						<div class="controls">
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label for="form_email">Email *</label> 
-										<input
-											id="dsemail" type="text" 
-											class="form-control" placeholder="Ingrese su contrasena"
-											required="required"
-											data-error="El email es obligatorio."
-											ng-model="usuario.dsemail"/>
-										<div class="help-block with-errors"></div>
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<label for="form_lastname">Contraseña *</label> 
-										<input
-											id="dscontrasena" type="password" 
-											class="form-control" placeholder="Ingrese su contrasena"
-											required="required"
-											data-error="La contrasena es obligatoria."
-											ng-model="usuario.dscontrasena"/>
-										<div class="help-block with-errors"></div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-8">
-									<div class="form-group">
-										<div class="g-recaptcha"
-											data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
-											data-callback="verifyRecaptchaCallback"
-											data-expired-callback="expiredRecaptchaCallback"></div>
-										<input class="form-control d-none" data-recaptcha="true"
-											required data-error="Porfavor complete el Captcha">
-										<div class="help-block with-errors"></div>
-									</div>
-								</div>
-
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<a href="" id="btnIniciarSesion" class="btn btn-success"
-										ng-click="consultarUsuario()">Iniciar Sesiòn</a> <a href="#"
-										class="forgot-password"> Recuperar Contraseña? </a>
-								</div>
-								<div class="col-lg-6">
-									<a class="btn btn-primary" data-toggle="collapse"
-										href="#collapseExample" role="button" aria-expanded="false"
-										aria-controls="collapseExample"> Incribirse ahora </a>
-								</div>
-							</div>
-							<div class="collapse" id="collapseExample">
-								<div class="card card-body">
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label for="form_email">Correo *</label> <input
-													id="form_email" type="email" name="email"
-													class="form-control" placeholder="Ingrese su email *"
-													required="required" data-error="El email es obligatorio.">
-												<div class="help-block with-errors"></div>
-											</div>
+	<div ng-show="formVisible">
+		<div class="container">
+			<div class="card card-container">
+				<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+				<img id="profile-img" class="profile-img-card"
+					src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+				<p id="profile-name" class="profile-name-card"></p>
+				<div class="row">
+					<div class="col-xl-8 offset-xl-2">
+						<form id="contact-form" method="post" action="" role="form">							
+							<div class="controls">								
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_email">Email *</label> <input id="dsemail"
+												type="text" class="form-control"
+												placeholder="Ingrese su contrasena" required="required"
+												data-error="El email es obligatorio."
+												ng-model="usuario.dsemail" />
+											<div class="help-block with-errors"></div>
 										</div>
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label for="form_email">Confirmación *</label> <input
-													id="form_email" type="email" name="email"
-													class="form-control" placeholder="Ingrese su email *"
-													required="required" data-error="Confirmar su email.">
-												<div class="help-block with-errors"></div>
-											</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_lastname">Contraseña *</label> 
+											<input id="dscontrasena" type="password" class="form-control"
+												placeholder="Ingrese su contrasena" required="required"
+												data-error="La contrasena es obligatoria."
+												ng-model="usuario.dscontrasena" />
+											<div class="help-block with-errors"></div>
 										</div>
-										<input type="submit" class="btn btn-success btn-send"
-											value="Registrarme">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-8">
+									  <div class="form-group">
+				                            <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+				                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required data-error="complete el Captcha">
+				                            <div class="help-block with-errors"></div>
+				                        </div>										
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-4">
+										<a href="" id="btnIniciarSesion" class="btn btn-success"
+											ng-click="consultarUsuario()">Iniciar Sesiòn</a>
+										<br> 
+										<a href="#"	class="forgot-password"> Recuperar Contraseña? </a>
+									</div>
+									<div class="col-lg-4">
+										<a class="btn btn-primary" data-toggle="collapse"
+											href="#collapseExample" role="button" aria-expanded="false"
+											aria-controls="collapseExample"> Incribirse ahora </a>
+									</div>
+								</div>
+								<div class="collapse" id="collapseExample">
+									<div class="card card-body">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label for="form_email">Correo *</label> <input
+														id="form_email" type="email" name="email"
+														class="form-control" placeholder="Ingrese su email *"
+														required="required" data-error="El email es obligatorio.">
+													<div class="help-block with-errors"></div>
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label for="form_email">Confirmación *</label> <input
+														id="form_email" type="email" name="email"
+														class="form-control" placeholder="Ingrese su email *"
+														required="required" data-error="Confirmar su email.">
+													<div class="help-block with-errors"></div>
+												</div>
+											</div>
+											<input type="submit" class="btn btn-success btn-send"
+												value="Registrarme">
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</div>
-
+						</form>
+					</div>
+				</div>			
 			</div>
 		</div>
 	</div>
+	<div ng-show="formVisibility">
+		<nav class="navbar navbar-inverse">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">WebSiteName</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="#">Home</a></li>
+		      <li><a href="#">Page 1</a></li>
+		      <li><a href="#">Page 2</a></li>
+		    </ul>
+		    <ul class="nav navbar-nav navbar-right">		      
+		      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
+		    </ul>
+		  </div>
+		</nav>
+		
+		<div class="container">
+		    <div class="stepwizard">
+		        <div class="stepwizard-row setup-panel">
+		            <div class="stepwizard-step col-xs-4"> 
+		                <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+		                <p><small>Registro de usuarios</small></p>
+		            </div>
+		            <div class="stepwizard-step col-xs-4"> 
+		                <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+		                <p><small>Reservar Cita</small></p>
+		            </div>
+		            <div class="stepwizard-step col-xs-4"> 
+		                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+		                <p><small>Citas solicitadas</small></p>
+		            </div>	            
+		        </div>
+		    </div>
+		    
+		    <form role="form">
+		        <div class="panel panel-info setup-content" id="step-1">
+		            <div class="panel-heading">
+		                 <h3 class="panel-title">Registro de usuarios</h3>
+		            </div>
+		            <div class="panel-body">
+		            	<div class="row">
+							<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Tipo Identificaciòn *</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Tipo Identificaciòn" />
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+				               	<div class="form-group">
+				                    <label class="control-label">Nùmero de Identificación*</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Nùmero de Identificación" />
+				                </div>
+			               	</div>
+			               	<div class="col-lg-4">
+				        		 <div class="form-group">
+				                    <label class="control-label">Sexo</label>
+				                    <select class="form-control" id="exampleFormControlSelect1">
+								      <option>seleccionar</option>								     
+								    </select>
+				                </div>
+				        	</div>
+				        </div>
+				        <div class="row">
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Primer Nombre *</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Primer Nombre" />
+				                </div>
+			               </div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Segundo Nombre</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Segundo Nombre" />
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+			               		<div class="form-group">
+				                    <label class="control-label">Fecha de Nacimiento</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Fecha de Nacimiento" />
+				                </div>			               		
+			               </div>
+				        </div>
+				        <div class="row">
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Primer Apellido*</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Primer Apellido" />
+				                </div>
+			               </div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Segundo Apellido</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Segundo Apellido" />
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+			               		<div class="form-group">
+				                    <label class="control-label">Dirección</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Dirección" />
+				                </div>			               		
+			               </div>
+				        </div>
+		                <div class="row">
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Teléfono</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Teléfono" />
+				                </div>
+			               </div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Celular</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Celular" />
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+			               		<div class="form-group">
+				                    <label class="control-label">Email</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Email" />
+				                </div>			               		
+			               </div>
+				        </div>
+				        <input type="submit" class="btn btn-success" value="Guardar">
+		                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+		            </div>
+		        </div>
+		        
+		        <div class="panel panel-info setup-content" id="step-2">
+		            <div class="panel-heading">
+		                 <h3 class="panel-title">Reservar Cita</h3>
+		            </div>
+		            <div class="panel-body">
+		                <div class="row">
+							<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Cliente</label>
+				                    <input maxlength="100" type="text" readonly="readonly" class="form-control" />
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+				               	<div class="form-group">
+				                    <label class="control-label">Inmnobiliaria*</label>
+				                    <select class="form-control" id="exampleFormControlSelect1">
+								      <option>seleccionar</option>								     
+								    </select>
+				                </div>
+			               	</div>
+			               	<div class="col-lg-4">
+				        		 <div class="form-group">
+				                    <label class="control-label">Tipo de Inmueble*</label>
+				                    <select class="form-control" id="exampleFormControlSelect1">
+								      <option>seleccionar</option>								     
+								    </select>
+				                </div>
+				        	</div>
+				        </div>
+				        <div class="row">
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Còdigo del inmueble*</label>
+				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Còdigo del inmueble" />
+				                </div>
+			               </div>
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Fecha*</label>
+				                    <input maxlength="100" type="date" required="required" class="form-control"/>
+				                </div>
+			               </div>
+			               <div class="col-lg-4">
+			               		<div class="form-group">
+				                    <label class="control-label">Hora*</label>
+				                    <input maxlength="100" type="time" required="required" class="form-control" />
+				                </div>			               		
+			               </div>
+				        </div>
+				        <input type="submit" class="btn btn-success" value="Reservar cita">
+				        <input type="submit" class="btn btn-success" value="Nueva cita">
+		                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+		            </div>
+		        </div>
+		        
+		        <div class="panel panel-info setup-content" id="step-3">
+		            <div class="panel-heading">
+		                 <h3 class="panel-title">Citas solicitadas</h3>
+		            </div>
+		            <div class="panel-body">
+		                <div class="row">
+				        	<div class="col-lg-4">
+				                <div class="form-group">
+				                    <label class="control-label">Còdigo del inmueble*</label>
+				                    <input maxlength="100" type="text"readonly="readonly" class="form-control"/>
+				                </div>
+			               </div>
+		              	</div>
+		              	<div class="row">
+		              		<table class="table">
+							  <thead class="thead-dark">
+							    <tr>
+							      <th scope="col">Acciòn</th>
+							      <th scope="col">Inmobiliaria</th>
+							      <th scope="col">Tipo de inmueble</th>
+							      <th scope="col">Código del inmueble </th>
+							      <th scope="col">Fecha</th>
+							      <th scope="col">Hora</th>
+							      <th scope="col">Estado</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <td colspan="7"></td>							      
+							    </tr>		    
+							    
+							  </tbody>
+							</table>
+							
+							<table class="table">
+							  <thead class="thead-light">
+							    <tr>
+							      <th scope="col">#</th>
+							      <th scope="col">First</th>
+							      <th scope="col">Last</th>
+							      <th scope="col">Handle</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <th scope="row">1</th>
+							      <td>Mark</td>
+							      <td>Otto</td>
+							      <td>@mdo</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">2</th>
+							      <td>Jacob</td>
+							      <td>Thornton</td>
+							      <td>@fat</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">3</th>
+							      <td>Larry</td>
+							      <td>the Bird</td>
+							      <td>@twitter</td>
+							    </tr>
+							  </tbody>
+							</table>
+		              	</div>
+		                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+		            </div>
+		        </div>		       
+		    </form>
+		</div>
+	</div>
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script type="text/javascript" src="../../../js/js/validator.js"></script>
+	<script type="text/javascript" src="../../../js/js/contact.js"></script>
 </body>
 </html>

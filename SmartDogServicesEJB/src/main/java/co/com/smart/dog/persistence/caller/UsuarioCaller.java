@@ -2,6 +2,7 @@ package co.com.smart.dog.persistence.caller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -95,16 +96,24 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 		try { 
 			conn = getConnection();
 			call = conn.prepareCall(getString("UsuarioCaller.fn_grabar_usuario"));
+			
 			if (usuario.getScusuario() != null) {
-                call.setBigDecimal(1, usuario.getScusuario());
+				call.setInt(1, usuario.getScusuario().intValue());
             } else {
-                call.setNull(1, java.sql.Types.NULL);
-            }
-				call.setBigDecimal(2, usuario.getScusuario());
-				call.setString(3, usuario.getDsusuario());
-				call.setString(4, usuario.getDscontrasena());
-				call.setString(5, usuario.getDsemail());
-						
+                call.setNull(1, java.sql.Types.INTEGER);
+            }			
+			call.setString(2, usuario.getDsusuario());
+			call.setString(3, usuario.getDscontrasena());
+			call.setString(4, usuario.getDsemail());
+
+			call.registerOutParameter(5, java.sql.Types.INTEGER);
+			call.registerOutParameter(6, java.sql.Types.VARCHAR);
+			
+			call.executeUpdate();			
+			usuario.setScusuario(new BigDecimal(call.getInt(5))); 
+			MensajeSQLDTO msj = getResponseSQL(call.getString(6));
+			usuario.setCodigo(msj.getCodigo());
+			usuario.setDescripcion(msj.getDescripcion());			
 		}finally {
 			closeResources(conn, call);
 		}

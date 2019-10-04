@@ -30,8 +30,7 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	 */
 	 $scope.consultarUsuario = function() {
 
-		  try {	  
-			  
+		  try {	   
 
 				  var exito = function(response) {
 					  	if(response.data != null){
@@ -40,10 +39,13 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 							if(usuarios.length>0){
 								$.each(usuarios, function( index , usuario ) {						
 									$scope.usuario.dsemail = usuario.dsemail;
-									$scope.usuario.dscontrasena = usuario.dscontrasena;
-										
-									alert("exito usuario con este correo");
+									$scope.usuario.dscontrasena = usuario.dscontrasena;								
+									
 								});
+								
+								alert("el usuario existe con este correo");
+								$scope.ShowForm();
+								$scope.formVisible = false;
 							}else{
 								alert("No se encontro usuario con este correo");
 							}
@@ -60,12 +62,7 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 				    var sendObject = {
 				    		dsemail : $scope.usuario.dsemail,
 				    		dscontrasena : $scope.usuario.dscontrasena,				    		
-				    };
-
-				    alert(sendObject.dsemail);
-				    alert(sendObject.dscontrasena);
-				    alert(angular.toJson(sendObject));
-				    
+				    };				    
 				    smartServices.sendPost(
 				      angular.toJson(sendObject),
 				      hostSmart+context+methodConsultarUsuario,
@@ -74,11 +71,56 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 
 		   
 		  } catch (error) {
-			 // $scope.mensaje("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
+			 alert("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
 		  }
 	 }
-			
+	$scope.formVisible = true;
+	$scope.formVisibility = false;
+	$scope.ShowForm = function(){		
+		$scope.formVisibility = true;
 		
+	}
+	 
 });
+$(document).ready(function () {
 
+    var navListItems = $('div.setup-panel div a'),
+        allWells = $('.setup-content'),
+        allNextBtn = $('.nextBtn');
 
+    allWells.hide();
+
+    navListItems.click(function (e) {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this);
+
+        if (!$item.hasClass('disabled')) {
+            navListItems.removeClass('btn-success').addClass('btn-default');
+            $item.addClass('btn-success');
+            allWells.hide();
+            $target.show();
+            $target.find('input:eq(0)').focus();
+        }
+    });
+
+    allNextBtn.click(function () {
+        var curStep = $(this).closest(".setup-content"),
+            curStepBtn = curStep.attr("id"),
+            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+            curInputs = curStep.find("input[type='text'],input[type='url']"),
+            isValid = true;
+
+        $(".form-group").removeClass("has-error");
+        for (var i = 0; i < curInputs.length; i++) {
+            if (!curInputs[i].validity.valid) {
+                isValid = false;
+                $(curInputs[i]).closest(".form-group").addClass("has-error");
+            }
+        }
+
+        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+    });
+
+    $('div.setup-panel div a.btn-success').trigger('click');
+});

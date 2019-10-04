@@ -39,14 +39,14 @@
 <script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
 
 <!-- Importarmos Resources Services JS -->
-<script type="text/javascript"
-	src="js/resourceServicesRegistroempresa.js"></script>
-			<script type="text/javascript" src="../departamento/js/resourceServicesDepartamento.js"></script>
-		<script type="text/javascript" src="../ciudad/js/resourceServicesCiudad.js"></script>	
+		<script type="text/javascript" src="js/resourceServicesRegistroempresa.js"></script>
+		<script type="text/javascript" src="../departamento/js/resourceServicesDepartamento.js"></script>
+		<script type="text/javascript" src="../ciudad/js/resourceServicesCiudad.js"></script>
+		<script type="text/javascript" src="js/registroempresaCtrl.js"></script>
 
 
 </head>
-<body ng-controller="registroempresaCtrl" ng-init="onInit(consultarDepartamentoEmpresa)">
+<body ng-controller="registroempresaCtrl" ng-init="onInit()">
 
 	<link rel="stylesheet" href="../../../js/bootstrap-3.2.0/css/bootstrap.css">
 
@@ -105,35 +105,22 @@
 	</div>
 
 
-	<table class="table">
+	<table class="table" >
 		<thead class="thead-dark">
 			<tr>
+				<th scope="col">Acción</th>
 				<th scope="col">Nit</th>
 				<th scope="col">Razón social</th>
-				<th scope="col">Acción</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-
-
-			</tr>
-			<tr>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
+			<tr ng-repeat="E in empresas | orderBy : 'empresas'" >
+					<td><li><a href="">editar</a></li><li><a href="">eliminar</a></li></td>
+				<td>{{E.nitempresa}}</td>
+				<td>{{E.dsrazonsocial}}</td>
+				
 			</tr>
 		</tbody>
 	</table>
-
-
 </body>
 </html>

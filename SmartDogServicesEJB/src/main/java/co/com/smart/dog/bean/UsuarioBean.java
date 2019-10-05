@@ -60,12 +60,32 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	public List<UsuarioDTO> consultarUsuario(UsuarioDTO json)
 			throws SmartExcepcionSerializada {
 		List<UsuarioDTO> usuarios = new ArrayList<>();
+		try {			
+			usuarios = facade.consultarUsuario(json);
+		} catch (Throwable ex) {
+			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
+			smartException.setCode(0);
+			smartException.setStackTrace(ex.getStackTrace());
+			throw smartException;
+		}
+		return usuarios;
+
+	}
+
+	/**
+	 * metodo utilizado para grabar usuario
+	 */
+
+	@Override
+	public UsuarioDTO grabarUsuario(UsuarioDTO json)
+			throws SmartExcepcionSerializada {
+		UsuarioDTO response = new UsuarioDTO();
 		try {
 			String secureToken = generateSecureToken(json);
 			json.setSecureToken(secureToken);
+			response = facade.grabarUsuario(json);
 			
-			usuarios = facade.consultarUsuario(json);
-
+			
 			VelocityContext context = loadParamsVelocity(facade.getParams("EMAIL-SMTP-REQUEST-USERS"));
 
 			SmartEmail mail = new SmartEmail(configs);
@@ -91,27 +111,7 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 			mail.addRecipients(json.getDsemail());
 			mail.setContent(html.toString(), true);
 			mail.send();
-
-		} catch (Throwable ex) {
-			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
-			smartException.setCode(0);
-			smartException.setStackTrace(ex.getStackTrace());
-			throw smartException;
-		}
-		return usuarios;
-
-	}
-
-	/**
-	 * metodo utilizado para grabar usuario
-	 */
-
-	@Override
-	public UsuarioDTO grabarUsuario(UsuarioDTO usuario)
-			throws SmartExcepcionSerializada {
-		UsuarioDTO usuarios = new UsuarioDTO();
-		try {
-			usuarios = facade.grabarUsuario(usuario);
+			
 		} catch (Throwable ex) {
 			ex.printStackTrace(System.err);
 			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
@@ -120,7 +120,7 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 			smartException.setStackTrace(ex.getStackTrace());
 			throw smartException;
 		}
-		return usuarios;
+		return response;
 	}
 
 	@Override

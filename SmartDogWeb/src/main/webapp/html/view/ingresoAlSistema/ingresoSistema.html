@@ -39,82 +39,90 @@
 				<img id="profile-img" class="profile-img-card"
 					src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 				<p id="profile-name" class="profile-name-card"></p>
-				<div class="row">
-					<div class="col-xl-8 offset-xl-2">
-						<form id="contact-form" method="post" action="" role="form">							
-							<div class="controls">								
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_email">Email *</label> <input id="dsemail"
-												type="text" class="form-control"
-												placeholder="Ingrese su contrasena" 
-												data-error="El email es obligatorio."
-												ng-model="usuario.dsemail" />
-											<div class="help-block with-errors"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-8 offset-xl-2">
+							<form id="contact-form" method="post" action="" role="form">							
+								<div class="controls">								
+									<div class="row">
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label for="form_email">Email *</label> <input id="dsemail"
+													type="text" class="form-control"
+													placeholder="Ingrese su contrasena" 
+													data-error="El email es obligatorio."
+													ng-model="usuario.dsemail" />
+												<div class="help-block with-errors"></div>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label for="form_lastname">Contraseña *</label> 
+												<input id="dscontrasena" type="password" class="form-control"
+													placeholder="Ingrese su contrasena" 
+													data-error="La contrasena es obligatoria."
+													ng-model="usuario.dscontrasena" />
+												<div class="help-block with-errors"></div>
+											</div>
 										</div>
 									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_lastname">Contraseña *</label> 
-											<input id="dscontrasena" type="password" class="form-control"
-												placeholder="Ingrese su contrasena" 
-												data-error="La contrasena es obligatoria."
-												ng-model="usuario.dscontrasena" />
-											<div class="help-block with-errors"></div>
+									<div class="row">
+										<div class="col-lg-8">
+										  <div class="form-group">
+					                            <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
+					                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required data-error="complete el Captcha">
+					                            <div class="help-block with-errors"></div>
+					                        </div>										
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-lg-4">
+											<a href="" id="btnIniciarSesion" class="btn btn-success"
+												ng-click="consultarUsuario()">Iniciar Sesiòn</a>
+											<br> 
+											<a href="#"	class="forgot-password"> Recuperar Contraseña? </a>
+										</div>
+										<div class="col-lg-4">
+											<a class="btn btn-primary" data-toggle="collapse"
+												href="#collapseExample" role="button" aria-expanded="false"
+												aria-controls="collapseExample"> Incribirse ahora </a>
+										</div>
+									</div>								
 								</div>
-								<div class="row">
-									<div class="col-lg-8">
-									  <div class="form-group">
-				                            <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
-				                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required data-error="complete el Captcha">
-				                            <div class="help-block with-errors"></div>
-				                        </div>										
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-4">
-										<a href="" id="btnIniciarSesion" class="btn btn-success"
-											ng-click="consultarUsuario()">Iniciar Sesiòn</a>
-										<br> 
-										<a href="#"	class="forgot-password"> Recuperar Contraseña? </a>
-									</div>
-									<div class="col-lg-4">
-										<a class="btn btn-primary" data-toggle="collapse"
-											href="#collapseExample" role="button" aria-expanded="false"
-											aria-controls="collapseExample"> Incribirse ahora </a>
-									</div>
-								</div>
-								<div class="collapse" id="collapseExample">
-									<div class="card card-body">
-										<div class="row">
-											<div class="col-lg-6">
-												<div class="form-group">
-													<label for="dsemail1">Correo *</label> <input
-														id="dsemail1" type="email" name="email"
-														class="form-control" placeholder="Ingrese su email *"
-														required="required" data-error="El email es obligatorio.">
-													<div class="help-block with-errors"></div>
+							</form>
+						</div>
+						<div class="col-xl-8 offset-xl-2">
+							<form id="contact-form" method="post" action="" role="form">							
+								<div class="controls">	
+									<div class="collapse" id="collapseExample">
+										<div class="container">
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="form-group">
+														<label for="dsemail1">Correo *</label> <input
+															id="dsemail1" type="email" name="email"
+															class="form-control" placeholder="Ingrese su email *"
+															required="required" data-error="El email es obligatorio.">
+														<div class="help-block with-errors"></div>
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-6">
-												<div class="form-group">
-													<label for="dsemail2">Confirmación *</label> <input
-														id="dsemail2" type="email" name="email"
-														class="form-control" placeholder="Ingrese su email *"
-														required="required" data-error="Confirmar su email.">
-													<div class="help-block with-errors"></div>
-												</div>
-											</div>
+												<div class="col-lg-4">
+													<div class="form-group">
+														<label for="dsemail2">Confirmación *</label> <input
+															id="dsemail2" type="email" name="email"
+															class="form-control" placeholder="Ingrese su email *"
+															required="required" data-error="Confirmar su email.">
+														<div class="help-block with-errors"></div>
+													</div>
+												</div>												
+											</div>											
 											<input type="submit" class="btn btn-success btn-send"
-												value="Registrarme">
-										</div>
+													value="Registrarme">
+										</div>				
 									</div>
-								</div>
-							</div>
-						</form>
+								</div>	
+							</form>
+						</div>
 					</div>
 				</div>			
 			</div>

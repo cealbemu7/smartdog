@@ -57,10 +57,10 @@ public class CiudadCaller extends JDBCResourceManager implements Serializable{
 	        	 CiudadDTO ciudadDTO = new CiudadDTO();
 	        	 DepartamentoDTO departamentoDTO = new DepartamentoDTO();
 	        	        	 
-	        	 ciudadDTO.setScciudad(rs.getBigDecimal("sp_scciudad"));
-	        	 ciudadDTO.setCociudad(rs.getString("sp_cociudad"));
-	        	 ciudadDTO.setDsciudad(rs.getString("sp_dsciudad"));
-	        	 departamentoDTO.setScdepartamento(rs.getBigDecimal("sp_scdepartamento"));
+	        	 ciudadDTO.setScciudad(rs.getBigDecimal("sm_scciudad"));
+	        	 ciudadDTO.setCociudad(rs.getString("sm_cociudad"));
+	        	 ciudadDTO.setDsciudad(rs.getString("sm_dsciudad"));
+	        	 departamentoDTO.setScdepartamento(rs.getBigDecimal("sm_scdepartamento"));
 	        	 ciudadDTO.setDepartamento(departamentoDTO);      	 
 	        	 ciudad.add(ciudadDTO);
         	 

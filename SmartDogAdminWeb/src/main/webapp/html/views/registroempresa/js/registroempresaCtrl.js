@@ -51,16 +51,16 @@ angular
 							"dstelefono" : null,
 							"dsemail" : null,
 						}
-						$scope.consultarDepartamentoEmpresa();
-						//$scope.consultarEmpresa();
-						$scope.listarEmpresa
+						//$scope.usuario = getUserSession().user;
+						$scope.usuario = "andres";
+						
+						$scope.listarDepartamento();
 					}
 
 					/**
 					 * controlador que consultar departamentos
 					 */
-					$scope.consultarDepartamentoEmpresa = function() {
-						alert("estoy consultando")
+					$scope.listarDepartamento = function() {
 						try {
 							var exito = function(response) {
 								try {
@@ -73,9 +73,9 @@ angular
 									} else {
 										alert("Informativo No se encontraron departamentos");
 									}
-
+									$scope.listarEmpresa();
 								} catch (e) {
-									alert("Error Se produjo un error al momento de consultar los departamentos",e.message);
+									alert("Error Se produjo un error al momento de consultar los departamentos...",e.message);
 								}
 							}
 							var error = function(response) {
@@ -83,8 +83,8 @@ angular
 								console.log(angular.toJson(response));
 							}
 							
-							$scope.pais = {"copais": null}
-							$scope.pais.copais = SmartMaestroPais;
+							$scope.pais = {"scpais": null}
+							$scope.pais.scpais = SmartMaestroPais;
 								var sendPais =$scope.pais;
 								var sendObject ={
 										pais :sendPais
@@ -163,70 +163,15 @@ angular
 								var reponsoObject = angular.fromJson(response.data);
 								alert("Error", "Ha ocurrido un error al momento de listar empresa",reponsoObject.descripcion);
 							}			
-							var sendEmpresa = $scope.empresa;					    
-							smartServices.sendPost(angular.toJson(sendempresa),hostSmart+context+methodConsultarEmpresa,exito,error);
+							
+							
+							var sendEmpresa = $scope.empresa;
+							smartServices.sendPost(angular.toJson(sendEmpresa),hostSmart+context+methodConsultarEmpresa,exito,error);
 							
 						} catch (error) {
 							$scope.mensaje("Error", "Ha ocurrido un error al momento de listar empresa", error.message);
 						}
 					}	
-
-					/**
-					 * este metodo permite consultar empresas
-					 * 
-					 
-					$scope.consultarEmpresa = function() {
-						alert("estoy enpesando la consulta")
-						try {
-							if ($scope.sw != false) {
-								var exito = function(response) {
-									if (response.data != null) {
-										$scope.empresas = new Array();
-										var empresas = angular.fromJson(response.data);
-										if (empresas.length > 0) {
-											$.each(empresas,function(index,empresa) {
-																$scope.empresa.scempresa = empresa.scempresa;
-																$scope.empresa.dsrazonsocial = empresa.dsrazonsocial;
-																$scope.empresa.dsdireccion = empresa.dsdireccion;
-																$scope.empresa.dstelefono = empresa.dstelefono;
-																$scope.empresa.dsemail = empresa.dsemail;
-
-																// Recorrer el componente y  seleccionar el consultado
-
-																$.each($scope.departamentos,function(index,departamento) {
-																					if (departamento.scdepartamento == empresa.ciudad.departamento.scdepartamento) {
-																						$scope.departamento = departamento;
-																					}
-																				});
-
-																$scope.consultarCiudadEmpresa(empresa.ciudad.scciudad);
-															});
-											alert("Informativo Empresa consultada con éxito");
-										} else {
-											alert("Advertencia No se encontro empresa con el nit ingresado");
-
-										}
-									} else {
-										alert("Advertencia No se encontro empresa con este nit");
-									}
-								}
-								var error = function(response) {
-									var reponsoObject = angular.fromJson(response.data);
-									alert("Error Ha ocurrido un error al consultar la empresa",reponsoObject);
-								}
-								var sendObjectEmpresa = {
-									scempresa : $scope.empresa.scempresa,
-									dsrazonsocial : $scope.empresa.dsrazonsocial,
-									dstelefono : $scope.empresa.dstelefono,
-									nitempresa : $scope.nitempresa
-								};
-								smartServices.sendPost(angular.toJson(sendObjectEmpresa), hostSmart+ context + methodConsultarEmpresa,exito, error);
-							}
-						} catch (error) {
-							alert("Error Ha ocurrido un error al momento de consultar la empresa",error.message);
-						}
-					}
-					*/
 
 					/**
 					 * Grabar empresa
@@ -238,10 +183,10 @@ angular
 									var reponsoObject = angular.fromJson(response.data);
 									if (reponsoObject != null) {
 										$scope.mensaje(" grabado con Exito  ",reponsoObject.descripcion);
-										$scope.consultarEmpresa();
 									} else {
 										alert("Error Ha ocurrido un error al momento de grabar la empresa");
 									}
+									$scope.listarEmpresa();
 								}
 								var error = function(response) {
 									var reponsoObject = angular.fromJson(response.data);
@@ -259,8 +204,10 @@ angular
 									dsdireccion : $scope.empresa.dsdireccion,
 									dstelefono : $scope.empresa.dstelefono,
 									dsemail : $scope.empresa.dsemail,
+									cousuario : $scope.usuario
 
 								};
+								
 								smartServices.sendPost(angular.toJson(sendObjectEmpresa), hostSmart+ context + methodGrabarEmpresa, exito,error);
 							}
 						} catch (error) {

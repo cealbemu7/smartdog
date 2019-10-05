@@ -50,16 +50,16 @@ public class DepartamentoCaller extends JDBCResourceManager implements Serializa
 			while (rs.next()) {
 				DepartamentoDTO departamentoDTO = new DepartamentoDTO();
 				PaisDTO paisDTO = new PaisDTO();
-
-				departamentoDTO.setScdepartamento(rs.getBigDecimal("sp_scdepartamento"));
-				departamentoDTO.setCodepartamento(rs.getString("sp_codepartamento"));
-				departamentoDTO.setDsdepartamento(rs.getString("sp_dsdepartamento"));
-				paisDTO.setScpais(rs.getBigDecimal("sp_scpais"));
+																	
+				departamentoDTO.setScdepartamento(rs.getBigDecimal("sm_scdepartamento"));
+				departamentoDTO.setCodepartamento(rs.getString("sm_codepartamento"));
+				departamentoDTO.setDsdepartamento(rs.getString("sm_dsdepartamento"));
+				paisDTO.setScpais(rs.getBigDecimal("sm_scpais"));
 				departamentoDTO.setPais(paisDTO);
-				departamentoDTO.setCousuario(rs.getString("sp_cousuario"));
-				departamentoDTO.setFhingreso(rs.getDate("sp_fhingreso"));
-				departamentoDTO.setFhmodificacion(rs.getDate("sp_fhmodificacion"));
-				departamentoDTO.setFhretiro(rs.getDate("sp_fhretiro"));
+				departamentoDTO.setCousuario(rs.getString("sm_cousuario"));
+				departamentoDTO.setFhingreso(rs.getDate("sm_fhingreso"));
+				departamentoDTO.setFhmodificacion(rs.getDate("sm_fhmodificacion"));
+				departamentoDTO.setFhretiro(rs.getDate("sm_fhretiro"));
 				departamento.add(departamentoDTO);
 
 			}

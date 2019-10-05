@@ -7,6 +7,8 @@
 
 angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, smartServices) {
 
+	$scope.isRequest = 'S';
+	$scope.isUser = 'N';
 	
 	/**
 	 * @Descripcion: Carga Inicial de los envios al servidor
@@ -14,15 +16,18 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	 * @Date: 25-09-2019
 	 */
 	$scope.onInit = function(){
+		$scope.isRequest = 'S';
+		$scope.isUser = 'N';
+		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		
-		$scope.usuario = {
-				"scusuario": null,
-			   	"dsusuario": null,
-			    "dscontrasena": null,
-			    "dsemail": null
-		}
-		
-	}	
+	}
+	
+	$scope.usuario = {
+			"scusuario": null,
+		   	"dsusuario": null,
+		    "dscontrasena": null,
+		    "dsemail": null
+	}
 		
 	/**
 	 * este metodo permite consultar usuarios
@@ -44,8 +49,8 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 								});
 								
 								alert("el usuario existe con este correo");
-								$scope.ShowForm();
-								$scope.formVisible = false;
+								$scope.isRequest = 'N';
+								$scope.isUser = 'S';
 							}else{
 								alert("No se encontro usuario con este correo");
 							}
@@ -74,124 +79,119 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 			 alert("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
 		  }
 	 }
-	$scope.formVisible = true;
-	$scope.formVisibility = false;
-	$scope.ShowForm = function(){		
-		$scope.formVisibility = true;
-		
+	
+	/**
+	* Método utilizado para crear el registro
+	*/
+	$scope.create = function(){
+		try {
+			var exito = function(response){
+				try{
+					if(response.data != null){
+						var resp = angular.toJson(response.data);
+						alert(resp.descripcion+": \nVerifique el codigo que le llego al correo "+$scope.usuario.dsemail+",\n" +
+								" Ingresa el c&oacute;digo en el campo de confirmaci&oacute;n para continuar con el registro.");
+						$("#confirmarToken").prop('disabled', false);
+					}
+				}catch(e){
+					alert("Error al tratar de crear el usuario: "+e.message);
+				}
+				
+			}
+			var error = function(response){
+				var resp = angular.toJson(response.data);
+				alert("Error creando el usuario: \n"+resp.descripcion);
+				console.log(angular.toJson(response));
+			}
+			var create = true;
+			
+			if($scope.usuario.dsemail == null || $scope.usuario.dsemail == ''){
+				msg +='Correo electr&oacute;nico ';
+				$("#dsemail2").focus();
+				create= false;
+				return;
+			}	   
+			
+		   if(create){
+			    
+			   
+			    var password = utf8_to_b64($scope.user.confirmPassword);
+				$scope.user.password = password;
+				$scope.user.confirmPassword = password;
+				/*tienes un error es user o usuario?usuario, entocne sporque estas llenando user*/
+				
+				smartServices.sendPost(
+										angular.toJson($scope.usuario),
+										hostSmart+context+methodGrabarUsuario,
+										exito,
+										error
+									  );		
+		   }else{
+			   alert(msg+' ]');
+		   }
+		} catch (error) {
+	      alert("Error al iniciar sesión: "+error.message);
+	      console.log(error.message);
+		}
+		 
+	}
+
+	$scope.solicitarRegistro = function() {
+
+		var request = true;
+		let msg = 'Campos obligatorios [';
+
+		try {
+
+			let success = function(response) {
+				try{
+					if(response.data != null){
+						var resp = angular.toJson(response.data);
+						$scope.usuario = resp;
+						alert(resp.descripcion+": \nVerifique el codigo que le llego al correo "+$scope.usuario.dsemail+",\n" +
+								" Ingresa el c&oacute;digo en el siguiente formulario.");
+						$scope.isRequest = 'N';
+					}
+				}catch(e){
+					alert("Error al tratar de crear el usuario: "+e.message);
+				}
+			};
+
+			let error = function(response) {
+				var resp = angular.toJson(response.data);
+				alert("Error creando el usuario: \n"+resp.descripcion);
+				console.log(angular.toJson(response));
+			};
+
+			if ($scope.usuario.dsemail == null || $scope.usuario.dsemail == '') {
+				msg += 'Correo electr&oacute;nico ';
+				$("#dsemail2").focus();
+				request = false;
+				return;
+			}
+
+			if (request) {
+				$scope.usuario.dsusuario = $scope.usuario.dsemail;
+				const sendObject = $scope.usuario;
+				smartServices.sendPost(angular.toJson(sendObject), hostSmart
+						+ context + methodSolicitarRegistroUsuario, success, error);
+			} else {
+				alert(msg + ' ]');
+			}
+
+		} catch (error) {
+			alert("Error al iniciar sesión: " + error.message);
+			console.log(error.message);
+		}
+
 	}
 	 
 });
-/**
-* Método utilizado para confirmar el código del token
-*/
-$scope.confirmaToken = function(){
-	try {
-		var exito = function(response){
-			try{
-				if(response.data != null){
-					$scope.limpiar();
-				}
-			}catch(e){
-				alert("Error al tratar de comparar codigo: "+e.message);
-			}
-		}
-		var error = function(response){
-			alert("Error comparando codigo");
-			console.log(angular.toJson(response));
-		}
-		var confirma = true;
-		var msg = 'Debe ingresar el campo [ ';
-		if($scope.user.secureToken == null || $scope.user.secureToken == ''){
-			msg +='Confirmar Token - ';
-			$("#confirmarToken").focus();
-			create= false;
-			return;
-		}
-		
-		   
-	   if(confirma){
-		   
-			smartServices.sendPost(
-									angular.toJson($scope.user),
-									hostSmart+context+methodConfirmCreateUser,
-									exito,
-									error
-								  );		
-	   }else{
-		   alert(msg+' ]');
-	   }
-		
-	} catch (error) {
-      alert("Error al iniciar sesión: "+error.message);
-      console.log(error.message);
-	}
-	
-}
-/**
-* Método utilizado para crear el registro
-*/
-$scope.create = function(){
-	try {
-		var exito = function(response){
-			try{
-				if(response.data != null){
-					var resp = angular.toJson(response.data);
-					alert(resp.descripcion+": \nVerifique el codigo que le llego al correo "+$scope.usuario.dsemail+",\n" +
-							" Ingresa el c&oacute;digo en el campo de confirmaci&oacute;n para continuar con el registro.");
-					$("#confirmarToken").prop('disabled', false);
-				}
-			}catch(e){
-				alert("Error al tratar de crear el usuario: "+e.message);
-			}
-			
-		}
-		var error = function(response){
-			var resp = angular.toJson(response.data);
-			alert("Error creando el usuario: \n"+resp.descripcion);
-			console.log(angular.toJson(response));
-		}
-		var create = true;
-		
-		
-		if($scope.usuario.dsemail == null || $scope.usuario.dsemail == ''){
-			msg +='Correo electr&oacute;nico ';
-			$("#dsemail1").focus();
-			create= false;
-			return;
-		}
-		
-		if($scope.usuario.dsemail == null || $scope.usuario.dsemail == ''){
-			msg +='Correo electr&oacute;nico ';
-			$("#dsemail2").focus();
-			create= false;
-			return;
-		}	   
-		
-	   if(create){
-		    
-		   
-		    var password = utf8_to_b64($scope.user.confirmPassword);
-			$scope.user.password = password;
-			$scope.user.confirmPassword = password;
-			
-			smartServices.sendPost(
-									angular.toJson($scope.usuario),
-									hostSmart+context+methodGrabarUsuario,
-									exito,
-									error
-								  );		
-	   }else{
-		   alert(msg+' ]');
-	   }
-	} catch (error) {
-      alert("Error al iniciar sesión: "+error.message);
-      console.log(error.message);
-	}
-	 
-}
+
+
 /**
  * funciones del steps
+ * 
  * @returns
  */
 $(document).ready(function () {

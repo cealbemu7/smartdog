@@ -5,39 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Ingreso al sistema</title>
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">		
+	<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet" type="text/css">		
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
 	<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
-	
-	<!-- Importarmos angular JS -->
-	<script type="text/javascript" src="../../../js/angular-1.4.7/angular.min.js"></script>
-	<script type="text/javascript" src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
-	<script type="text/javascript" src="../../../js/angucomplete/angucomplete.js"></script>
-	<script type="text/javascript" src="../../../js/smartmessagebox/app.min.js"> </script>
-	<script type="text/javascript" src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
-	<script type="text/javascript" src="../../../js/smart/SmartConstantes.js"></script>
-	
-	<!-- Smart javascript framework -->
-	<script type="text/javascript" src="../../../js/smart/angular-websocket.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
-	<script type="text/javascript" src="js/ingresoAlSistemaCtrl.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
-	
-	<!-- Importarmos Resources Services JS -->
-	<script type="text/javascript" src="js/resourceServicesIngresoAlSistema.js"></script>
-	
-
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
-	<div ng-show="formVisible">
+    
+    <!-- Solicitud registro -->
+	<div ng-if="isRequest == 'S'">
 		<div class="container">
 			<div class="card card-container">
 				<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
 				<img id="profile-img" class="profile-img-card"
-					src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+					src="../../../img/avatar.png"/>
 				<p id="profile-name" class="profile-name-card"></p>
 				<div class="container">
 					<div class="row">
@@ -99,25 +80,29 @@
 											<div class="row">
 												<div class="col-lg-4">
 													<div class="form-group">
-														<label for="dsemail1">Correo *</label> <input
+														<label for="dsemail1">Correo *</label> 
+														 <input
 															id="dsemail1" type="email" name="email"
 															class="form-control" placeholder="Ingrese su email *"
-															required="required" data-error="El email es obligatorio.">
+															required="required" data-error="El email es obligatorio."
+															ng-model="usuario.dsemail"
+															>
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>
 												<div class="col-lg-4">
 													<div class="form-group">
-														<label for="dsemail2">Confirmación *</label> <input
-															id="dsemail2" type="email" name="email"
+														<label for="dsemail2">Confirmación *</label> 
+														<input id="dsemail2" type="email" name="email"
 															class="form-control" placeholder="Ingrese su email *"
-															required="required" data-error="Confirmar su email.">
+															required="required" data-error="Confirmar su email."
+															ng-model="usuario.dsemail">
 														<div class="help-block with-errors"></div>
 													</div>
 												</div>												
 											</div>											
 											<input type="submit" class="btn btn-success btn-send"
-													value="Registrarme">
+													ng-click="solicitarRegistro()" value="Registrarme" >
 										</div>				
 									</div>
 								</div>	
@@ -128,7 +113,9 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="formVisibility">
+	
+	<!-- Autenticar usaurio existente -->
+	<div ng-if="isUser == 'S'">
 		<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
@@ -343,38 +330,7 @@
 							    </tr>		    
 							    
 							  </tbody>
-							</table>
-							
-							<table class="table">
-							  <thead class="thead-light">
-							    <tr>
-							      <th scope="col">#</th>
-							      <th scope="col">First</th>
-							      <th scope="col">Last</th>
-							      <th scope="col">Handle</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							    <tr>
-							      <th scope="row">1</th>
-							      <td>Mark</td>
-							      <td>Otto</td>
-							      <td>@mdo</td>
-							    </tr>
-							    <tr>
-							      <th scope="row">2</th>
-							      <td>Jacob</td>
-							      <td>Thornton</td>
-							      <td>@fat</td>
-							    </tr>
-							    <tr>
-							      <th scope="row">3</th>
-							      <td>Larry</td>
-							      <td>the Bird</td>
-							      <td>@twitter</td>
-							    </tr>
-							  </tbody>
-							</table>
+							</table>							
 		              	</div>
 		                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
 		            </div>
@@ -382,9 +338,92 @@
 		    </form>
 		</div>
 	</div>
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
+	<!-- Completar solicitud registro -->
+	<div ng-if="isRequest == 'N' && isUser == 'N' ">
+		<div class="container">
+			<div class="card card-container">
+				<img id="profile-img" class="profile-img-card"
+					src="/SmartDogWeb/src/main/webapp/img/avatar.png" /> 
+				<p id="profile-name" class="profile-name-card"></p>
+				<div class="row">
+					<div class="col-xl-8 offset-xl-2">
+						<form id="contact-form" method="post" action="" role="form">
+							<div class="messages"></div>
+							<div class="controls">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_email">Email</label> <input id="form_email"
+												disabled="disabled" type="email" name="email"
+												class="form-control" required="required"
+												data-error="El email es obligatorio.">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_lastname">Código confirmacion*</label> <input
+												id="form_lastname" type="text" name="codigo"
+												class="form-control" placeholder="Ingrese su codigo"
+												required="required" data-error="Ingrese el código">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_lastname">Constraseña *</label> <input
+												id="form_lastname" type="text" name="codigo"
+												class="form-control" placeholder="Ingrese su codigo"
+												required="required" data-error="Ingrese el código">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="form_lastname">Confirma contraseña *</label> <input
+												id="form_lastname" type="text" name="codigo"
+												class="form-control" placeholder="Confirmar contraseña"
+												required="required" data-error="Ingrese el código">
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+								<input type="submit" class="btn btn-success"value="Guardar">
+							</div>
+						</form>
+					</div>
+	
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Importando js de bootstrap && jquery -->
 	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script	type="text/javascript" src="../../../bootstrap-3/js/bootstrap.min.js"></script>	
 	<script type="text/javascript" src="../../../js/js/validator.js"></script>
 	<script type="text/javascript" src="../../../js/js/contact.js"></script>
+	
+	
+		<!-- Importarmos angular JS -->
+	<script type="text/javascript" src="../../../js/angular-1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+	<script type="text/javascript" src="../../../js/angucomplete/angucomplete.js"></script>
+	<script type="text/javascript" src="../../../js/smartmessagebox/app.min.js"> </script>
+	<script type="text/javascript" src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
+	<script type="text/javascript" src="../../../js/smart/SmartConstantes.js"></script>
+	
+	<!-- Smart javascript framework -->
+	<script type="text/javascript" src="../../../js/smart/angular-websocket.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
+	<script type="text/javascript" src="js/ingresoAlSistemaCtrl.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+	
+	<!-- Importarmos Resources Services JS -->
+	<script type="text/javascript" src="js/resourceServicesIngresoAlSistema.js"></script>	
 </body>
+
 </html>

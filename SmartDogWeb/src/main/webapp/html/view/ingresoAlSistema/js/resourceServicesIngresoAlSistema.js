@@ -8,5 +8,6 @@
 var serviceNameSmartServiceUsuario = '/SmartServiceUsuario';
 var methodGrabarUsuario  = serviceNameSmartServiceUsuario +'/grabarUsuario';
 var methodConsultarUsuario  = serviceNameSmartServiceUsuario +'/consultarUsuario';
+var methodSolicitarRegistroUsuario  = serviceNameSmartServiceUsuario +'/solicitarRegistroUsuario';
 
 

@@ -74,7 +74,7 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 	        	 usuarioDTO.setDsusuario(rs.getString("sm_dsusuario"));
 	        	 usuarioDTO.setDscontrasena(rs.getString("sm_dscontrasena"));
 	        	 usuarioDTO.setDsemail(rs.getString("sm_dsemail"));
-	        	 usuarioDTO.setDstoken(rs.getString("dstokenrequest"));
+	        	 usuarioDTO.setSecureToken(rs.getString("dstokenrequest"));
 	        	 usuarios.add(usuarioDTO);
         	 
                 }
@@ -104,9 +104,15 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
                 call.setNull(1, java.sql.Types.INTEGER);
             }			
 			call.setString(2, usuario.getDsusuario());
-			call.setString(3, usuario.getDscontrasena());
+			
+			if(usuario.getDscontrasena() != null){
+				call.setString(3,usuario.getDscontrasena());
+			}else{
+				call.setNull(3, java.sql.Types.NULL);
+			}
+			
 			call.setString(4, usuario.getDsemail());
-			call.setString(5, usuario.getDstoken());
+			call.setString(5, usuario.getSecureToken());
 
 			call.registerOutParameter(6, java.sql.Types.INTEGER);
 			call.registerOutParameter(7, java.sql.Types.VARCHAR);

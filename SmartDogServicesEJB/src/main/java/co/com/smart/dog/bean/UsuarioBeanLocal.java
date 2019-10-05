@@ -40,5 +40,12 @@ public interface UsuarioBeanLocal {
 	 * @throws SmartExcepcionSerializada
 	 */
 	Jws<Claims> getInfoSecureToken(String token);
+
+	/**
+	 * solicitarRegistroUsuario
+	 * @param json
+	 * @return
+	 */
+	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json)throws SmartExcepcionSerializada;
 	
 }

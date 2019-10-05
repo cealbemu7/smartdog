@@ -83,9 +83,9 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 		try {
 			String secureToken = generateSecureToken(json);
 			json.setSecureToken(secureToken);
-			response = facade.grabarUsuario(json);
+			response = facade.grabarUsuario(json);// primero guardo
 			
-			
+			//luego envio correo
 			VelocityContext context = loadParamsVelocity(facade.getParams("EMAIL-SMTP-REQUEST-USERS"));
 
 			SmartEmail mail = new SmartEmail(configs);
@@ -172,6 +172,29 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 			configs.put(config.getKey(), config.getValue());
 		}
 		return context;
+	}
+	
+	@Override
+	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json) 
+		throws SmartExcepcionSerializada {
+			UsuarioDTO response = new UsuarioDTO();
+			try {
+				response = facade.grabarUsuario(json);
+				/*TODO: 
+				 *   1) genero token JWT apartir del correo, la aplicacion y la fecha con hora
+				 *   2) almaceno solicitud en usuarios (Base de datos, funcion que crea la solicitud de registro)
+				 *   3) crear plantilla de notificacion velocity y mapeo de campos, que contenido debe tener el correo
+				 *   4) respondemos la informacion de registro exitoso
+				 */
+			} catch (Throwable ex) {
+				ex.printStackTrace(System.err);
+				SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
+				smartException.setCode(0);
+				smartException.setMensaje(ex.getMessage());
+				smartException.setStackTrace(ex.getStackTrace());
+				throw smartException;
+			}
+			return response;
 	}
 
 }

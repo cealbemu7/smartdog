@@ -17,6 +17,19 @@ public class SmartServiceUsuario extends SmartResponseBase{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Servicio que permite grabar usuario
+	 * @param json
+	 * @return
+	 */	
+	@POST
+	@Path("/solicitarRegistroUsuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response solicitarRegistroUsuario (UsuarioDTO json){
+		return getResponse(DelegateContextEJB.getUsuarioBean().solicitarRegistroUsuario(json));
+	}
+	
 	/**
 	 * Servicio que permite consultar usuario
 	 * @param json

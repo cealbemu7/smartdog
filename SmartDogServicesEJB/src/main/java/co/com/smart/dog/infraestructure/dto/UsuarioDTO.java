@@ -17,17 +17,10 @@ public class UsuarioDTO extends SmartBaseDTO implements Serializable{
     private String dsusuario;
     private String dscontrasena;
     private String dsemail;
-    private String dstoken;
     private Date fhingreso;
     private Date fhmodificacion;
     private Date fhretiro;
     
-	public String getDstoken() {
-		return dstoken;
-	}
-	public void setDstoken(String dstoken) {
-		this.dstoken = dstoken;
-	}
 	public BigDecimal getScusuario() {
 		return scusuario;
 	}

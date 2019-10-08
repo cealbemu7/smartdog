@@ -1,4 +1,4 @@
-package co.com.smart.dog.persistence.entity.util;
+package co.com.smart.dog.persistence.caller.entity.util;
 
 import java.io.Serializable;
 import java.sql.CallableStatement;
@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
+import co.com.smart.dog.persistence.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.utility.SmartConstant;
 
 /**

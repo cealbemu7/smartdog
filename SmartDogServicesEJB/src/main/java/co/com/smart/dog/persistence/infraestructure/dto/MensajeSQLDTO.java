@@ -1,4 +1,4 @@
-package co.com.smart.dog.infraestructure.dto;
+package co.com.smart.dog.persistence.infraestructure.dto;
 
 /**
  * DTO base de mensajes de respuesta SQL para todos los objetos transaccionales y de negocio en el contexto smart

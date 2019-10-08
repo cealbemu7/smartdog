@@ -5,4 +5,4 @@
  * @author SmartJungle
  *
  */
-package co.com.smart.dog.persistence.entity.util;
+package co.com.smart.dog.persistence.caller.entity.util;

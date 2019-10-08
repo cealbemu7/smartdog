@@ -42,6 +42,20 @@ public class SmartServiceEmpresa extends SmartResponseBase{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response grabarEmpresa (EmpresaDTO json){
 		return getResponse(DelegateContextEJB.getEmpresaBean().grabarEmpresa(json));
+		
+	}
+	
+	/**
+	 * Servicio que permite eliminar Empresa
+	 * @param json
+	 * @return
+	 */	
+	@POST
+	@Path("/eliminarEmpresa")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response grabarEmpresa (EmpresaDTO json){
+		return getResponse(DelegateContextEJB.getEmpresaBean().eliminarEmpresa(json));
+		
 	}
 
 }

@@ -10,4 +10,6 @@ public interface EmpresaFacadeLocal {
 	
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa ) throws Throwable;
 	
+	public EmpresaDTO eliminarEmpresa(EmpresaDTO empresa ) throws Throwable;
+	
 }

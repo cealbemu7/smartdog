@@ -66,6 +66,44 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 		}
 		return empresa;
 	}
+	
+	/**
+	 * Eliminar Empresa
+	 * @param empresa
+	 * @return
+	 * @throws Throwable
+	 */
+	 public EmpresaDTO eliminarEmpresa(EmpresaDTO Empresa)  throws NamingException, SQLException {
+		 EmpresaDTO returnObject = new EmpresaDTO();
+         try {
+             conn = getConnection();
+             call = conn.prepareCall("EmpresaCaller.fn_eliminar_empresa");
+             if (Empresa.getScempresa() != null && Empresa.getScempresa()!=null) {
+            	 call.setBigDecimal(1, Empresa.getScempresa());
+             } else {
+                 call.setNull(1, java.sql.Types.INTEGER);
+             }   
+           
+ 			call.registerOutParameter(2, java.sql.Types.INTEGER);
+ 			call.registerOutParameter(3, java.sql.Types.VARCHAR);
+            call.executeUpdate();
+			Empresa.setScempresa(new BigDecimal(call.getInt(2))); 
+			MensajeSQLDTO msj = getResponseSQL(call.getString(3));
+			Empresa.setCodigo(msj.getCodigo());
+			Empresa.setDescripcion(msj.getDescripcion());
+             
+         } catch (SQLException e) {
+             e.printStackTrace(System.err);
+             throw  e;
+         }catch (Throwable thr) {
+             thr.printStackTrace(System.err);
+             throw  thr;
+         
+         } finally {
+             closeResources(conn, call );
+         }
+         return returnObject;
+     }
 	/**
 	 * 
 	 */

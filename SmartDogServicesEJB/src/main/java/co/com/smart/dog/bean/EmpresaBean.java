@@ -42,7 +42,26 @@ public class EmpresaBean extends AbstractBean implements EmpresaBeanLocal {
 		}
 		return enpresareturn;
 	}
+	
+	@Override
+	public EmpresaDTO eliminarempresa(EmpresaDTO empresa)throws SmartExcepcionSerializada {
+		EmpresaDTO returnObject = new EmpresaDTO();
+		try {
+			returnObject = facade.eliminarEmpresa(empresa);
+		} catch(Throwable ex){
+			ex.printStackTrace(System.err);
+			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
+			smartException.setCode(0);
+			smartException.setMensaje(ex.getMessage());
+			smartException.setStackTrace(ex.getStackTrace());
+			throw smartException;
+		}
+		return returnObject;
+	}
 
+	
+	
+	
 	@Override
 	public List<EmpresaDTO> consultarEmpresa(EmpresaDTO filtro)throws SmartExcepcionSerializada {
 		List<EmpresaDTO> enpresalist = new ArrayList<>();

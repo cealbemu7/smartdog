@@ -5,11 +5,7 @@
  * @Date Modificación: 26-09-2019
  */
 
-angular
-		.module('smartApp')
-		.controller(
-				'registroempresaCtrl',
-				function($scope, smartServices) {
+angular.module('smartApp').controller('registroempresaCtrl',function($scope, smartServices) {
 
 					/**
 					 * @Descripcion: Carga los Servidor
@@ -163,8 +159,7 @@ angular
 								var reponsoObject = angular.fromJson(response.data);
 								alert("Error", "Ha ocurrido un error al momento de listar empresa",reponsoObject.descripcion);
 							}			
-							
-							
+				
 							var sendEmpresa = $scope.empresa;
 							smartServices.sendPost(angular.toJson(sendEmpresa),hostSmart+context+methodConsultarEmpresa,exito,error);
 							
@@ -172,6 +167,36 @@ angular
 							$scope.mensaje("Error", "Ha ocurrido un error al momento de listar empresa", error.message);
 						}
 					}	
+					
+					
+					
+					
+					/**
+					 * eliminar empresa
+					 */
+					 $scope.eliminarEmpresa = function(m) {
+					 	try {	
+					 		var exito = function(response) {
+					 			var reponsoObject = angular.fromJson(response.data);
+					 			if(reponsoObject!=null){
+					 				alert("Exito", " ",reponsoObject.descripcion);	
+					 			}else{
+					 				alert("Error", "Ha ocurrido un error al momento de eliminar la  empresa","");
+					 			}
+					 		
+					 		var error = function(response) {
+					 			var reponsoObject = angular.fromJson(response.data);
+					 			alert("Error", "Ha ocurrido un error al momento de eliminar la  empresa",reponsoObject.descripcion);
+					 		}			    
+
+					 		};	
+					 		var sendEmpresa = $scope.empresa;
+					 		smartServices.sendPost(angular.toJson(sendEmpresa),hostSmart+context+methodEliminarEmpresa,exito,error);	
+
+					 	} catch (error) {
+					 		alert("Error Ha ocurrido un error al momento de eliminar la  empresa", error.message);
+					 	}	
+
 
 					/**
 					 * Grabar empresa

@@ -40,9 +40,29 @@ public class EmpresaFacade extends AbstractBean implements EmpresaFacadeLocal{
 	}
 
 	
+	/** Metodo Eliminar empresa
+	 * 
+	 * 
+	 */
+	@Override
+	public EmpresaDTO eliminarEmpresa(EmpresaDTO empresa) throws Throwable{
+		EmpresaDTO returnObject = new EmpresaDTO();
+		try {
+			EmpresaCaller caller = new EmpresaCaller(SmartConstant.JDNI_CONNECTION);
+			returnObject = caller.EmpresaCaller(empresa);
+			
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return returnObject;
+	}
 	
-	
-	
+	/** Metodo grabar empresa
+	 * 
+	 * 
+	 */
 	@Override
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws Throwable {
 		

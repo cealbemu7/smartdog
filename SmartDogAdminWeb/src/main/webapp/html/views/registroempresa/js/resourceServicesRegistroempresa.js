@@ -8,3 +8,4 @@ var serviceNameEmpresa = '/SmartServiceEmpresa';
 
 var methodConsultarEmpresa  = serviceNameEmpresa+'/consultarEmpresa';
 var methodGrabarEmpresa  = serviceNameEmpresa+'/grabarEmpresa';
+var methodEliminarEmpresa  = serviceNameEmpresa+'/eliminarEmpresa';

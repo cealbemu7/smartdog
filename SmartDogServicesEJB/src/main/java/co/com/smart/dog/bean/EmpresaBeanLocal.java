@@ -10,5 +10,7 @@ public interface EmpresaBeanLocal {
 	public List<EmpresaDTO> consultarEmpresa(EmpresaDTO empresalist) throws  SmartExcepcionSerializada;
 
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws SmartExcepcionSerializada;
+	
+	public EmpresaDTO eliminarEmpresa(EmpresaDTO empresa) throws SmartExcepcionSerializada;
 
 }

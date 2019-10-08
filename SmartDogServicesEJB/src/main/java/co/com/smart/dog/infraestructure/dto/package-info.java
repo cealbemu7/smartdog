@@ -5,4 +5,4 @@
  * @author SmartJungle
  *
  */
-package co.com.smart.dog.persistence.infraestructure.dto;
+package co.com.smart.dog.infraestructure.dto;

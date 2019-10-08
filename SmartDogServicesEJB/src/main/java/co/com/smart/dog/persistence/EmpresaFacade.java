@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import co.com.smart.dog.bean.AbstractBean;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 import co.com.smart.dog.persistence.caller.EmpresaCaller;
+
 import co.com.smart.dog.utility.SmartConstant;
 @Stateless(name = "EmpresaFacade",
 mappedName = "ejb/EmpresaFacade")
@@ -49,7 +50,7 @@ public class EmpresaFacade extends AbstractBean implements EmpresaFacadeLocal{
 		EmpresaDTO returnObject = new EmpresaDTO();
 		try {
 			EmpresaCaller caller = new EmpresaCaller(SmartConstant.JDNI_CONNECTION);
-			returnObject = caller.EmpresaCaller(empresa);
+			returnObject = caller.eliminarEmpresa(empresa);
 			
 		} catch (NamingException e) {
 			e.printStackTrace();

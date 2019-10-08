@@ -1,4 +1,4 @@
-package co.com.smart.dog.persistence.entity.util;
+package co.com.smart.dog.persistence;
 
 
 import java.util.List;

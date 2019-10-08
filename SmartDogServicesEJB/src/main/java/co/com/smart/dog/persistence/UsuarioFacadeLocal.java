@@ -31,5 +31,11 @@ public interface UsuarioFacadeLocal {
 	 */
 	Map<String, String> getParams(String dsparameter) throws NamingException,
 			SQLException;
-
+	/**
+	 * solicitarRegistroUsuario
+	 * @param json
+	 * @return
+	 * @throws Throwable
+	 */
+	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json)throws Throwable; 
 }

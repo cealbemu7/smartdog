@@ -28,7 +28,9 @@ public class UsuarioFacade extends AbstractBean implements UsuarioFacadeLocal {
 	protected EntityManager getEntityManager() {
 		return em;
 	}
-
+	/***
+	 * consultar Usuario
+	 */
 	@Override
 	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario) throws Throwable {
 		List<UsuarioDTO> usuarios = new ArrayList<>();
@@ -59,10 +61,30 @@ public class UsuarioFacade extends AbstractBean implements UsuarioFacadeLocal {
 			}
 		return usuarios;
 	}
-	
+	/**
+	 * get params
+	 */
 	@Override
 	public Map<String, String> getParams(String dsparameter)throws NamingException, SQLException {
 		ParametersCaller caller = new ParametersCaller(SmartConstant.JDNI_CONNECTION);
 		return caller.getParams(dsparameter);
 	}
+	/**
+	 * solicitarRegistroUsuario
+	 */
+	@Override
+	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json) throws Throwable {
+		UsuarioDTO response = new UsuarioDTO();
+		 try {
+				UsuarioCaller caller = new UsuarioCaller(SmartConstant.JDNI_CONNECTION);
+				response = caller.grabarUsuario(json);
+				
+			} catch (NamingException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return response;
+	}
+	
 }

@@ -115,9 +115,9 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 		   if(create){
 			    
 			   
-			    var password = utf8_to_b64($scope.user.confirmPassword);
-				$scope.user.password = password;
-				$scope.user.confirmPassword = password;
+			    var contrasena = utf8_to_b64($scope.usuario.confirmcontresena);
+				$scope.usuario.contresena = contrasena;
+				$scope.usuario.confirmcontresena = contrasena;
 				/*tienes un error es user o usuario?usuario, entocne sporque estas llenando user*/
 				
 				smartServices.sendPost(

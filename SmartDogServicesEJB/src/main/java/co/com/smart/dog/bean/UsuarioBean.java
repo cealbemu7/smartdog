@@ -178,14 +178,15 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json) 
 		throws SmartExcepcionSerializada {
 			UsuarioDTO response = new UsuarioDTO();
+			/*TODO: 
+			 *   1) genero token JWT apartir del correo, la aplicacion y la fecha con hora
+			 *   2) almaceno solicitud en usuarios (Base de datos, funcion que crea la solicitud de registro)
+			 *   3) crear plantilla de notificacion velocity y mapeo de campos, que contenido debe tener el correo
+			 *   4) respondemos la informacion de registro exitoso
+			 */
 			try {
-				response = facade.grabarUsuario(json);
-				/*TODO: 
-				 *   1) genero token JWT apartir del correo, la aplicacion y la fecha con hora
-				 *   2) almaceno solicitud en usuarios (Base de datos, funcion que crea la solicitud de registro)
-				 *   3) crear plantilla de notificacion velocity y mapeo de campos, que contenido debe tener el correo
-				 *   4) respondemos la informacion de registro exitoso
-				 */
+				response = facade.solicitarRegistroUsuario(json);
+				
 			} catch (Throwable ex) {
 				ex.printStackTrace(System.err);
 				SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();

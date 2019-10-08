@@ -5,25 +5,26 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Ingreso al sistema</title>
 	
+	<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
 	<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet" type="text/css">		
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
 	<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+	
+	
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
     
     <!-- Solicitud registro -->
 	<div ng-if="isRequest == 'S'">
 		<div class="container">
-			<div class="card card-container">
-				<!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+			<div class="card card-container">				
 				<img id="profile-img" class="profile-img-card"
 					src="../../../img/avatar.png"/>
 				<p id="profile-name" class="profile-name-card"></p>
 				<div class="container">
 					<div class="row">
 						<div class="col-xl-8 offset-xl-2">
-							<form id="contact-form" method="post" action="" role="form">							
+							<form id="contact-form" method="post" role="form">							
 								<div class="controls">								
 									<div class="row">
 										<div class="col-lg-4">
@@ -51,7 +52,7 @@
 										<div class="col-lg-8">
 										  <div class="form-group">
 					                            <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
-					                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required data-error="complete el Captcha">
+					                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required="required" data-error="complete el Captcha">
 					                            <div class="help-block with-errors"></div>
 					                        </div>										
 										</div>
@@ -400,12 +401,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- Importando js de bootstrap && jquery -->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<!-- Importando js de bootstrap && jquery -->	
 	<script	type="text/javascript" src="../../../bootstrap-3/js/bootstrap.min.js"></script>	
-	<script type="text/javascript" src="../../../js/js/validator.js"></script>
-	<script type="text/javascript" src="../../../js/js/contact.js"></script>
-	
+	<script src='https://www.google.com/recaptcha/api.js'></script>	
 	
 		<!-- Importarmos angular JS -->
 	<script type="text/javascript" src="../../../js/angular-1.4.7/angular.min.js"></script>

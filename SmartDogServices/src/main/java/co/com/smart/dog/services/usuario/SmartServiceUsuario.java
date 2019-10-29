@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
+import co.com.smart.dog.services.annotations.SmartSecurity;
 import co.com.smart.dog.services.base.SmartResponseBase;
 import co.com.smart.dog.session.DelegateContextEJB;
 
@@ -26,6 +27,7 @@ public class SmartServiceUsuario extends SmartResponseBase{
 	@POST
 	@Path("/solicitarRegistroUsuario")
 	@Produces(MediaType.APPLICATION_JSON)
+	@SmartSecurity
 	public Response solicitarRegistroUsuario (UsuarioDTO json){
 		return getResponse(DelegateContextEJB.getUsuarioBean().solicitarRegistroUsuario(json));
 	}
@@ -38,6 +40,7 @@ public class SmartServiceUsuario extends SmartResponseBase{
 	@POST
 	@Path("/consultarUsuario")
 	@Produces(MediaType.APPLICATION_JSON)
+	@SmartSecurity
 	public Response consultarUsuario (UsuarioDTO json){
 		return getResponse(DelegateContextEJB.getUsuarioBean().consultarUsuario(json));
 	}
@@ -49,6 +52,7 @@ public class SmartServiceUsuario extends SmartResponseBase{
 	@POST
 	@Path("/grabarUsuario")
 	@Produces(MediaType.APPLICATION_JSON)
+	@SmartSecurity
 	public Response grabarUsuario (UsuarioDTO json){
 		return getResponse(DelegateContextEJB.getUsuarioBean().grabarUsuario(json));
 	}

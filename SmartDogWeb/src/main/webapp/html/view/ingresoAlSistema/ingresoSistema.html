@@ -9,8 +9,7 @@
 	<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet" type="text/css">		
 	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
 	<link href='../../../css/custom.css' rel='stylesheet' type='text/css'>
-	
-	
+		
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
     
@@ -161,7 +160,9 @@
 							<div class="col-lg-4">
 				                <div class="form-group">
 				                    <label class="control-label">Tipo Identificaciòn *</label>
-				                    <input maxlength="100" type="text" required="required" class="form-control" placeholder="Tipo Identificaciòn" />
+				                	<select id="tipodocumento" class="form-control select-sm" ng-model="tipodocumento" ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos" >
+		                         		<option value="">Seleccionar</option>
+								 	</select>
 				                </div>
 			               </div>
 			               <div class="col-lg-4">
@@ -259,9 +260,9 @@
 			               <div class="col-lg-4">
 				               	<div class="form-group">
 				                    <label class="control-label">Inmnobiliaria*</label>
-				                    <select class="form-control" id="exampleFormControlSelect1">
-								      <option>seleccionar</option>								     
-								    </select>
+				                    <select class="custom-select" id="idinmobiliaria" ng-model="inmobiliaria" ng-options="inmobiliaria as inmobiliaria.dsrazonsocial for inmobiliaria in inmobiliarias"tabindex=3>
+										<option value="">Seleccionar</option>
+									</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
 				                </div>
 			               	</div>
 			               	<div class="col-lg-4">
@@ -421,7 +422,9 @@
 	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
 	
 	<!-- Importarmos Resources Services JS -->
-	<script type="text/javascript" src="js/resourceServicesIngresoAlSistema.js"></script>	
+	<script type="text/javascript" src="js/resourceServicesIngresoAlSistema.js"></script>
+	<script type="text/javascript" src="../cargainicial/js/resourcesServicesCargaInicial.js"></script>
+		
 </body>
 
 </html>

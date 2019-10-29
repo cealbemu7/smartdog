@@ -178,15 +178,37 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	public UsuarioDTO solicitarRegistroUsuario(UsuarioDTO json) 
 		throws SmartExcepcionSerializada {
 			UsuarioDTO response = new UsuarioDTO();
-			/*TODO: 
-			 *   1) genero token JWT apartir del correo, la aplicacion y la fecha con hora
-			 *   2) almaceno solicitud en usuarios (Base de datos, funcion que crea la solicitud de registro)
-			 *   3) crear plantilla de notificacion velocity y mapeo de campos, que contenido debe tener el correo
-			 *   4) respondemos la informacion de registro exitoso
-			 */
+			
 			try {
 				response = facade.solicitarRegistroUsuario(json);
+				String secureToken = generateSecureToken(json);
+				json.setSecureToken(secureToken);
 				
+				VelocityContext context = loadParamsVelocity(facade.getParams("EMAIL-SMTP-REQUEST-USERS"));
+
+				SmartEmail mail = new SmartEmail(configs);
+				velocityEngine = new VelocityEngine(props);
+				velocityEngine.init();
+				Template template = velocityEngine.getTemplate("/co/com/smart/dog/templates/templateEmailRequestCreateUser.vm");
+				context.put("user", json.getDsusuario());
+				context.put("email", json.getDsemail());
+
+				Jws<Claims> claims = getInfoSecureToken(json.getSecureToken());
+
+				Date expire = claims.getBody().getExpiration();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss a");
+
+				context.put("token", json.getSecureToken());
+				context.put("expire", dateFormat.format(expire.getTime()));
+				context.put("year", Calendar.getInstance().get(Calendar.YEAR));
+
+				StringWriter html = new StringWriter();
+
+				template.merge(context, html);
+				mail.setSubject("Confirmacion de registro");
+				mail.addRecipients(json.getDsemail());
+				mail.setContent(html.toString(), true);
+				mail.send();
 			} catch (Throwable ex) {
 				ex.printStackTrace(System.err);
 				SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();

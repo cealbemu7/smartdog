@@ -5,3 +5,4 @@
  * @Date Modifi: 26-09-2019
  */
 var SmartEjemplo = '18';
+var SmartMaestroTipoDocumento  = '02'

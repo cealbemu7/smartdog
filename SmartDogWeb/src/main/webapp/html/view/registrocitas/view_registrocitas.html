@@ -1,10 +1,302 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="smartApp" lang="es">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Insert title here</title>
+<script type="text/javascript"
+	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
 </head>
-<body>
+<body ng-controller="registroCitasCtrl" ng-init="onInit()">
+	<!-- Autenticar usaurio existente -->
 
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">WebSiteName</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Page 1</a></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+						Salir</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="stepwizard">
+			<div class="stepwizard-row setup-panel">
+				<div class="stepwizard-step col-xs-4">
+					<a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+					<p>
+						<small>Registro de usuarios</small>
+					</p>
+				</div>
+				<div class="stepwizard-step col-xs-4">
+					<a href="#step-2" type="button" class="btn btn-default btn-circle"
+						disabled="disabled">2</a>
+					<p>
+						<small>Reservar Cita</small>
+					</p>
+				</div>
+				<div class="stepwizard-step col-xs-4">
+					<a href="#step-3" type="button" class="btn btn-default btn-circle"
+						disabled="disabled">3</a>
+					<p>
+						<small>Citas solicitadas</small>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<form role="form">
+			<div class="panel panel-info setup-content" id="step-1">
+				<div class="panel-heading">
+					<h3 class="panel-title">Registro de usuarios</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Tipo Identificaciòn *</label> <select
+									id="tipodocumento" class="form-control select-sm"
+									ng-model="tipodocumento"
+									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos">
+									<option value="">Seleccionar</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Nùmero de Identificación*</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Nùmero de Identificación" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Sexo</label> <select id="sexo"
+									class="form-control select-sm" ng-model="sexo"
+									ng-options="sexo as sexo.dsdatmaestro for sexo in sexos">
+									<option value="">Seleccionar</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Primer Nombre *</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Primer Nombre" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Segundo Nombre</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Segundo Nombre" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Fecha de Nacimiento</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Fecha de Nacimiento" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Primer Apellido*</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Primer Apellido" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Segundo Apellido</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Segundo Apellido" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Dirección</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Dirección" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Teléfono</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Teléfono" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Celular</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Celular" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Email</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Email" />
+							</div>
+						</div>
+					</div>
+					<input type="submit" class="btn btn-success" value="Guardar">
+					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+				</div>
+			</div>
+
+			<div class="panel panel-info setup-content" id="step-2">
+				<div class="panel-heading">
+					<h3 class="panel-title">Reservar Cita</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Cliente</label> <input
+									maxlength="100" type="text" readonly="readonly"
+									class="form-control" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Inmnobiliaria*</label> <select
+									class="form-control select-sm" id="idempresa"
+									ng-model="idrazonsocialempresa"
+									ng-options="empresa as empresa.dsrazonsocial for empresa in empresas"
+									tabindex=3>
+									<option value="">Seleccionar</option>
+								</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Tipo de Inmueble*</label> <select
+									class="form-control" id="exampleFormControlSelect1">
+									<option>seleccionar</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Còdigo del inmueble*</label> <input
+									maxlength="100" type="text" required="required"
+									class="form-control" placeholder="Còdigo del inmueble" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Fecha*</label> <input
+									maxlength="100" type="date" required="required"
+									class="form-control" />
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Hora*</label> <input
+									maxlength="100" type="time" required="required"
+									class="form-control" />
+							</div>
+						</div>
+					</div>
+					<input type="submit" class="btn btn-success" value="Reservar cita">
+					<input type="submit" class="btn btn-success" value="Nueva cita">
+					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+				</div>
+			</div>
+
+			<div class="panel panel-info setup-content" id="step-3">
+				<div class="panel-heading">
+					<h3 class="panel-title">Citas solicitadas</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="control-label">Còdigo del inmueble*</label> <input
+									maxlength="100" type="text" readonly="readonly"
+									class="form-control" />
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<table class="table">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">Acciòn</th>
+									<th scope="col">Inmobiliaria</th>
+									<th scope="col">Tipo de inmueble</th>
+									<th scope="col">Código del inmueble</th>
+									<th scope="col">Fecha</th>
+									<th scope="col">Hora</th>
+									<th scope="col">Estado</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="7"></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Importando js de bootstrap && jquery -->
+	<script type="text/javascript"
+		src="../../../bootstrap-3/js/bootstrap.min.js"></script>
+
+	<!-- Importarmos angular JS -->
+	<script type="text/javascript"
+		src="../../../js/angular-1.4.7/angular.min.js"></script>
+	<script type="text/javascript"
+		src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+	<script type="text/javascript"
+		src="../../../js/angucomplete/angucomplete.js"></script>
+	<script type="text/javascript"
+		src="../../../js/smartmessagebox/app.min.js"> </script>
+	<script type="text/javascript"
+		src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
+	<script type="text/javascript"
+		src="../../../js/smart/SmartConstantes.js"></script>
+
+	<!-- Smart javascript framework -->
+	<script type="text/javascript"
+		src="../../../js/smart/angular-websocket.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
+	<script type="text/javascript" src="js/registrocitasCtrl.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+
+	<!-- Importarmos Resources Services JS -->
+	<script type="text/javascript"
+		src="js/resourceServicesRegistrocitas.js"></script>
+	<script type="text/javascript"
+		src="../cargainicial/js/resourceServicesCargaInicial.js"></script>
 </body>
 </html>

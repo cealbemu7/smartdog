@@ -8,7 +8,7 @@
 angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, smartServices) {
 
 	$scope.isRequest = 'S';
-	$scope.isUser = 'N';
+	
 	
 	/**
 	 * @Descripcion: Carga Inicial de los envios al servidor
@@ -17,21 +17,9 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	 */
 	$scope.onInit = function(){
 		$scope.isRequest = 'S';
-		$scope.isUser = 'N';
+		
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
-		$scope.cargaInicial();
-	}
-	
-	$scope.maestro = {
-		"comaestro" : null
-	}
-	
-	
-	$scope.tipodocumento = {
-		"scdatmaestro" : null,
-		"codatmaestro" : null,
-		"dsdatmaestro" : null,
-		"dsvalor" : null
+		
 	}
 	
 	$scope.usuario = {
@@ -41,90 +29,11 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	    "dsemail": null
 	}
 	
-	$scope.inmobiliaria = {
-		"scempresa" : null,
-		"nitempresa" : null,
-		"dsrazonsocial" : null,
-		"cousuario" : null,			
-		"fhretiro" : null,
-		"ciudad" : null,
-		"dsdireccion" : null,
-		"dstelefono" : null,
-		"dsemail" : null,
-	}
-	/**
-	* controlador que consulta de los maestros
-	*/
-	
-	$scope.cargaInicial = function() {
-		try {			
-			var exito = function(response){
-				try{
-					if(response.data != null){
-						$scope.tipodocumentos = new Array();
-						var tipodocumentos  = angular.fromJson(response.data.listatipodocumento);						
-						$.each(tipodocumentos, function( index , tipodocumento ) {
-							$scope.tipodocumentos.push(tipodocumento);
-						});						
-						
-						$scope.CargarInmobiliaria();
-					}else{
-						alert("Error al cargar inicial: ");
-					}
-				}catch(e){
-					alert("Error en la cargar inicial: ");
-				}
-			}
-	
-			var error = function(response){
-				alert("Error en la carga inicial: ");
-				console.log(angular.toJson(response));
-			}
-			$scope.maestro = {"comaestro" : null}
-			$scope.maestro.comaestro = SmartMaestroTipoDocumento;
-			var sendTipoDocumento = $scope.maestro;
-			var sendobjectTipoDocumento = {
-				maestro : sendTipoDocumento,
-				cousuario: $scope.cousuario
-			};	   
-		
-		   var sendObject = {				   
-				   tipodocumento : sendobjectTipoDocumento,				  
-		   }; 	   
-		   smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodListaInicial,exito,error);				
-			
-		} catch (error) {
-			alert("Error en cargar inicial: ");
-		}
-	}
-	/***
-	 * metodo para cargar inmobiliaria
-	 */
-	$scope.CargarInmobiliaria = function(){
-		try {
-			var exito = function(response) {
-				if(response.data != null){
-					$scope.inmobiliaria = new Array();
-					var inmobiliarias = angular.fromJson(response.data);
-					$.each(inmobiliarias, function(index,inmobiliaria) {
-						$scope.inmobiliarias.push(inmobiliaria);
-					});				
-				}else{
-					alert("Advertencia", "No se han encontrado inmobiliaria ingresadas","");
-				}
-			}
-			var error = function(response) {
-				var reponsoObject = angular.fromJson(response.data);
-				alert("Error", "Ha ocurrido un error al momento de listar inmobiliaria",reponsoObject.descripcion);
-			}			
-
-			var sendInmobiliaria = $scope.inmobiliaria;
-			smartServices.sendPost(angular.toJson(sendInmobiliaria),hostSmart+context+methodConsultarEmpresa,exito,error);
-			
-		} catch (error) {
-			alert("Error", "Ha ocurrido un error al momento de listar inmobiliaria", error.message);
-		}
-	}
+	$scope.RutaCitas = function () {
+        var url = "http://" + window.location.host + "/SmartDogWeb/html/view/registrocitas/view_registrocitas.html";
+        console.log(window.location.host);
+        window.open (url,'_self');
+    };
 		
 	/**
 	 * este metodo permite consultar usuarios
@@ -146,10 +55,9 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 								});
 								
 								alert("el usuario existe con este correo");
-								$scope.isRequest = 'N';
-								$scope.isUser = 'S';								
-								setUserSession(angular.tojson(respose.data));
-								
+								$scope.isRequest = 'N';														
+								/*setUserSession(angular.tojson(respose.data));*/
+								$scope.RutaCitas();
 							}else{
 								alert("No se encontro usuario con este correo");
 							}

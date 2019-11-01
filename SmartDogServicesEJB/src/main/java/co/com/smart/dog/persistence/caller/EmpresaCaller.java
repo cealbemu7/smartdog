@@ -13,6 +13,7 @@ import co.com.smart.dog.infraestructure.dto.CiudadDTO;
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
+import co.com.smart.dog.infraestructure.dto.PropiedadDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
 public class EmpresaCaller extends JDBCResourceManager implements Serializable {
@@ -156,5 +157,6 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 		
 		return sqldto;
 	}
+
 
 }

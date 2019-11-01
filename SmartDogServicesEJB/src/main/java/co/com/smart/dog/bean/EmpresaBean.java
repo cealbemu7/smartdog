@@ -2,7 +2,6 @@ package co.com.smart.dog.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.Stateless;
 
 

@@ -6,6 +6,7 @@ import co.com.smart.dog.bean.DepartamentoBeanLocal;
 import co.com.smart.dog.bean.EmpresaBeanLocal;
 import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
+import co.com.smart.dog.bean.PropiedadBeanLocal;
 import co.com.smart.dog.bean.UsuarioBeanLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
@@ -13,6 +14,7 @@ import co.com.smart.dog.persistence.DepartamentoFacadeLocal;
 import co.com.smart.dog.persistence.EmpresaFacadeLocal;
 import co.com.smart.dog.persistence.MaestroFacadeLocal;
 import co.com.smart.dog.persistence.PaisFacadeLocal;
+import co.com.smart.dog.persistence.PropiedadFacadeLocal;
 import co.com.smart.dog.persistence.UsuarioFacadeLocal;
 import co.com.smart.dog.session.base.SmartContextLookUp;
 
@@ -38,6 +40,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static DatosMaestroBeanLocal getDatosMaestroBean;
 	private static UsuarioBeanLocal getUsuarioBean;
 	private static EmpresaBeanLocal getEmpresaBean;
+	private static PropiedadBeanLocal getPropiedadBean;
 	
 	 /**
 	  * Instancia unica del bean getPaisBean
@@ -124,6 +127,15 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 
 	  return getEmpresaBean;
 	 }
+	 
+	 public static synchronized PropiedadBeanLocal getPropiedadBean() {
+
+		  if (getPropiedadBean == null) {
+			  getPropiedadBean = (PropiedadBeanLocal) getSmartContext("PropiedadBean");
+		  }
+
+		  return getPropiedadBean;
+		 }
 	
 	/**
 	 * Facade ----------------------------------------------
@@ -136,6 +148,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static DatosMaestroFacadeLocal getDatosMaestroFacade;
 	private static UsuarioFacadeLocal getUsuarioFacade;
 	private static EmpresaFacadeLocal getEmpresaFacade;
+	private static PropiedadFacadeLocal getPropiedadFacade;
 	
 	 /**
 	  * Instancia unica de la facade getPaisFacade
@@ -224,8 +237,17 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 		}
 		return getEmpresaFacade;
 	}
-
-
+	/**
+	 * 
+	 * @return
+	 */
+	
+	public static synchronized PropiedadFacadeLocal getPropiedadFacade() {
+		if (getPropiedadFacade== null) {
+			getPropiedadFacade=(PropiedadFacadeLocal) getSmartContext("PropiedadFacade");
+		}
+		return getPropiedadFacade;
+	}
 
 
 }

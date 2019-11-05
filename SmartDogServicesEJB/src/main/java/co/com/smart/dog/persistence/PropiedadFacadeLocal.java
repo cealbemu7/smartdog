@@ -3,7 +3,6 @@ package co.com.smart.dog.persistence;
 import java.util.List;
 
 import co.com.smart.dog.infraestructure.dto.PropiedadDTO;
-import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;;
 
 public interface PropiedadFacadeLocal {
 
@@ -13,7 +12,7 @@ public interface PropiedadFacadeLocal {
 
 	public PropiedadDTO eliminarPropiedad(PropiedadDTO propiedad) throws Throwable;
 
-	public List<PropiedadDTO> consultarPropiedad(PropiedadDTO propiedad);
+	public List<PropiedadDTO> consultarPropiedad(PropiedadDTO propiedad) throws Throwable;
 
 
 

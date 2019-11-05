@@ -24,8 +24,7 @@ public class PropiedadFacade extends AbstractBean implements PropiedadFacadeLoca
 	}
 
 	@Override
-	public List<PropiedadDTO> consultarEmpresa(PropiedadDTO propiedad) throws Throwable {
-
+	public List<PropiedadDTO> consultarPropiedad(PropiedadDTO propiedad) throws Throwable {
 		List<PropiedadDTO> propiedadlist = new ArrayList<>();
 		try {
 			PropiedadCaller caller = new PropiedadCaller(SmartConstant.JDNI_CONNECTION);

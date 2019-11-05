@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 import co.com.smart.dog.infraestructure.dto.PropiedadDTO;
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 import co.com.smart.dog.persistence.PropiedadFacadeLocal;

@@ -29,7 +29,10 @@ public class SmartServiceCargaInicial extends SmartResponseBase{
 		}
 		if(json.getSexo()!=null){	
 			returnListas.setListasexo(DelegateContextEJB.getDatosMaestroBean().consultarDatosMestros(json.getSexo()));
-		}		
+		}
+		if(json.getTipoinmueble()!=null){	
+			returnListas.setListaTipoInmueble(DelegateContextEJB.getDatosMaestroBean().consultarDatosMestros(json.getTipoinmueble()));
+		}	
 		return getResponse(returnListas);
 	}
 

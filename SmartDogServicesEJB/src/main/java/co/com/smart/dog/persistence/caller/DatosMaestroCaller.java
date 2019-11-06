@@ -49,11 +49,11 @@ public class DatosMaestroCaller extends JDBCResourceManager implements Serializa
                 while(rs.next()){
                 	DatosMaestroDTO datosmaestro = new DatosMaestroDTO();
                 	MaestroDTO maestro = new MaestroDTO();
-                    datosmaestro.setScdatmaestro(rs.getBigDecimal("sp_scdatmaestro"));
-                    datosmaestro.setCodatmaestro(rs.getString("sp_codatmaestro"));
-                    datosmaestro.setDsdatmaestro(rs.getString("sp_dsdatmaestro"));
-                    datosmaestro.setDsvalor(rs.getString("sp_dsvalor"));
-                    maestro.setScmaestro(rs.getBigDecimal("sp_scmaestro"));
+                    datosmaestro.setScdatmaestro(rs.getBigDecimal("sm_scdatosmaestros"));
+                    datosmaestro.setCodatmaestro(rs.getString("sm_codatosmaestros"));
+                    datosmaestro.setDsdatmaestro(rs.getString("sm_dsdatosmaestros"));
+                    datosmaestro.setDsvalor(rs.getString("sm_dsvalor"));
+                    maestro.setScmaestro(rs.getBigDecimal("sm_scmaestro"));
                     datosmaestro.setMaestro(maestro);
                     datosMaestros.add(datosmaestro);
                 }

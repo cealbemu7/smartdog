@@ -13,7 +13,6 @@ import co.com.smart.dog.infraestructure.dto.CiudadDTO;
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
-import co.com.smart.dog.infraestructure.dto.PropiedadDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
 public class EmpresaCaller extends JDBCResourceManager implements Serializable {
@@ -74,9 +73,9 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 	 * @return
 	 * @throws Throwable
 	 */
-	 public EmpresaDTO eliminarEmpresa(EmpresaDTO Empresa)  throws NamingException, SQLException {
-		 EmpresaDTO returnObject = new EmpresaDTO();
-         try {
+	 public EmpresaDTO eliminarEmpresa(EmpresaDTO Empresa)  throws NamingException, SQLException {	
+		EmpresaDTO returnObject = new EmpresaDTO();
+	 	try {
              conn = getConnection();
              call = conn.prepareCall("EmpresaCaller.fn_eliminar_empresa");
              if (Empresa.getScempresa() != null && Empresa.getScempresa()!=null) {

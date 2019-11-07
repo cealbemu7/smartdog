@@ -1,5 +1,6 @@
 package co.com.smart.dog.session;
 
+import co.com.smart.dog.bean.AsesorBeanLocal;
 import co.com.smart.dog.bean.CiudadBeanLocal;
 import co.com.smart.dog.bean.ClienteBeanLocal;
 import co.com.smart.dog.bean.DatosMaestroBeanLocal;
@@ -42,6 +43,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static UsuarioBeanLocal getUsuarioBean;
 	private static EmpresaBeanLocal getEmpresaBean;
 	private static PropiedadBeanLocal getPropiedadBean;
+	private static AsesorBeanLocal getAsesorBean;
 	private static ClienteBeanLocal getClienteBean;
 
 	/**
@@ -151,6 +153,23 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 		return getPropiedadBean;
 	}
+	
+	
+	
+	/**
+	 * Instancia unica del bean getAsesorBean
+	 *
+	 * @return
+	 */
+	public static synchronized AsesorBeanLocal getAsesorBean() {
+
+		if (getAsesorBean == null) {
+			getAsesorBean = (AsesorBeanLocal) getSmartContext("AsesorBean");
+		}
+
+		return getAsesorBean;
+	}
+	
 
 	/**
 	 * Instancia unica del bean getClienteBean

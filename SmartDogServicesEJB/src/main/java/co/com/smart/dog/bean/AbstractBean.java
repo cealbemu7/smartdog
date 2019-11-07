@@ -1,5 +1,6 @@
 package co.com.smart.dog.bean;
 
+import co.com.smart.dog.infraestructure.dto.AsesorDTO;
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 
 public class AbstractBean {
@@ -17,5 +18,7 @@ public class AbstractBean {
 		smartException.setStackTrace(ex.getStackTrace());
 		return smartException;
 	}
+
+
 
 }

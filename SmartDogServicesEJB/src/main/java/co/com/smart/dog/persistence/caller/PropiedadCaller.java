@@ -30,6 +30,14 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 	public PropiedadCaller(String jdniData) {
 		super(jdniData);
 	}
+	/**
+	 * consultar Propiedad
+	 * @param propiedad
+	 * @return 
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
 
 	public List<PropiedadDTO> consultarEmpresa(PropiedadDTO propiedad) throws SQLException, NamingException, IOException{
 		List<PropiedadDTO> propiedadreturn  = new ArrayList<>();
@@ -59,6 +67,14 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 		return propiedadreturn;
 	}
 
+	/**
+	 * grabar Propiedad
+	 * @param propiedad
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
 	 public PropiedadDTO grabarPropiedad(PropiedadDTO propiedad) throws SQLException, NamingException, IOException{
 			try { 
 				conn = getConnection();
@@ -89,12 +105,35 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 			}
 			return propiedad;
 	}
+	 
+	 
+	 
+	 /**
+	  * Actulizar Propiedad
+	  * @param propiedad
+	  * @return
+	  * @throws SQLException
+	  * @throws NamingException
+	  * @throws IOException
+	  */
 
 	public PropiedadDTO actulizarPropiedad(PropiedadDTO propiedad)throws SQLException, NamingException, IOException{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
 
+	/**
+	 * eliminar Propiedad
+	 * @param propiedad
+	 * @return
+	 * @throws SQLException
+	 * @throws NamingException
+	 * @throws IOException
+	 */
+	
 	public PropiedadDTO eliminarPropiedad(PropiedadDTO propiedad) throws SQLException, NamingException, IOException{
 		PropiedadDTO returnObject = new PropiedadDTO();
 		try { 

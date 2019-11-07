@@ -8,6 +8,7 @@ import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
 import co.com.smart.dog.bean.PropiedadBeanLocal;
 import co.com.smart.dog.bean.UsuarioBeanLocal;
+import co.com.smart.dog.persistence.AsesorFacadeLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
 import co.com.smart.dog.persistence.DepartamentoFacadeLocal;
@@ -149,6 +150,7 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 	private static UsuarioFacadeLocal getUsuarioFacade;
 	private static EmpresaFacadeLocal getEmpresaFacade;
 	private static PropiedadFacadeLocal getPropiedadFacade;
+	private static AsesorFacadeLocal getAsesorFacade;
 	
 	 /**
 	  * Instancia unica de la facade getPaisFacade
@@ -248,6 +250,19 @@ public class DelegateContextEJB  extends SmartContextLookUp{
 		}
 		return getPropiedadFacade;
 	}
+	
+	 /**
+	  * Instancia unica de la facade getPaisFacade
+	  * @return
+	  */
+	 public static synchronized AsesorFacadeLocal getAsesorFacade() {
+
+		if (getAsesorFacade == null) {
+			getAsesorFacade = (AsesorFacadeLocal) getSmartContext("getAsesorFacade");
+		}
+		
+		return getAsesorFacade;
+	 }
 
 
 }

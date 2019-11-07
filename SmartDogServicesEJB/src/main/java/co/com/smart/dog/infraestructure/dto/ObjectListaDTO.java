@@ -13,6 +13,7 @@ public class ObjectListaDTO extends SmartBaseDTO implements Serializable{
 	private DatosMaestroDTO tipodocumento;
 	private String fechaactual;
 	private DatosMaestroDTO sexo;
+	private DatosMaestroDTO tipoinmueble;
 	
 	public DatosMaestroDTO getTipodocumento() {
 		return tipodocumento;
@@ -33,11 +34,19 @@ public class ObjectListaDTO extends SmartBaseDTO implements Serializable{
 		this.sexo = sexo;
 	}
 
+	public DatosMaestroDTO getTipoinmueble() {
+		return tipoinmueble;
+	}
+	public void setTipoinmueble(DatosMaestroDTO tipoinmueble) {
+		this.tipoinmueble = tipoinmueble;
+	}
+
 	/**
 	 * Listas que retornan los maestros 
 	 */	
 	private List<DatosMaestroDTO> listatipodocumento;
 	private List<DatosMaestroDTO> listasexo;
+	private List<DatosMaestroDTO> listatipoinmueble;
 	
 	public List<DatosMaestroDTO> getListatipodocumento() {
 		return listatipodocumento;
@@ -50,5 +59,12 @@ public class ObjectListaDTO extends SmartBaseDTO implements Serializable{
 	}
 	public void setListasexo(List<DatosMaestroDTO> listasexo) {
 		this.listasexo = listasexo;
+	}
+	
+	public List<DatosMaestroDTO> getListaTipoInmueble() {
+		return listatipoinmueble;
+	}
+	public void setListaTipoInmueble(List<DatosMaestroDTO> listatipoinmueble) {
+		this.listatipoinmueble = listatipoinmueble;
 	}
 }

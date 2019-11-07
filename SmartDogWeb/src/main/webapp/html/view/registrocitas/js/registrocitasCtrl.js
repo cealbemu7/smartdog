@@ -24,6 +24,12 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			"dsvalor" : null
 		};	
 	
+	$scope.tipoinmueble = {
+		"scdatmaestro" : null,
+		"codatmaestro" : null,
+		"dsdatmaestro" : null,
+		"dsvalor" : null
+	}
 	$scope.tipodocumento = {
 		"scdatmaestro" : null,
 		"codatmaestro" : null,
@@ -54,12 +60,18 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$scope.tipodocumentos = new Array();
 						var tipodocumentos  = angular.fromJson(response.data.listatipodocumento);						
 						$.each(tipodocumentos, function( index , tipodocumento ) {
-							$scope.tipodocumentos.push(tipodocumento);
+							$scope.tipodocumentos.push(tipodocumento);							
 						});			
 						$scope.sexos = new Array();
 						var sexos  = angular.fromJson(response.data.listasexo);
 						$.each(sexos, function( index , sexo ) {
 							$scope.sexos.push(sexo);
+						});
+						
+						$scope.tipoinmuebles = new Array();
+						var tipoinmuebles  = angular.fromJson(response.data.listatipoinmueble);
+						$.each(tipoinmuebles, function( index , tipoinmueble ) {
+							$scope.tipoinmuebles.push(tipoinmueble);
 						});
 						
 					}else{
@@ -80,7 +92,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			var sendTipoDocumento = $scope.maestro;
 			var sendobjectTipoDocumento = {
 				maestro : sendTipoDocumento,
-				cousuario: $scope.cousuario
+				//cousuario: $scope.cousuario
 			};	
 			
 			$scope.maestro = {"comaestro" : null}
@@ -88,12 +100,23 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		    var sendMaestroSexo = $scope.maestro;
 		    var sendObjectSexo = {
 				maestro : sendMaestroSexo,
-				cousuario: $scope.usuario
+				//cousuario: $scope.usuario
 		    };
+		    
+			$scope.maestro = {"comaestro" : null}
+		    $scope.maestro.comaestro = SmartMaestroTipoInmueble;
+		    var sendMaestroTipoInmueble = $scope.maestro;
+		    var sendObjectInmueble = {
+				maestro : sendMaestroTipoInmueble,
+				//cousuario: $scope.usuario
+		    };
+		    
 		   var sendObject = {				   
-				   tipodocumento : sendobjectTipoDocumento,
-				   sexo : sendObjectSexo
-		   }; 	   
+				   tipodocumento: sendobjectTipoDocumento,
+				   sexo: sendObjectSexo,
+				   tipoinmueble: sendObjectInmueble,
+		   }; 
+		   
 		   smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodListaInicial,exito,error);				
 			
 		} catch (error) {
@@ -129,4 +152,52 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			alert("Error", "Ha ocurrido un error al momento de listar inmobiliaria", error.message);
 		}
 	}
+
+	/**
+	 * funciones del steps
+	 * 
+	 * @returns
+	 */
+	$(document).ready(function () {
+
+	    var navListItems = $('div.setup-panel div a'),
+	        allWells = $('.setup-content'),
+	        allNextBtn = $('.nextBtn');
+
+	    allWells.hide();
+
+	    navListItems.click(function (e) {
+	        e.preventDefault();
+	        var $target = $($(this).attr('href')),
+	            $item = $(this);
+
+	        if (!$item.hasClass('disabled')) {
+	            navListItems.removeClass('btn-success').addClass('btn-default');
+	            $item.addClass('btn-success');
+	            allWells.hide();
+	            $target.show();
+	            $target.find('input:eq(0)').focus();
+	        }
+	    });
+
+	    allNextBtn.click(function () {
+	        var curStep = $(this).closest(".setup-content"),
+	            curStepBtn = curStep.attr("id"),
+	            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+	            curInputs = curStep.find("input[type='text'],input[type='url']"),
+	            isValid = true;
+
+	        $(".form-group").removeClass("has-error");
+	        for (var i = 0; i < curInputs.length; i++) {
+	            if (!curInputs[i].validity.valid) {
+	                isValid = false;
+	                $(curInputs[i]).closest(".form-group").addClass("has-error");
+	            }
+	        }
+
+	        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+	    });
+
+	    $('div.setup-panel div a.btn-success').trigger('click');
+	});
 });

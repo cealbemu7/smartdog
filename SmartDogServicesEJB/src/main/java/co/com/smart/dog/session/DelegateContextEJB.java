@@ -9,6 +9,7 @@ import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
 import co.com.smart.dog.bean.PropiedadBeanLocal;
 import co.com.smart.dog.bean.UsuarioBeanLocal;
+import co.com.smart.dog.persistence.AsesorFacadeLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.ClienteFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
@@ -23,7 +24,7 @@ import co.com.smart.dog.session.base.SmartContextLookUp;
 /**
  * Define la comunicacion entre BEAN y FACADE usando el patron singleton de
  * forma que delegue la transaccion sincrona y unica
- * 
+ *
  * @author SmartJugle S.A.S
  *
  */
@@ -45,7 +46,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica del bean getPaisBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized PaisBeanLocal getPaisBean() {
@@ -59,7 +60,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la bean getDepartamentoBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized DepartamentoBeanLocal getDepartamentoBean() {
@@ -73,7 +74,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la bean getCiudadBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized CiudadBeanLocal getCiudadBean() {
@@ -87,7 +88,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la bean getGetMaestroBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized MaestroBeanLocal getMaestroBean() {
@@ -99,7 +100,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la bean getDatosMaestroBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized DatosMaestroBeanLocal getDatosMaestroBean() {
@@ -111,7 +112,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica del bean getUsuarioBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized UsuarioBeanLocal getUsuarioBean() {
@@ -125,7 +126,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica del bean getEmpresaBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized EmpresaBeanLocal getEmpresaBean() {
@@ -139,7 +140,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica del bean getPropiedadBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized PropiedadBeanLocal getPropiedadBean() {
@@ -153,7 +154,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica del bean getClienteBean
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized ClienteBeanLocal getClienteBean() {
@@ -177,16 +178,15 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static UsuarioFacadeLocal getUsuarioFacade;
 	private static EmpresaFacadeLocal getEmpresaFacade;
 	private static PropiedadFacadeLocal getPropiedadFacade;
+	private static AsesorFacadeLocal getAsesorFacade;
 	private static ClienteFacadeLocal getClienteFacade;
 
 	/**
 	 * Instancia unica de la facade getPaisFacade
-	 * 
+	 *
 	 * @return
 	 */
-	public static synchronized PaisFacadeLocal getPaisFacade() {
-
-		if (getPaisFacade == null) {
+	public static synchronized PaisFacadeLocal getPaisFacade() {		if (getPaisFacade == null) {
 			getPaisFacade = (PaisFacadeLocal) getSmartContext("PaisFacade");
 		}
 
@@ -195,7 +195,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getDepartamentoFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized DepartamentoFacadeLocal getDepartamentoFacade() {
@@ -209,7 +209,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getCiudadFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized CiudadFacadeLocal getCiudadFacade() {
@@ -223,7 +223,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getMaestroFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized MaestroFacadeLocal getMaestroFacade() {
@@ -237,7 +237,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getDatosMaestroFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized DatosMaestroFacadeLocal getDatosMaestroFacade() {
@@ -251,7 +251,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getUsuarioFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized UsuarioFacadeLocal getUsuarioFacade() {
@@ -265,7 +265,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getEmpresaFacade
-	 * 
+	 *
 	 * @return
 	 */
 	public static synchronized EmpresaFacadeLocal getEmpresaFacade() {
@@ -277,7 +277,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 	/**
 	 * Instancia unica de la fachada getPropiedadFacade
-	 * 
+	 *
 	 * @return
 	 */
 
@@ -287,11 +287,19 @@ public class DelegateContextEJB extends SmartContextLookUp {
 		}
 		return getPropiedadFacade;
 	}
-	
-	/**
-	 * Instancia unica de la fachada getClienteFacade 
-	 * @return
-	 */
+
+	 /**
+	  * Instancia unica de la facade getPaisFacade
+	  * @return
+	  */
+	 public static synchronized AsesorFacadeLocal getAsesorFacade() {
+
+		if (getAsesorFacade == null) {
+			getAsesorFacade = (AsesorFacadeLocal) getSmartContext("getAsesorFacade");
+		}
+
+		return getAsesorFacade;
+	 }
 
 	public static synchronized ClienteFacadeLocal getClienteFacade() {
 		if (getClienteFacade == null) {

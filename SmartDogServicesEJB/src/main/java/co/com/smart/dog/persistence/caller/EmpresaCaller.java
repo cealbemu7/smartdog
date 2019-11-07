@@ -30,7 +30,10 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 		super(jdniData);
 	}
 	/**
-	 * 
+	 * grabar Empresa
+	 * @param empresa
+	 * @return
+	 * @throws Throwable
 	 */
 	public EmpresaDTO grabarEmpresa(EmpresaDTO empresa) throws SQLException, NamingException, IOException{
 		try { 
@@ -104,9 +107,12 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
          }
          return returnObject;
      }
-	/**
-	 * 
-	 */
+		/**
+		 * consultar Empresa
+		 * @param empresa
+		 * @return
+		 * @throws Throwable
+		 */
 	public List<EmpresaDTO> consultarEmpresa (EmpresaDTO filtros) throws SQLException, NamingException, IOException{
 		List<EmpresaDTO> empresalist = new ArrayList<>();
 		try {

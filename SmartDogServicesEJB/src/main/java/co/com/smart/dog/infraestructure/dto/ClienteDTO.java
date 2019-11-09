@@ -17,7 +17,7 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	private String dssnombre;
 	private String dspapellido;
 	private String dssapellido;
-	private DatosMaestroDTO sctipoidentificacion;
+	private DatosMaestroDTO tipoidentificacion;
 	private String dsidentificacion;
 	private String dsdireccion;
 	private String dstelefono;
@@ -26,12 +26,9 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	private Date fhingreso;
     private Date fhmodificacion;
     private Date fhretiro;
-    private DatosMaestroDTO scsexo;
+    private DatosMaestroDTO sexo;
     private String fhnacimiento;
-    private String cousuario;
-    private UsuarioDTO scusuario;
-    
-    
+    private UsuarioDTO usuario;
 	public BigDecimal getSccliente() {
 		return sccliente;
 	}
@@ -62,11 +59,11 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	public void setDssapellido(String dssapellido) {
 		this.dssapellido = dssapellido;
 	}
-	public DatosMaestroDTO getSctipoidentificacion() {
-		return sctipoidentificacion;
+	public DatosMaestroDTO getTipoidentificacion() {
+		return tipoidentificacion;
 	}
-	public void setSctipoidentificacion(DatosMaestroDTO sctipoidentificacion) {
-		this.sctipoidentificacion = sctipoidentificacion;
+	public void setTipoidentificacion(DatosMaestroDTO tipoidentificacion) {
+		this.tipoidentificacion = tipoidentificacion;
 	}
 	public String getDsidentificacion() {
 		return dsidentificacion;
@@ -116,11 +113,11 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	public void setFhretiro(Date fhretiro) {
 		this.fhretiro = fhretiro;
 	}
-	public DatosMaestroDTO getScsexo() {
-		return scsexo;
+	public DatosMaestroDTO getSexo() {
+		return sexo;
 	}
-	public void setScsexo(DatosMaestroDTO scsexo) {
-		this.scsexo = scsexo;
+	public void setSexo(DatosMaestroDTO sexo) {
+		this.sexo = sexo;
 	}
 	public String getFhnacimiento() {
 		return fhnacimiento;
@@ -128,17 +125,10 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	public void setFhnacimiento(String fhnacimiento) {
 		this.fhnacimiento = fhnacimiento;
 	}
-	public String getCousuario() {
-		return cousuario;
+	public UsuarioDTO getUsuario() {
+		return usuario;
 	}
-	public void setCousuario(String cousuario) {
-		this.cousuario = cousuario;
-	}
-	public UsuarioDTO getScusuario() {
-		return scusuario;
-	}
-	public void setScusuario(UsuarioDTO scusuario) {
-		this.scusuario = scusuario;
-	}   
-	
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
+	}	
 }

@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.naming.NamingException;
 
@@ -36,8 +40,11 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 	 * @return
 	 * @throws SQLException
 	 * @throws NamingException	 
+	 * @throws ParseException 
 	 */
-	public ClienteDTO GrabarCliente (ClienteDTO cliente) throws SQLException, NamingException{
+	public ClienteDTO GrabarCliente (ClienteDTO cliente) throws SQLException, NamingException, ParseException{
+		SimpleDateFormat outFormat = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 		try { 
 			conn = getConnection();
 			call = conn.prepareCall(getString("ClienteCaller.fn_grabar_cliente"));
@@ -48,8 +55,8 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
                 call.setNull(1, java.sql.Types.INTEGER);
             }
 
-			if (cliente.getSctipoidentificacion() != null) {
-				call.setInt(2, cliente.getSctipoidentificacion().getScdatmaestro().intValue());
+			if (cliente.getTipoidentificacion() != null) {
+				call.setInt(2, cliente.getTipoidentificacion().getScdatmaestro().intValue());
             } else {
                 call.setNull(2, java.sql.Types.INTEGER);
             }
@@ -61,17 +68,18 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 			call.setString(8, cliente.getDstelefono());
 			call.setString(9, cliente.getDscelular());
 			call.setString(10, cliente.getDsemail());
-			call.setString(11, cliente.getFhnacimiento());
-			call.setString(12, cliente.getCousuario());
+			Date fechanacimiento = inputFormat.parse(cliente.getFhnacimiento());
+			call.setString(11, outFormat.format(fechanacimiento));
+			call.setString(12, cliente.getUsuario().getCousuario());
 			
-			if (cliente.getScsexo() != null) {
-				call.setInt(13, cliente.getScsexo().getScdatmaestro().intValue());
+			if (cliente.getSexo() != null) {
+				call.setInt(13, cliente.getSexo().getScdatmaestro().intValue());
             } else {
                 call.setNull(13, java.sql.Types.INTEGER);
             }
 			
-			if (cliente.getScusuario() != null) {
-				call.setInt(14, cliente.getScusuario().getScusuario().intValue());
+			if (cliente.getUsuario().getScusuario() != null) {
+				call.setInt(14, cliente.getUsuario().getScusuario().intValue());
             } else {
                 call.setNull(14, java.sql.Types.INTEGER);
             }

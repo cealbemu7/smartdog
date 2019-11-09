@@ -6,15 +6,7 @@
  */
 
 angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices) {
-	/**
-	 * @Descripcion: Carga Inicial de los envios al servidor
-	 * @Author: SmartJungle S.A.S
-	 * @Date: 25-09-2019
-	 */
-	$scope.onInit = function(){			
-		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
-		$scope.cargaInicial();
-	}
+	
 	$scope.maestro = {
 			"comaestro" : null
 	}
@@ -53,22 +45,39 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			"dssnombre" : null,
 			"dspapellido" : null,
 			"dssapellido" : null,
-			"sctipoidentificacion" : $scope.tipodocumento,
+			"tipoidentificacion" : null,
 			"dsidentificacion" : null,
 			"dsdireccion" : null,
 			"dstelefono" : null,
 			"dscelular" : null,
 			"dsemail" : null,
-			"scsexo" : $scope.sexo,
+			"sexo" : null,
 			"fhnacimiento" : null,
 			"cousuario" : null,
-			"scusuario" : $scope.usuario
+			"usuario" : null
 
 	};
 	
+	
 	$scope.usuario = {
-			"scusuario":null
-	}	
+			"scusuario":null,
+			"cousuario" : null
+	}
+	
+	/**
+	 * @Descripcion: Carga Inicial de los envios al servidor
+	 * @Author: SmartJungle S.A.S
+	 * @Date: 25-09-2019
+	 */
+	$scope.onInit = function(){			
+		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
+		$scope.cargaInicial();
+		alert(angular.toJson(getUserSession());
+		$scope.usuario = angular.toJson(getUserSession());
+		
+		alert("usuario>>> " + $scope.usuario.dsusuario);
+	}
+	
 	/**
 	* controlador que consulta de los maestros
 	*/
@@ -192,9 +201,9 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				    alert("Error", "Ha ocurrido un error al momento de almacenar el cliente ");
 			    }		 
 				   	    
-			    var sendObject = {
+			    var sendCliente = {
 			    		sccliente : $scope.cliente.sccliente,
-			    		sctipoidentificacion : $scope.tipodocumento.scdatmaestro,
+			    		tipoidentificacion : $scope.tipodocumento,
 			    		dsidentificacion : $scope.cliente.dsidentificacion,
 						dspnombre : $scope.cliente.dspnombre,
 						dssnombre : $scope.cliente.dssnombre,
@@ -204,14 +213,13 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						dscelular :  $scope.cliente.dscelular,
 						dsemail : $scope.cliente.dsemail,						
 						fhnacimiento : $scope.cliente.fhnacimiento,
-						cousuario : $scope.cliente.cousuario,
-						scsexo : $scope.sexo.scdatmaestro,						
-						scusuario : $scope.usuario.scusuario,
+						sexo : $scope.sexo,						
+						usuario : $scope.usuario,
 						dsdireccion : $scope.cliente.dsdireccion
 			   
 			    };	
-			    alert(sendObject);
-			    smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodGrabarCliente,exito,error);
+			    alert(angular.toJson(sendCliente));
+			    smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodGrabarCliente,exito,error);
 		  }	catch (error) {
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");
 		  }

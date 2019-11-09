@@ -54,8 +54,25 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 									
 								});
 								
-								alert("el usuario existe con este correo");																					
-								setUserSession(angular.toJson(response.data));
+								
+								
+								userSession = angular.fromJson(response.data);
+								$scope.session = userSession;
+								setUserSession($scope.session);
+								
+								
+								
+								
+								
+								
+								alert("el usuario existe con este correo");			
+								alert(angular.fromJson(response.data));
+								
+								
+								//setUserSession(angular.fromJson(response.data));
+								
+								alert("obtener el json>>> "+getUserSession());
+								
 								$scope.RutaCitas();
 							}else{
 								alert("No se encontro usuario con este correo");
@@ -70,12 +87,13 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 					    var reponsoObject = angular.fromJson(response.data);
 				    }
 				    
-				    var sendObject = {
+				    var userSession = {
+				    		dsusuario : null,
 				    		dsemail : $scope.usuario.dsemail,
 				    		dscontrasena : $scope.usuario.dscontrasena,				    		
 				    };				    
 				    smartServices.sendPost(
-				      angular.toJson(sendObject),
+				      angular.toJson(userSession),
 				      hostSmart+context+methodConsultarUsuario,
 				      exito,
 				      error);

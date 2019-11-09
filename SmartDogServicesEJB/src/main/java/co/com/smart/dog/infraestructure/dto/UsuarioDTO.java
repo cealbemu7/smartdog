@@ -14,6 +14,7 @@ public class UsuarioDTO extends SmartBaseDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private BigDecimal scusuario;
+	private String cousuario;
     private String dsusuario;
     private String dscontrasena;
     private String dsemail;
@@ -26,6 +27,12 @@ public class UsuarioDTO extends SmartBaseDTO implements Serializable{
 	}
 	public void setScusuario(BigDecimal scusuario) {
 		this.scusuario = scusuario;
+	}
+	public String getCousuario() {
+		return cousuario;
+	}
+	public void setCousuario(String cousuario) {
+		this.cousuario = cousuario;
 	}
 	public String getDsusuario() {
 		return dsusuario;

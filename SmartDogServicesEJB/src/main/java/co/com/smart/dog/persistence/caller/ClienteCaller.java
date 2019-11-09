@@ -41,7 +41,7 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 		try { 
 			conn = getConnection();
 			call = conn.prepareCall(getString("ClienteCaller.fn_grabar_cliente"));
-			
+			System.out.println(cliente);
 			if (cliente.getSccliente() != null) {
 				call.setInt(1, cliente.getSccliente().intValue());
             } else {

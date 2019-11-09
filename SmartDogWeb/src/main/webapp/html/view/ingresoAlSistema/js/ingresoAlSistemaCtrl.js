@@ -54,9 +54,8 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 									
 								});
 								
-								alert("el usuario existe con este correo");
-								$scope.isRequest = 'N';														
-								/*setUserSession(angular.tojson(respose.data));*/
+								alert("el usuario existe con este correo");																					
+								setUserSession(angular.toJson(response.data));
 								$scope.RutaCitas();
 							}else{
 								alert("No se encontro usuario con este correo");

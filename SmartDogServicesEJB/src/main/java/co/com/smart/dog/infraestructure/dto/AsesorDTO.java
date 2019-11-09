@@ -50,7 +50,7 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	private DatosMaestroDTO sexo;
 	private CiudadDTO ciudad;
 	private EmpresaDTO empresa;
-
+	private String nombrecompleto;
 	
 	
 	public String getDspnombre() {
@@ -159,18 +159,11 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setEmpresa(EmpresaDTO empresa) {
 		this.empresa = empresa;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getNombrecompleto() {
+		return nombrecompleto;
 	}
-	
-	
-
-	
-	
-
-	
-	
-	
-	
+	public void setNombrecompleto(String nombrecompleto) {
+		this.nombrecompleto = nombrecompleto;
+	}
 
 }

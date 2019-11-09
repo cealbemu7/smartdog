@@ -23,6 +23,7 @@ public class SmartServiceCliente extends SmartResponseBase{
 	 * Servicio que permite grabar cliente
 	 * @param json
 	 * @return
+	 * @throws Throwable 
 	 */	
 	@POST
 	@Path("/GrabarCliente")

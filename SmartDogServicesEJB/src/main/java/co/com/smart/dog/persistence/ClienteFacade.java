@@ -16,7 +16,8 @@ import co.com.smart.dog.utility.SmartConstant;
  * Session Bean implementation class ClienteFacade 
  * @author deymer
  */
-@Stateless(name = "ClienteFacade", mappedName = "ejb/ClienteFacade")
+@Stateless(name = "ClienteFacade", 
+           mappedName = "ejb/ClienteFacade")
 public class ClienteFacade	extends AbstractBean  implements ClienteFacadeLocal {
 	
 	@PersistenceContext(unitName = "SmartDogPU")

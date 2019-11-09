@@ -7,10 +7,14 @@ import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 import co.com.smart.dog.persistence.ClienteFacadeLocal;
 import co.com.smart.dog.session.DelegateContextEJB;
 
-@Stateless(name = "ClienteBean",mappedName = "ejb/ClienteBean")
+@Stateless(name = "ClienteBean",
+		   mappedName = "ejb/ClienteBean")
 public class ClienteBean extends AbstractBean implements ClienteBeanLocal {
 	
 	private ClienteFacadeLocal facade;
+	
+	
+	
 	
 	/**
 	 * Default constructor

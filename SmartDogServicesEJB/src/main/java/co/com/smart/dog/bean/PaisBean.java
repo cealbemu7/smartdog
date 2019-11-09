@@ -25,8 +25,7 @@ public class PaisBean extends AbstractBean implements PaisBeanLocal{
 	}
 
 	@Override
-	public List<PaisDTO> consultarPais(PaisDTO filtro)
-			throws SmartExcepcionSerializada {
+	public List<PaisDTO> consultarPais(PaisDTO filtro) throws SmartExcepcionSerializada {
 		List<PaisDTO> pais = new ArrayList<>();
 		try {
 			pais = facade.consultarPais(filtro);

@@ -4,13 +4,7 @@ import co.com.smart.dog.infraestructure.dto.ClienteDTO;
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 
 public interface ClienteBeanLocal {
-	
-	/**
-	 * Metodo utilizado para grabar cliente.
-	 * @param cliente
-	 * @return
-	 * @throws SmartExcepcionSerializada
-	 */
-	public ClienteDTO GrabarCliente(ClienteDTO cliente)throws SmartExcepcionSerializada;
 
+	public ClienteDTO GrabarCliente(ClienteDTO cliente ) throws SmartExcepcionSerializada;
+	
 }

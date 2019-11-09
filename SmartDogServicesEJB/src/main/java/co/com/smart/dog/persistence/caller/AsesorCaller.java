@@ -16,7 +16,10 @@ import javax.naming.NamingException;
 
 import co.com.smart.dog.infraestructure.dto.AsesorDTO;
 import co.com.smart.dog.infraestructure.dto.CiudadDTO;
+import co.com.smart.dog.infraestructure.dto.DatosMaestroDTO;
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
+import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
+import co.com.smart.dog.infraestructure.dto.MaestroDTO;
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
@@ -60,7 +63,7 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
             }
 			
 			
-			call.setBigDecimal(2, asesor.getSctipoidentificacion());
+			call.setObject(2, asesor.getTipoidentificacion());
 			call.setString(3, asesor.getCoidentificacion());
 			call.setString(4, asesor.getDsemail());
 			call.setString(5, asesor.getDstelefono());
@@ -74,7 +77,7 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 			call.setString(13,asesor.getDssapellido());
 			call.setString(14,asesor.getDscelular());
 			call.setString(15,asesor.getFhnacimineto());
-			call.setBigDecimal(16, asesor.getScsexo());
+			call.setObject(16, asesor.getSexo());
 	
 			call.registerOutParameter(17, java.sql.Types.INTEGER);
 			call.registerOutParameter(18, java.sql.Types.VARCHAR);
@@ -113,15 +116,44 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 				conn = getConnection();
 				call = conn.prepareCall(getString("AsesorCaller.fn_consultarasesor"));
 				call.registerOutParameter(1,Types.OTHER);
-				call.setBigDecimal(2,asesorlist.getScasesor());
-				call.execute();
-				rs = (ResultSet) call.getObject(1);
+				
+	            if (asesorlist.getScasesor() != null) {
+	            	call.setBigDecimal(2, asesorlist.getScasesor());
+		        } else {
+		            call.setNull(2, java.sql.Types.NULL);
+		        }
+	            if (asesorlist.getTipoidentificacion() != null) {
+	            	call.setObject(3,asesorlist.getTipoidentificacion());
+	            }	else {
+		            call.setNull(3, java.sql.Types.NULL);
+	            }
+	            if (asesorlist.getCoidentificacion()!= null) {
+	            	
+				call.setString(4,asesorlist.getCoidentificacion());
+	            }else {
+		            call.setNull(4, java.sql.Types.NULL);
+		        }
+	            if (asesorlist.getDspnombre()!= null) {
+				call.setString(5,asesorlist.getDspnombre());
+	            }else {
+		            call.setNull(5, java.sql.Types.NULL);
+		        }
+	            
+	            if(asesorlist.getDspapellido()!= null) {
+				call.setString(6,asesorlist.getDspapellido());
+	            }else {
+		            call.setNull(6, java.sql.Types.NULL);
+	            }
+	            rs = call.executeQuery();
+	           if (rs!=null){	            		
 				while(rs.next()) {
 					AsesorDTO AsesorDTO = new AsesorDTO();
 					DepartamentoDTO departamentoDTO = new DepartamentoDTO();
 					CiudadDTO ciudadDTO = new CiudadDTO();
+					DatosMaestroDTO maestroDTO = new DatosMaestroDTO();
+					EmpresaDTO empresaDTO = new EmpresaDTO();
 					
-					AsesorDTO.setSctipoidentificacion(rs.getBigDecimal("sm_sctipoidentificacion"));
+					maestroDTO.setScdatmaestro(rs.getBigDecimal("sm_sctipoidentificacion"));
 					AsesorDTO.setCoidentificacion(rs.getString("sm_dsidentificacion"));
 					AsesorDTO.setDspnombre(rs.getString("sm_dspnombre"));
 					AsesorDTO.setDssnombre(rs.getString("sm_dssnombre"));
@@ -130,17 +162,22 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 					ciudadDTO.setScciudad(rs.getBigDecimal("sm_scciudad"));
 					AsesorDTO.setFhnacimineto(rs.getString("sm_fhnacimiento"));
 					ciudadDTO.setDepartamento(departamentoDTO);
-					AsesorDTO.setScsexo(rs.getBigDecimal("sm_scsexo"));
-					AsesorDTO.setScempresa(rs.getBigDecimal("sm_scempresa"));
+					maestroDTO.setScdatmaestro(rs.getBigDecimal("sm_scsexo"));
+					
+					empresaDTO.setScempresa(rs.getBigDecimal("sm_scempresa"));
+					
 					AsesorDTO.setDscelular(rs.getString("sm_dscelular"));
 					AsesorDTO.setDsdireccion(rs.getString("sm_dsdireccion"));
 					AsesorDTO.setDstelefono(rs.getString("sm_dstelefono"));
 					AsesorDTO.setDsemail(rs.getString("sm_dsemail"));
 					AsesorDTO.setCiudad(ciudadDTO);
+					AsesorDTO.setSexo(maestroDTO);
+					AsesorDTO.setTipoidentificacion(maestroDTO);
+					AsesorDTO.setEmpresa(empresaDTO);
 					list.add(AsesorDTO);
 										
 				}
-				
+	           }
 			} finally {
 				closeResources(conn, call);
 			}

@@ -13,7 +13,19 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	
 	private BigDecimal scasesor;
 	
-	private BigDecimal sctipoidentificacion;
+	private DatosMaestroDTO tipoidentificacion;
+	public DatosMaestroDTO getTipoidentificacion() {
+		return tipoidentificacion;
+	}
+	public void setTipoidentificacion(DatosMaestroDTO tipoidentificacion) {
+		this.tipoidentificacion = tipoidentificacion;
+	}
+	public DatosMaestroDTO getSexo() {
+		return sexo;
+	}
+	public void setSexo(DatosMaestroDTO sexo) {
+		this.sexo = sexo;
+	}
 	private String coidentificacion;
 	
 
@@ -35,9 +47,9 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	
 	private String  cousuario;
 	private String dsdireccion;
-	private BigDecimal scsexo;
+	private DatosMaestroDTO sexo;
 	private CiudadDTO ciudad;
-	private BigDecimal scempresa;
+	private EmpresaDTO empresa;
 
 	
 	
@@ -53,12 +65,7 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setScasesor(BigDecimal scacesor) {
 		this.scasesor = scacesor;
 	}
-	public BigDecimal getSctipoidentificacion() {
-		return sctipoidentificacion;
-	}
-	public void setSctipoidentificacion(BigDecimal sctipoidentificacion) {
-		this.sctipoidentificacion = sctipoidentificacion;
-	}
+
 	public String getCoidentificacion() {
 		return coidentificacion;
 	}
@@ -131,12 +138,7 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setFhnacimineto(String fhnacimineto) {
 		this.fhnacimineto = fhnacimineto;
 	}
-	public BigDecimal getScsexo() {
-		return scsexo;
-	}
-	public void setScsexo(BigDecimal scsexo) {
-		this.scsexo = scsexo;
-	}
+
 	public String getDsdireccion() {
 		return dsdireccion;
 	}
@@ -149,11 +151,13 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setCiudad(CiudadDTO ciudad) {
 		this.ciudad = ciudad;
 	}
-	public BigDecimal getScempresa() {
-		return scempresa;
+
+	
+	public EmpresaDTO getEmpresa() {
+		return empresa;
 	}
-	public void setScempresa(BigDecimal scempresa) {
-		this.scempresa = scempresa;
+	public void setEmpresa(EmpresaDTO empresa) {
+		this.empresa = empresa;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

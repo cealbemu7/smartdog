@@ -39,7 +39,7 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 	 * @throws IOException
 	 */
 
-	public List<PropiedadDTO> consultarEmpresa(PropiedadDTO propiedad) throws SQLException, NamingException, IOException{
+	public List<PropiedadDTO> consultarPropiedad(PropiedadDTO propiedad) throws SQLException, NamingException, IOException{
 		List<PropiedadDTO> propiedadreturn  = new ArrayList<>();
 		try {
 			conn = getConnection();

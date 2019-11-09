@@ -28,7 +28,7 @@ public class PropiedadFacade extends AbstractBean implements PropiedadFacadeLoca
 		List<PropiedadDTO> propiedadlist = new ArrayList<>();
 		try {
 			PropiedadCaller caller = new PropiedadCaller(SmartConstant.JDNI_CONNECTION);
-			propiedadlist = caller.consultarEmpresa(propiedad);
+			propiedadlist = caller.consultarPropiedad(propiedad);
 
 		} catch (NamingException e) {
 			e.printStackTrace();

@@ -23,9 +23,9 @@ public class SmartServicePropiedad extends SmartResponseBase {
 	 * @throws SmartExcepcionSerializada 
 	 */	
 	@POST
-	@Path("/consultarPrpiedad")
+	@Path("/consultarPropiedad")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response consultarPrpiedad (PropiedadDTO json){
+	public Response consultarPropiedad (PropiedadDTO json){
 		return getResponse(DelegateContextEJB.getPropiedadBean().consultarPropiedad(json));
 	}
 	/**
@@ -47,9 +47,9 @@ public class SmartServicePropiedad extends SmartResponseBase {
 	 * @return
 	 */	
 	@POST
-	@Path("/eliminarPrpiedad")
+	@Path("/eliminarPropiedad")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response eliminarPrpiedad(PropiedadDTO json){
+	public Response eliminarPropiedad(PropiedadDTO json){
 		return getResponse(DelegateContextEJB.getPropiedadBean().eliminarPropiedad(json));
 		
 	}

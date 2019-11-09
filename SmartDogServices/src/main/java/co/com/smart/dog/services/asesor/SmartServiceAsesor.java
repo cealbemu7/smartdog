@@ -11,6 +11,7 @@ import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 import co.com.smart.dog.services.base.SmartResponseBase;
 import co.com.smart.dog.session.DelegateContextEJB;
 
+@Path("/SmartServiceAsesor")
 public class SmartServiceAsesor extends SmartResponseBase{
 
 

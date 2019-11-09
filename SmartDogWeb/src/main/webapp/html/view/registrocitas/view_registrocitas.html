@@ -73,9 +73,15 @@
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Nùmero de Identificación*</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Nùmero de Identificación" />
+								<label class="control-label">Nùmero de Identificación*</label> 
+								<input id="dsidentificacion" ng-model="cliente.dsidentificacion"
+									maxlength="100" type="text"  ng-trim="true" tabindex=3
+									class="form-control"required="required" />
+									<b class="tooltip tooltip-bottom-right">
+								        <i class="fa fa-warning txt-color-teal"></i> 
+								        La identificación es un campo obligatorio
+							        </b> 
+						        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -91,73 +97,122 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Primer Nombre *</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Primer Nombre" />
+								<label class="control-label">Primer Nombre *</label> 
+								<input id="dsprimernombre" type="text"  
+								ng-model="cliente.dsprimernombre"maxlength="150" 
+								ng-trim="true" tabindex=3 class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						        Primer nombre es un campo obligatorio.</b> 
+					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Segundo Nombre</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Segundo Nombre" />
+								<label class="control-label">Segundo Nombre</label> 
+								<input id="dssegundonombre" type="text"  
+								ng-model="tercero.dssegundonombre" maxlength="50" 
+								ng-trim="true" tabindex=3 class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						        	Ingrese su segundo nombre.</b> 
+					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Fecha de Nacimiento</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Fecha de Nacimiento" />
+								<label class="control-label">Fecha de Nacimiento</label>
+								<input id="fhnacimiento" type="date" name="request" 
+								placeholder="DD/MM/AAAA" data-dateformat='dd/mm/yy'
+								 ng-model="cliente.fhnacimiento" class="form-control"required="required">
+									<i class="icon-append txt-color-teal fa fa-calendar" title="Botón para buscar en calendario" data-toggle="tooltip"></i> 
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Primer Apellido*</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Primer Apellido" />
+								<label class="control-label">Primer Apellido*</label>
+								<input id="dspapellido" type="text"  ng-model="cliente.dspapellido"
+								 maxlength="50" ng-trim="true" tabindex=3
+								 class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						       		Primer apellido es un campo obligatorio.</b> 
+					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Segundo Apellido</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Segundo Apellido" />
+								<label class="control-label">Segundo Apellido</label> 
+								<input id="dssapellido" type="text"  ng-model="cliente.dssapellido"
+								 maxlength="50" ng-trim="true" tabindex=3
+								 class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						       		Segundo apellido.
+						       	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Dirección</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Dirección" />
+								<label class="control-label">Dirección</label> 
+								<input id="dsdireccion" type="text"  ng-model="cliente.dsdireccion"
+								 maxlength="150" ng-trim="true" tabindex=3
+								 class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						       		Dirección es un dato obligatorio.
+						       	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-home"></i>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Teléfono</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Teléfono" />
+								<label class="control-label">Teléfono</label> 
+								<input id="dstelefono" type="text"  maxlength="50" 
+								ng-model="cliente.dstelefono" ng-trim="true" tabindex=3
+								class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						        	Ingrese su numero de telefono.
+					        	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-phone"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Celular</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Celular" />
+								<label class="control-label">Celular</label> 
+								<input id="dscelular" type="text" maxlength="50"  
+								ng-model="cliente.dscelular" ng-trim="true" tabindex=3
+								class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						        	Insgrese su numero de celular.
+					        	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-mobile"></i>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Email</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Email" />
+								<label class="control-label">Email</label> 
+								<input id="dsemail" type="text"  ng-model="cliente.dsemail" 
+								maxlength="150" ng-trim="true" tabindex=3
+								class="form-control"required="required">
+						        <b class="tooltip tooltip-bottom-right">
+						        <i class="fa fa-warning txt-color-teal"></i> 
+						        Email es un dato obligatorio.</b> 
+					        	<i class="icon-append txt-color-teal fa fa-envelope"></i>
 							</div>
 						</div>
 					</div>
-					<input type="submit" class="btn btn-success" value="Guardar">
+					<a href="#" type = "button" id="btnguardar" class='btn btn-success'
+					 title="Botón para Guardar cliente" data-toggle="tooltip" 
+					 data-original-title='Guardar cliente' ng-click="GrabarCliente()" 
+					 tabindex=3><i class="fa fa-floppy-o"></i> Guardar</a >					
 					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
 				</div>
 			</div>

@@ -47,7 +47,28 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dstelefono" : null,
 		"dsemail" : null,
 	}
-		
+	$scope.cliente = {
+			"sccliente" : null,
+			"dspnombre" : null,
+			"dssnombre" : null,
+			"dspapellido" : null,
+			"dssapellido" : null,
+			"sctipoidentificacion" : $scope.tipodocumento,
+			"dsidentificacion" : null,
+			"dsdireccion" : null,
+			"dstelefono" : null,
+			"dscelular" : null,
+			"dsemail" : null,
+			"scsexo" : $scope.sexo,
+			"fhnacimiento" : null,
+			"cousuario" : null,
+			"scusuario" : $scope.usuario
+
+	};
+	
+	$scope.usuario = {
+			"scusuario":null
+	}	
 	/**
 	* controlador que consulta de los maestros
 	*/
@@ -137,21 +158,64 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$scope.empresas.push(empresa);
 					});										
 				}else{
-					alert("Advertencia", "No se han encontrado inmobiliaria ingresadas","");
+					alert("Advertencia", "No se han encontrado inmobiliaria ingresadas");
 				}
 			}
 			var error = function(response) {
 				var reponsoObject = angular.fromJson(response.data);
-				alert("Error", "Ha ocurrido un error al momento de listar inmobiliaria",reponsoObject.descripcion);
+				alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
 			}			
 
 			var sendInmobiliaria = $scope.empresa;
 			smartServices.sendPost(angular.toJson(sendInmobiliaria),hostSmart+context+methodConsultarEmpresa,exito,error);
 			
 		} catch (error) {
-			alert("Error", "Ha ocurrido un error al momento de listar inmobiliaria", error.message);
+			alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
 		}
 	}
+	
+	/**
+	 * metodo utilizado para grabar clientes 
+	 */	
+	 $scope.GrabarCliente = function() {
+		  try {				 
+			    var exito = function(response) {
+				    var reponsoObject = angular.fromJson(response.data);
+				    if(reponsoObject!=null){
+						alert("Cliente almacenado con exito");												
+					   }else{
+						   alert("Error", "Ha ocurrido un error al momento de almacenar el cliente ");
+				     }					    
+			    }		 
+			    var error = function(response) {
+				    var reponsoObject = angular.fromJson(response.data);
+				    alert("Error", "Ha ocurrido un error al momento de almacenar el cliente ");
+			    }		 
+				   	    
+			    var sendObject = {
+			    		sccliente : $scope.cliente.sccliente,
+			    		sctipoidentificacion : $scope.tipodocumento.scdatmaestro,
+			    		dsidentificacion : $scope.cliente.dsidentificacion,
+						dspnombre : $scope.cliente.dspnombre,
+						dssnombre : $scope.cliente.dssnombre,
+						dspapellido : $scope.cliente.dspapellido,
+						dssapellido : $scope.cliente.dssapellido,
+						dstelefono : $scope.cliente.dstelefono,
+						dscelular :  $scope.cliente.dscelular,
+						dsemail : $scope.cliente.dsemail,						
+						fhnacimiento : $scope.cliente.fhnacimiento,
+						cousuario : $scope.cliente.cousuario,
+						scsexo : $scope.sexo.scdatmaestro,						
+						scusuario : $scope.usuario.scusuario,
+						dsdireccion : $scope.cliente.dsdireccion
+			   
+			    };	
+			    alert(sendObject);
+			    smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodGrabarCliente,exito,error);
+		  }	catch (error) {
+			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");
+		  }
+	 }
 
 	/**
 	 * funciones del steps

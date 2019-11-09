@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Asesores</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<link rel="stylesheet"
+	href="../../../js/bootstrap-3.2.0/css/bootstrap.css">
+
+<link rel="stylesheet"
+	href="../../../js/bootstrap-3.2.0/css/bootstrap.theme.css">
+<link rel="stylesheet"
+	href="../../../js/bootstrap-3.2.0/css/bootstrap-select.min.css">
+
+<link rel="stylesheet" type="text/css" media="screen"
+	href="../../../js/bootstrap-3.2.0/css/font-awesome.min.css">
+<!-- Importarmos angular JS -->
+
+<script type="text/javascript"
+	src="../../../js/angular-1.4.7/angular.min.js"></script>
+
+<script type="text/javascript"
+	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+<script type="text/javascript"
+	src="../../../js/angucomplete/angucomplete.js"></script>
+<script type="text/javascript"
+	src="../../../js/smartmessagebox/app.min.js"> </script>
+<script type="text/javascript"
+	src="../../../js/smart/SmartConstantes.js"></script>
+
+<!-- Smart javascript framework -->
+<script type="text/javascript"
+	src="../../../js/smart/angular-websocket.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
+<script type="text/javascript" src="js/asesorCtrl.js"></script>
+<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+<script type="text/javascript"
+	src="../../../js/smart/SmartConstantes.js"></script>
+
+<!-- Importarmos Resources Services JS -->
+<script type="text/javascript" src="js/resourceServicesAsesor.js"></script>
+<script type="text/javascript"
+	src="../departamento/js/resourceServicesDepartamento.js"></script>
+<script type="text/javascript"
+	src="../ciudad/js/resourceServicesCiudad.js"></script>
+
+
+</head>
+<body ng-controller="AsesorControllerCtrl" ng-init="onInit()">
+	<div class=" container jarviswidget jarviswidget-color-blueDark"
+		data-widget-colorbutton="false" data-widget-custombutton="false"
+		data-widget-editbutton="false" id="wid-id-3">
+		<header>
+			<span class="widget-icon"> </span>
+			<h2>Asesores</h2>
+		</header>
+		<div>
+			<div class="jarviswidget-editbox"></div>
+			<div class="widget-body no-padding">
+
+				<form class="smart-form">
+
+					<fieldset>
+						<div class="row">
+							<input id="scasesor" style="display: none;"
+								ng-model="asesor.scasesor" />
+							<section class="col col-4">
+								<label class="label">Tipo documento*</label> <select
+									class="form-control" id="tipodocumento"
+									ng-model="tipodocumento"
+									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos"
+									autofocus>
+									<option value="">Seleccionar</option>
+								</select>
+
+							</section>
+							<section class="col col-4 ">
+								<label class="label">Identificación* </label> <input
+									class="form-control" id="coidentificacion" type="text"
+									ng-model="asesor.coidentificacion">
+							</section>
+							<section class="col col-3">
+								<label class="label">Sexo *</label> <select class="form-control"
+									id="sexo" ng-model="tipodocumento"
+									ng-options="sexo as  sexo.dsdatmaestro for sexo in sexos"
+									autofocus>
+									<option value="">Seleccionar</option>
+								</select>
+
+							</section>
+						</div>
+						<br>
+						<div class="row ">
+							<section class="col col-4">
+								<label class="label">Primer Nombre *</label> <input
+									class="form-control" id="dspnombre" type="text"
+									ng-model="asesor.dspnombre">
+							</section>
+
+							<section class="col col-4 ">
+								<label class="label">Segundo Nombre *</label> <input
+									class="form-control" id="dssnombre" type="text"
+									ng-model="asesor.dssnombre">
+							</section>
+
+							<section class="col col-3">
+								<label class="label">Telefono* </label> <input
+									class="form-control" id="dstelefono" type="text"
+									ng-model="asesor.dstelefono">
+							</section>
+						</div>
+						<br>
+						<div class="row">
+							<section class="col col-3">
+								<label class="label">Primer Apellido *</label> <input
+									class="form-control" id="dspapellido" type="text"
+									ng-model="asesor.dspapellido">
+							</section>
+
+							<section class="col col-3">
+								<label class="label">Segundo Apellido*</label> <input
+									class="form-control" id="dssapellido" type="text"
+									ng-model="asesor.dssapellido">
+							</section>
+
+							<section class="col col-3">
+								<label class="label">Celular</label> <input class="form-control"
+									id="dscelular" type="text" ng-model="asesor.dscelular">
+							</section>
+							<section class="col col-3">
+								<div class="form-group">
+									<label class="label">Departamento*</label> <select
+										class="form-control" id="iddepartamentoempresa"
+										ng-model="departamento"
+										ng-options="departamento as departamento.dsdepartamento for departamento in departamentos"
+										ng-change="consultarCiudadEmpresa()" tabindex=3>
+										<option value="">Seleccionar</option>
+									</select>
+								</div>
+							</section>
+
+
+						</div>
+						<br>
+						<div class="row">
+							<section class="col col-3">
+								<label class="label">Direccion*</label> <input
+									class="form-control" id="dsdireccion" type="text"
+									ng-model="asesor.dsdireccion">
+							</section>
+
+							<section class="col col-3 ">
+								<label class="label">Fecha naciomiento*</label> <input
+									class="form-control" id="fhnacimiento" type="text"
+									ng-model="asesor.fhnacimiento">
+							</section>
+
+							<section class="col col-3">
+								<label class="label">Correo*</label> <input class="form-control"
+									id="dsemail" type="text" ng-model="asesor.dsemail">
+							</section>
+							<section class="col col-3">
+								<div class="form-group">
+									<label class="label">Ciudad*</label> <select
+										class="form-control" id="idciudadempresa" ng-model="ciudad"
+										ng-options="ciudad as ciudad.dsciudad for ciudad in ciudades"
+										tabindex=3>
+										<option value="">Seleccionar</option>
+									</select>
+
+								</div>
+
+
+							</section>
+						</div>
+
+					</fieldset>
+					<footer class="my-3 text-right">
+						<a href="#" type="button" href="javascript:void(0);"
+							id="btnguardar" class='btn btn-xs btn-primary' title="Guardar"
+							data-toggle="tooltip" data-original-title='Guardar egreso'
+							ng-click="grabarEgreso()" tabindex=3><i
+							class="fa fa-floppy-o"></i> Grabar</a> <a href="#" type="button"
+							href="javascript:void(0);" id="btnlimpiar"
+							class='btn btn-xs btn-primary' title="Limpiar"
+							data-toggle="tooltip"
+							data-original-title='Limpiar vista de vivienda'
+							ng-click="limpiar()" tabindex=3><i class="fa fa-eraser"></i>
+							Limpiar</a>
+					</footer>
+				</form>
+			</div>
+			<!-- grid lista de Actividad por tipo de sistema-->
+			<section id="widget-grid" class="">
+				<!-- row -->
+				<div class="row">
+
+					<!-- NEW WIDGET START -->
+					<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+						<!-- Widget ID (each widget will need unique ID)-->
+						<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0"
+							data-widget-editbutton="false">
+							<header>
+								<span class="widget-icon"> <i class="fa fa-table"></i>
+								</span>
+								<h2>Listado de Asesores</h2>
+							</header>
+							<div style="overflow-y: auto; height: 250px;">
+								<div>
+									<div class="jarviswidget-editbox"></div>
+									<div class="widget-body no-padding">
+										<table id="dt_basic"
+											class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr style="font-size: 12px">
+													<th>Acción</th>
+													<th>1°Nombre</th>
+													<th>1°Apellido</th>
+													<th>Telefono</th>
+													<th>Celular</th>
+													<th>Sexo</th>
+													<th>Direccion</th>
+												</tr>
+											</thead>
+											<tbody class="tbody">
+												<tr ng-show="asesor.length == 0">
+													<th colspan="7" style="text-align: center;">No se
+														encontraron Asesores</th>
+												</tr>
+												<tr ng-repeat="asesores in asesor | orderBy : 'asc"
+													style="font-size: 12px">
+													<td style="display: none;">{{asesores.scasesor}}</td>
+													<td class="botonera-table" style="width: 10%;">
+														<button class='btn btn-xs btn-default' title="Editar"
+															data-original-title='Edit Row'
+															ng-click="seleccionarEditarAsesor(asesores)">
+															<i class='fa fa-pencil'></i>
+														</button>
+														<button class='btn btn-xs btn-default' title="Eliminar"
+															data-original-title='Trash Row'
+															ng-click="seleccionarEliminarAsesor(asesores)">
+															<i class='fa fa-trash-o'></i>
+														</button>
+													</td>
+													<td>{{asesores.dspnombre}}</td>
+													<td>{{asesores.dspapellido}}</td>
+													<td>{{asesores.dstelefono}}</td>
+													<td>{{asesores.dscelular}}</td>
+													<td>{{asesores.scsexo}}</td>
+													<td>{{asesores.dsdireccion}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -308,13 +308,13 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	}
 
 	 /**
-	  * Instancia unica de la facade getPaisFacade
+	  * Instancia unica de la facade 
 	  * @return
 	  */
 	 public static synchronized AsesorFacadeLocal getAsesorFacade() {
 
 		if (getAsesorFacade == null) {
-			getAsesorFacade = (AsesorFacadeLocal) getSmartContext("getAsesorFacade");
+			getAsesorFacade = (AsesorFacadeLocal) getSmartContext("AsesorFacade");
 		}
 
 		return getAsesorFacade;

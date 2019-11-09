@@ -72,7 +72,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	$scope.onInit = function(){			
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		$scope.cargaInicial();
-		alert(angular.toJson(getUserSession());
+		alert(angular.toJson(getUserSession()));
 		$scope.usuario = angular.toJson(getUserSession());
 		
 		alert("usuario>>> " + $scope.usuario.dsusuario);

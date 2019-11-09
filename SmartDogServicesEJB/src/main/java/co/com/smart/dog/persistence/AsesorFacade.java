@@ -1,6 +1,7 @@
 package co.com.smart.dog.persistence;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -11,11 +12,11 @@ import javax.persistence.PersistenceContext;
 import co.com.smart.dog.bean.AbstractBean;
 import co.com.smart.dog.infraestructure.dto.AsesorDTO;
 import co.com.smart.dog.persistence.caller.AsesorCaller;
+
 import co.com.smart.dog.utility.SmartConstant;
 
-
 @Stateless(name = "AsesorFacade", mappedName = "ejb/AsesorFacade")
-public class AsesorFacade extends AbstractBean  implements AsesorFacadeLocal {
+public class AsesorFacade extends AbstractBean implements AsesorFacadeLocal {
 	@PersistenceContext(unitName = "SmartDogPU")
 	private EntityManager em;
 
@@ -23,17 +24,25 @@ public class AsesorFacade extends AbstractBean  implements AsesorFacadeLocal {
 		return em;
 	}
 
-	
-	
-	
-	
-	
 	@Override
 	public List<AsesorDTO> consultarAsesor(AsesorDTO asesorlist) throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
+		List<AsesorDTO> asesor = new ArrayList<>();
+		try {
+			AsesorCaller caller = new AsesorCaller(SmartConstant.JDNI_CONNECTION);
+			asesor = caller.consultarAsesor(asesorlist);
+
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return asesor;
 	}
 
+	
+	/**
+	 * 
+	 */
 	@Override
 	public AsesorDTO grabarAsesor(AsesorDTO asesor) throws Throwable {
 
@@ -49,17 +58,23 @@ public class AsesorFacade extends AbstractBean  implements AsesorFacadeLocal {
 		}
 		return asesorreturn;
 	}
+	/**
+	 * 
+	 */
 
 	@Override
 	public AsesorDTO eliminarAsesor(AsesorDTO asesor) throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		AsesorDTO returnObject = new AsesorDTO();
+		try {
+			AsesorCaller caller = new AsesorCaller(SmartConstant.JDNI_CONNECTION);
+			returnObject = caller.eliminarAsesor(asesor);
 
-	@Override
-	public AsesorDTO actulizarAsesor(AsesorDTO asesor) throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnObject;
 	}
 
 }

@@ -14,7 +14,7 @@ public interface AsesorFacadeLocal {
 	
 	public AsesorDTO eliminarAsesor(AsesorDTO asesor ) throws Throwable;
 	
-	public AsesorDTO actulizarAsesor(AsesorDTO asesor ) throws Throwable;
+
 	
 
 }

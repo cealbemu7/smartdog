@@ -14,7 +14,7 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	private BigDecimal scasesor;
 	
 	private BigDecimal sctipoidentificacion;
-	private String dsidentificacion;
+	private String coidentificacion;
 	
 
 	private Date fhingreso;
@@ -59,11 +59,11 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setSctipoidentificacion(BigDecimal sctipoidentificacion) {
 		this.sctipoidentificacion = sctipoidentificacion;
 	}
-	public String getDsidentificacion() {
-		return dsidentificacion;
+	public String getCoidentificacion() {
+		return coidentificacion;
 	}
-	public void setDsidentificacion(String dsidentificacion) {
-		this.dsidentificacion = dsidentificacion;
+	public void setCoidentificacion(String dsidentificacion) {
+		this.coidentificacion = dsidentificacion;
 	}
 	public String getCousuario() {
 		return cousuario;

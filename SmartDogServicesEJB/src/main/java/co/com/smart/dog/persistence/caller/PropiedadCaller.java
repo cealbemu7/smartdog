@@ -138,20 +138,20 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 		PropiedadDTO returnObject = new PropiedadDTO();
 		try { 
 			conn = getConnection();
-			call = conn.prepareCall(getString("PropiedadCaller.fn_grabar_propiedad"));
+			call = conn.prepareCall(getString("PropiedadCaller.fn_eliminar_propiedad"));
 			
 			if (propiedad.getScpropiedad() != null) {
 				call.setInt(1, propiedad.getScpropiedad().intValue());
             } else {
                 call.setNull(1, java.sql.Types.INTEGER);
             }
-			call.registerOutParameter(6, java.sql.Types.INTEGER);
-			call.registerOutParameter(7, java.sql.Types.VARCHAR);
+			call.registerOutParameter(2, java.sql.Types.INTEGER);
+			call.registerOutParameter(3, java.sql.Types.VARCHAR);
 			
 			call.executeUpdate();
 			
-			propiedad.setScpropiedad(new BigDecimal(call.getInt(6))); 
-			MensajeSQLDTO msj = getResponseSQL(call.getString(7));
+			propiedad.setScpropiedad(new BigDecimal(call.getInt(2))); 
+			MensajeSQLDTO msj = getResponseSQL(call.getString(3));
 			propiedad.setCodigo(msj.getCodigo());
 			propiedad.setDescripcion(msj.getDescripcion());
             

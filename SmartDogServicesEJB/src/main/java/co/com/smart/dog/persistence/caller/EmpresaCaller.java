@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import co.com.smart.dog.infraestructure.dto.AsesorDTO;
 import co.com.smart.dog.infraestructure.dto.CiudadDTO;
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;

@@ -86,11 +86,25 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 			MensajeSQLDTO msj = getResponseSQL(call.getString(17));
 			cliente.setCodigo(msj.getCodigo());
 			cliente.setDescripcion(msj.getDescripcion());
-			
+						
 		}finally {
 			closeResources(conn, call);
 		}
 		return cliente;
+	}
+	
+	
+	@Override
+	public MensajeSQLDTO getResponseSQL(String response) {
+		MensajeSQLDTO sqldto = new MensajeSQLDTO();
+		
+		if(response != null){
+			String[] msj = response.split(":");
+			sqldto.setCodigo(msj[0]);
+			sqldto.setDescripcion(msj[1]);
+		}
+		
+		return sqldto;
 	}
 
 }

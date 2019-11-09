@@ -139,9 +139,6 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	}
 	public void setScusuario(UsuarioDTO scusuario) {
 		this.scusuario = scusuario;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}    
+	}   
 	
 }

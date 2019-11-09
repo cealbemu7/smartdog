@@ -19,7 +19,6 @@ import co.com.smart.dog.infraestructure.dto.CiudadDTO;
 import co.com.smart.dog.infraestructure.dto.DatosMaestroDTO;
 import co.com.smart.dog.infraestructure.dto.DepartamentoDTO;
 import co.com.smart.dog.infraestructure.dto.EmpresaDTO;
-import co.com.smart.dog.infraestructure.dto.MaestroDTO;
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
@@ -113,38 +112,52 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 		public List<AsesorDTO> consultarAsesor(AsesorDTO asesorlist) throws SQLException, NamingException, IOException{
 			List<AsesorDTO> list = new ArrayList<>();
 			try {
+				
 				conn = getConnection();
 				call = conn.prepareCall(getString("AsesorCaller.fn_consultarasesor"));
 				call.registerOutParameter(1,Types.OTHER);
 				
+				
 	            if (asesorlist.getScasesor() != null) {
+	            	System.out.println("entro");
 	            	call.setBigDecimal(2, asesorlist.getScasesor());
 		        } else {
+		        	System.out.println("uno");
 		            call.setNull(2, java.sql.Types.NULL);
 		        }
+	            
 	            if (asesorlist.getTipoidentificacion() != null) {
 	            	call.setObject(3,asesorlist.getTipoidentificacion());
 	            }	else {
+	            	System.out.println("dos");
 		            call.setNull(3, java.sql.Types.NULL);
 	            }
+	            
 	            if (asesorlist.getCoidentificacion()!= null) {
-	            	
-				call.setString(4,asesorlist.getCoidentificacion());
+	            	call.setString(4,asesorlist.getCoidentificacion());
 	            }else {
+	            	System.out.println("tres");
 		            call.setNull(4, java.sql.Types.NULL);
 		        }
+	            
 	            if (asesorlist.getDspnombre()!= null) {
-				call.setString(5,asesorlist.getDspnombre());
+	            	call.setString(5,asesorlist.getDspnombre());
 	            }else {
+	            	System.out.println("cuatro");
 		            call.setNull(5, java.sql.Types.NULL);
 		        }
 	            
+	            
 	            if(asesorlist.getDspapellido()!= null) {
-				call.setString(6,asesorlist.getDspapellido());
+	            	call.setString(6,asesorlist.getDspapellido());
 	            }else {
+	            	System.out.println("cinco");
 		            call.setNull(6, java.sql.Types.NULL);
 	            }
-	            rs = call.executeQuery();
+	            
+	            call.execute();
+				rs = (ResultSet) call.getObject(1);
+
 	           if (rs!=null){	            		
 				while(rs.next()) {
 					AsesorDTO AsesorDTO = new AsesorDTO();

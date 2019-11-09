@@ -1,7 +1,6 @@
 package co.com.smart.dog.persistence;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 import javax.naming.NamingException;
@@ -14,7 +13,7 @@ public interface UsuarioFacadeLocal {
 	 * @param usuario
 	 * @return usuario
 	 */
-	public List<UsuarioDTO> consultarUsuario (UsuarioDTO usuario)throws Throwable;
+	public UsuarioDTO consultarUsuario (UsuarioDTO usuario)throws Throwable;
 	/**
 	 * Metodo utilizado para grabar usuario
 	 * @param usuario

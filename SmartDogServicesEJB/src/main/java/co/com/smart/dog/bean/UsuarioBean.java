@@ -7,12 +7,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -57,18 +55,17 @@ public class UsuarioBean extends AbstractBean implements UsuarioBeanLocal {
 	 * metodo utilizado para consultar usuario
 	 */
 	@Override
-	public List<UsuarioDTO> consultarUsuario(UsuarioDTO json)
-			throws SmartExcepcionSerializada {
-		List<UsuarioDTO> usuarios = new ArrayList<>();
+	public UsuarioDTO consultarUsuario(UsuarioDTO json) throws SmartExcepcionSerializada {
+		UsuarioDTO usuarioDTO = new UsuarioDTO(); 
 		try {			
-			usuarios = facade.consultarUsuario(json);
+			usuarioDTO = facade.consultarUsuario(json);
 		} catch (Throwable ex) {
 			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
 			smartException.setCode(0);
 			smartException.setStackTrace(ex.getStackTrace());
 			throw smartException;
 		}
-		return usuarios;
+		return usuarioDTO;
 
 	}
 

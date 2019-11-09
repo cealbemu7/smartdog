@@ -3,8 +3,6 @@ package co.com.smart.dog.bean;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 
-import java.util.List;
-
 import co.com.smart.dog.infraestructure.dto.SmartExcepcionSerializada;
 import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
 
@@ -15,7 +13,7 @@ public interface UsuarioBeanLocal {
 	 * @return
 	 * @throws SmartExcepcionSerializada
 	 */
-	public List<UsuarioDTO> consultarUsuario (UsuarioDTO usuario)throws SmartExcepcionSerializada;
+	public UsuarioDTO consultarUsuario (UsuarioDTO usuario)throws SmartExcepcionSerializada;
 	
 	/**
 	 * metodo utilizado para grabar usuario

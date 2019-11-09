@@ -40,47 +40,16 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 	 * 
 	 */
 	 $scope.consultarUsuario = function() {
-
 		  try {	   
-
 				  var exito = function(response) {
 					  	if(response.data != null){
-							$scope.usuarios = new Array();
-							var usuarios  = angular.fromJson(response.data);
-							if(usuarios.length>0){
-								$.each(usuarios, function( index , usuario ) {						
-									$scope.usuario.dsemail = usuario.dsemail;
-									$scope.usuario.dscontrasena = usuario.dscontrasena;								
-									
-								});
-								
-								
-								
-								userSession = angular.fromJson(response.data);
-								$scope.session = userSession;
-								setUserSession($scope.session);
-								
-								
-								
-								
-								
-								
-								alert("el usuario existe con este correo");			
-								alert(angular.fromJson(response.data));
-								
-								
-								//setUserSession(angular.fromJson(response.data));
-								
-								alert("obtener el json>>> "+getUserSession());
-								
-								$scope.RutaCitas();
-							}else{
-								alert("No se encontro usuario con este correo");
-							}
+					  		userSession = angular.fromJson(response.data);
+							$scope.session = userSession;
+							setUserSession($scope.session);
+							$scope.RutaCitas();
 						}else{
 							alert("No se encontro usuario con este correo");
 						}
-					    
 				    }
 		 
 				    var error = function(response) {
@@ -92,13 +61,10 @@ angular.module('smartApp').controller('ingresoAlSistemaCtrl',function($scope, sm
 				    		dsemail : $scope.usuario.dsemail,
 				    		dscontrasena : $scope.usuario.dscontrasena,				    		
 				    };				    
-				    smartServices.sendPost(
-				      angular.toJson(userSession),
-				      hostSmart+context+methodConsultarUsuario,
-				      exito,
-				      error);
-
-		   
+				    smartServices.sendPost(angular.toJson(userSession),
+				    					   hostSmart+context+methodConsultarUsuario,
+				    					   exito,
+				    					   error);
 		  } catch (error) {
 			 alert("Error", "Ha ocurrido un error al momento de consultar usuario", error.message);
 		  }

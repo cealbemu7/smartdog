@@ -70,7 +70,7 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 			call.setString(10, cliente.getDsemail());
 			Date fechanacimiento = inputFormat.parse(cliente.getFhnacimiento());
 			call.setString(11, outFormat.format(fechanacimiento));
-			call.setString(12, cliente.getUsuario().getCousuario());
+			call.setString(12, cliente.getUsuario().getDsusuario());
 			
 			if (cliente.getSexo() != null) {
 				call.setInt(13, cliente.getSexo().getScdatmaestro().intValue());

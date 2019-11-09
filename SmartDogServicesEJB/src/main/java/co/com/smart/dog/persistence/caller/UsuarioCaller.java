@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.NamingException;
 
@@ -44,8 +42,8 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 	 * @throws NamingException
 	 * @throws IOException
 	 */
-	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario)throws SQLException, NamingException, IOException{
-		List<UsuarioDTO> usuarios = new ArrayList<>();
+	public UsuarioDTO consultarUsuario(UsuarioDTO usuario)throws SQLException, NamingException, IOException{
+		 UsuarioDTO usuarioDTO = new UsuarioDTO(); 
 		try {
 			conn = getConnection();
 			call = conn.prepareCall(getString("UsuarioCaller.fn_consultarusuario"));
@@ -67,22 +65,18 @@ public class UsuarioCaller extends JDBCResourceManager implements Serializable{
 			call.execute();
 			rs = (ResultSet) call.getObject(1);
          
-	         while(rs.next()){
-	        	 UsuarioDTO usuarioDTO = new UsuarioDTO();       	
-	        	        	 
+	         while(rs.next()){	        	        	 
 	        	 usuarioDTO.setScusuario(rs.getBigDecimal("sm_scusuario"));
 	        	 usuarioDTO.setDsusuario(rs.getString("sm_dsusuario"));
 	        	 usuarioDTO.setDscontrasena(rs.getString("sm_dscontrasena"));
 	        	 usuarioDTO.setDsemail(rs.getString("sm_dsemail"));
 	        	 usuarioDTO.setSecureToken(rs.getString("dstokenrequest"));
-	        	 usuarios.add(usuarioDTO);
-        	 
-                }
+              }
         }finally{
 			closeResources(conn, call);
         }
 		
-		return usuarios;
+		return usuarioDTO;
 	}
 	/**
 	 * Metodo utilizado para grabar usuario

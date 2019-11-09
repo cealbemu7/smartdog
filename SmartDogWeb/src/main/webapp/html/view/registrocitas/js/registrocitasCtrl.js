@@ -61,7 +61,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	
 	$scope.usuario = {
 			"scusuario":null,
-			"cousuario" : null
+			"cousuario" : null,
+			"dsusuario":null
 	}
 	
 	/**
@@ -72,10 +73,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	$scope.onInit = function(){			
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		$scope.cargaInicial();
-		alert(angular.toJson(getUserSession()));
-		$scope.usuario = angular.toJson(getUserSession());
-		
-		alert("usuario>>> " + $scope.usuario.dsusuario);
+		$scope.usuario = getUserSession();
 	}
 	
 	/**
@@ -218,7 +216,6 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						dsdireccion : $scope.cliente.dsdireccion
 			   
 			    };	
-			    alert(angular.toJson(sendCliente));
 			    smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodGrabarCliente,exito,error);
 		  }	catch (error) {
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");

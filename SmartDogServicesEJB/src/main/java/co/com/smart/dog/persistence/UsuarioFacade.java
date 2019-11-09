@@ -1,8 +1,6 @@
 package co.com.smart.dog.persistence;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
@@ -32,17 +30,17 @@ public class UsuarioFacade extends AbstractBean implements UsuarioFacadeLocal {
 	 * consultar Usuario
 	 */
 	@Override
-	public List<UsuarioDTO> consultarUsuario(UsuarioDTO usuario) throws Throwable {
-		List<UsuarioDTO> usuarios = new ArrayList<>();
+	public UsuarioDTO consultarUsuario(UsuarioDTO usuario) throws Throwable {
+		UsuarioDTO usuarioDTO = new UsuarioDTO(); 
 		try {
 			UsuarioCaller caller = new UsuarioCaller(SmartConstant.JDNI_CONNECTION);
-			usuarios = caller.consultarUsuario(usuario);
+			usuarioDTO = caller.consultarUsuario(usuario);
 		} catch (NamingException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return usuarios;
+		return usuarioDTO;
 	}
 	/**
 	 * metodo utilizado para grabar usuario

@@ -29,6 +29,8 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
     private DatosMaestroDTO sexo;
     private String fhnacimiento;
     private UsuarioDTO usuario;
+    private String nombrecompleto;
+    
 	public BigDecimal getSccliente() {
 		return sccliente;
 	}
@@ -130,5 +132,12 @@ public class ClienteDTO extends SmartBaseDTO implements Serializable{
 	}
 	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
-	}	
+	}
+	public String getNombrecompleto() {
+		return nombrecompleto;
+	}
+	public void setNombrecompleto(String nombrecompleto) {
+		this.nombrecompleto = nombrecompleto;
+	}
+	
 }

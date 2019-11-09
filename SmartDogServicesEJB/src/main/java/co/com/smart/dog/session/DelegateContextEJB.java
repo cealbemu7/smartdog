@@ -1,6 +1,7 @@
 package co.com.smart.dog.session;
 
 import co.com.smart.dog.bean.AsesorBeanLocal;
+import co.com.smart.dog.bean.CitaBeanLocal;
 import co.com.smart.dog.bean.CiudadBeanLocal;
 import co.com.smart.dog.bean.ClienteBeanLocal;
 import co.com.smart.dog.bean.DatosMaestroBeanLocal;
@@ -11,6 +12,7 @@ import co.com.smart.dog.bean.PaisBeanLocal;
 import co.com.smart.dog.bean.PropiedadBeanLocal;
 import co.com.smart.dog.bean.UsuarioBeanLocal;
 import co.com.smart.dog.persistence.AsesorFacadeLocal;
+import co.com.smart.dog.persistence.CitaFacadeLocal;
 import co.com.smart.dog.persistence.CiudadFacadeLocal;
 import co.com.smart.dog.persistence.ClienteFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
@@ -45,6 +47,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static PropiedadBeanLocal getPropiedadBean;
 	private static AsesorBeanLocal getAsesorBean;
 	private static ClienteBeanLocal getClienteBean;
+	private static CitaBeanLocal getCitaBean;
 
 	/**
 	 * Instancia unica del bean getPaisBean
@@ -184,6 +187,20 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 		return getClienteBean;
 	}
+	
+	/**
+	 * Instancia unica del bean getCitaBean
+	 *
+	 * @return
+	 */
+	public static synchronized CitaBeanLocal getCitaBean() {
+
+		if (getCitaBean == null) {
+			getCitaBean = (CitaBeanLocal) getSmartContext("CitaBean");
+		}
+
+		return getCitaBean;
+	}
 
 	/**
 	 * Facade ----------------------------------------------
@@ -199,6 +216,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static PropiedadFacadeLocal getPropiedadFacade;
 	private static AsesorFacadeLocal getAsesorFacade;
 	private static ClienteFacadeLocal getClienteFacade;
+	private static CitaFacadeLocal getCitaFacade;
 
 	/**
 	 * Instancia unica de la facade getPaisFacade
@@ -319,12 +337,24 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 		return getAsesorFacade;
 	 }
-
+	 /**
+	  * Instancia unica de la facade ClienteFacade
+	  * @return
+	  */
 	public static synchronized ClienteFacadeLocal getClienteFacade() {
 		if (getClienteFacade == null) {
 			getClienteFacade = (ClienteFacadeLocal) getSmartContext("ClienteFacade");
 		}
 		return getClienteFacade;
 	}
-
+	 /**
+	  * Instancia unica de la facade CitaFacade
+	  * @return
+	  */
+	public static synchronized CitaFacadeLocal getCitaFacade() {
+		if (getCitaFacade == null) {
+			getCitaFacade = (CitaFacadeLocal) getSmartContext("CitaFacade");
+		}
+		return getCitaFacade;
+	}
 }

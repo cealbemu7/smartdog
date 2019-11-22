@@ -17,9 +17,7 @@
 				<a class="navbar-brand" href="#">WebSiteName</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li>
+				<li class="active"><a href="#">Home</a></li>			
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
@@ -245,11 +243,12 @@
 							<div class="form-group">
 								<label class="control-label">Tipo de Inmueble*</label> 
 								<select class="form-control select-sm" id="idtipoinmueble"
-									ng-model="tipoinmueble"
+									ng-model="idtipoinmueble"
 									ng-options="tipoinmueble as tipoinmueble.dsdatmaestro for tipoinmueble in tipoinmuebles"
 									tabindex=3>
 									<option value="">seleccionar</option>									
-								</select><i class="icon-append txt-color-teal fa fa-question-circle"></i>
+								</select>
+								<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
 					</div>

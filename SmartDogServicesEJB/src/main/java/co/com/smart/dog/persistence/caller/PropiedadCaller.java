@@ -45,7 +45,28 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 			conn = getConnection();
 			call = conn.prepareCall(getString("PropiedadCaller.fn_consultarpropiedad"));
 			call.registerOutParameter(1,Types.OTHER);
-			call.setString(2,propiedad.getCopropiedad());
+			
+            if (propiedad.getScpropiedad() != null) {
+            	System.out.println("entro");
+            	call.setBigDecimal(2, propiedad.getScpropiedad());
+	        } else {
+	        	System.out.println("uno");
+	            call.setNull(2, java.sql.Types.NULL);
+	        }
+            if (propiedad.getCopropiedad() != null) {
+            	System.out.println("entro");
+            	call.setString(3, propiedad.getCopropiedad());
+	        } else {
+	        	System.out.println("2");
+	            call.setNull(3, java.sql.Types.NULL);
+	        }
+            if (propiedad.getDspropiedad() != null) {
+            	System.out.println("entro");
+            	call.setString(4, propiedad.getDspropiedad());
+	        } else {
+	        	System.out.println("3");
+	            call.setNull(4, java.sql.Types.NULL);
+	        }
 			call.execute();
 			rs = (ResultSet) call.getObject(1);
 			while(rs.next()) {
@@ -88,16 +109,20 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 				
 				call.setString(2,propiedad.getCopropiedad());
 				call.setString(3,propiedad.getDspropiedad());
-				call.setString(4,propiedad.getCousuario());
-				call.setString(5,propiedad.getDsdireccion());
+				call.setString(4,propiedad.getDsdireccion());
+				call.setString(5,propiedad.getCousuario());
+				call.setInt(6, propiedad.getCiudad().getScciudad().intValue());
+				call.setInt(7, propiedad.getCiudad().getDepartamento().getScdepartamento().intValue());
+
+				
 		
-				call.registerOutParameter(6, java.sql.Types.INTEGER);
-				call.registerOutParameter(7, java.sql.Types.VARCHAR);
+				call.registerOutParameter(8, java.sql.Types.INTEGER);
+				call.registerOutParameter(9, java.sql.Types.VARCHAR);
 				
 				call.executeUpdate();
 				
-				propiedad.setScpropiedad(new BigDecimal(call.getInt(6))); 
-				MensajeSQLDTO msj = getResponseSQL(call.getString(7));
+				propiedad.setScpropiedad(new BigDecimal(call.getInt(8))); 
+				MensajeSQLDTO msj = getResponseSQL(call.getString(9));
 				propiedad.setCodigo(msj.getCodigo());
 				propiedad.setDescripcion(msj.getDescripcion());
 			}finally {

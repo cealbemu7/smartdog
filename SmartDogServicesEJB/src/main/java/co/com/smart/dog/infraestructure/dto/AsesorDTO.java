@@ -12,46 +12,26 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private BigDecimal scasesor;
-	
 	private DatosMaestroDTO tipoidentificacion;
-	public DatosMaestroDTO getTipoidentificacion() {
-		return tipoidentificacion;
-	}
-	public void setTipoidentificacion(DatosMaestroDTO tipoidentificacion) {
-		this.tipoidentificacion = tipoidentificacion;
-	}
-	public DatosMaestroDTO getSexo() {
-		return sexo;
-	}
-	public void setSexo(DatosMaestroDTO sexo) {
-		this.sexo = sexo;
-	}
 	private String coidentificacion;
-	
-
 	private Date fhingreso;
 	private Date fhmodificacion;
 	private Date fhretiro;
-	
 	private String dspnombre;
 	private String dssnombre;
-	
 	private String dspapellido;
 	private String dssapellido;
-	
 	private String dscelular;
 	private String dstelefono;
-	
-	private String fhnacimineto;
+	private String fhnacimiento;
 	private String dsemail;
-	
 	private String  cousuario;
 	private String dsdireccion;
 	private DatosMaestroDTO sexo;
 	private CiudadDTO ciudad;
 	private EmpresaDTO empresa;
 	private String nombrecompleto;
-	
+
 	
 	public String getDspnombre() {
 		return dspnombre;
@@ -132,11 +112,11 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	public void setDsemail(String dsemail) {
 		this.dsemail = dsemail;
 	}
-	public String getFhnacimineto() {
-		return fhnacimineto;
+	public String getFhnacimiento() {
+		return fhnacimiento;
 	}
-	public void setFhnacimineto(String fhnacimineto) {
-		this.fhnacimineto = fhnacimineto;
+	public void setFhnacimiento(String fhnacimineto) {
+		this.fhnacimiento = fhnacimineto;
 	}
 
 	public String getDsdireccion() {
@@ -164,6 +144,18 @@ public class AsesorDTO extends SmartBaseDTO  implements Serializable{
 	}
 	public void setNombrecompleto(String nombrecompleto) {
 		this.nombrecompleto = nombrecompleto;
+	}
+	public DatosMaestroDTO getTipoidentificacion() {
+		return tipoidentificacion;
+	}
+	public void setTipoidentificacion(DatosMaestroDTO tipoidentificacion) {
+		this.tipoidentificacion = tipoidentificacion;
+	}
+	public DatosMaestroDTO getSexo() {
+		return sexo;
+	}
+	public void setSexo(DatosMaestroDTO sexo) {
+		this.sexo = sexo;
 	}
 
 }

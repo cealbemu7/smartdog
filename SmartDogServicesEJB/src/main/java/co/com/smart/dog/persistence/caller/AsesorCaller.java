@@ -62,30 +62,31 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
             }
 			
 			
-			call.setObject(2, asesor.getTipoidentificacion());
+			call.setInt(2, asesor.getTipoidentificacion().getScdatmaestro().intValue());
 			call.setString(3, asesor.getCoidentificacion());
-			call.setString(4, asesor.getDsemail());
-			call.setString(5, asesor.getDstelefono());
-			call.setString(6, asesor.getCousuario());
-			call.setInt(7, asesor.getCiudad().getScciudad().intValue());
-			call.setInt(8, asesor.getCiudad().getDepartamento().getScdepartamento().intValue());		
-			call.setString(9, asesor.getDsdireccion());
-			call.setString(10,asesor.getDspnombre());
-			call.setString(11,asesor.getDssnombre());
-			call.setString(12,asesor.getDspapellido());
-			call.setString(13,asesor.getDssapellido());
-			call.setString(14,asesor.getDscelular());
-			call.setString(15,asesor.getFhnacimineto());
-			call.setObject(16, asesor.getSexo());
-	
-			call.registerOutParameter(17, java.sql.Types.INTEGER);
-			call.registerOutParameter(18, java.sql.Types.VARCHAR);
+			call.setString(4,asesor.getDspnombre());
+			call.setString(5,asesor.getDssnombre());
+			call.setString(6,asesor.getDspapellido());
+			call.setString(7,asesor.getDssapellido());
+			call.setString(8, asesor.getDstelefono());
+			call.setString(9,asesor.getDscelular());
+			call.setString(10, asesor.getDsemail());
+			call.setString(11,asesor.getFhnacimiento());
+			call.setString(12, asesor.getCousuario());
+			call.setString(13, asesor.getDsdireccion());
+			call.setInt(14, asesor.getSexo().getScdatmaestro().intValue());
+			call.setInt(15, asesor.getCiudad().getScciudad().intValue());
+			call.setInt(16, asesor.getCiudad().getDepartamento().getScdepartamento().intValue());
+			call.setInt(17,asesor.getEmpresa().getScempresa().intValue());
+			
+			call.registerOutParameter(18, java.sql.Types.INTEGER);
+			call.registerOutParameter(19, java.sql.Types.VARCHAR);
 			
 			call.executeUpdate();
 			
 			
-			asesor.setScasesor(new BigDecimal(call.getInt(17))); 
-			MensajeSQLDTO msj = getResponseSQL(call.getString(18));
+			asesor.setScasesor(new BigDecimal(call.getInt(18))); 
+			MensajeSQLDTO msj = getResponseSQL(call.getString(19));
 			asesor.setCodigo(msj.getCodigo());
 			asesor.setDescripcion(msj.getDescripcion());
 		}finally {
@@ -173,7 +174,7 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 					AsesorDTO.setDspapellido(rs.getString("sm_dspapeldo"));
 					AsesorDTO.setDssapellido(rs.getString("sm_dssapellido"));
 					ciudadDTO.setScciudad(rs.getBigDecimal("sm_scciudad"));
-					AsesorDTO.setFhnacimineto(rs.getString("sm_fhnacimiento"));
+					AsesorDTO.setFhnacimiento(rs.getString("sm_fhnacimiento"));
 					ciudadDTO.setDepartamento(departamentoDTO);
 					maestroDTO.setScdatmaestro(rs.getBigDecimal("sm_scsexo"));
 					

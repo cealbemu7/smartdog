@@ -21,6 +21,9 @@ public class PropiedadDTO extends SmartBaseDTO implements Serializable {
 	private Date fhingreso;
 	private Date fhmodificacion;
 	private Date fhretiro;
+	private String cousuario;
+	private CiudadDTO ciudad;
+	
 	
 	
 	public Date getFhingreso() {
@@ -53,8 +56,6 @@ public class PropiedadDTO extends SmartBaseDTO implements Serializable {
 	public void setCiudad(CiudadDTO ciudad) {
 		this.ciudad = ciudad;
 	}
-	private String cousuario;
-	private CiudadDTO ciudad;
 	
 	public BigDecimal getScpropiedad() {
 		return scpropiedad;

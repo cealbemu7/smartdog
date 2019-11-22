@@ -3,12 +3,7 @@ package co.com.smart.dog.persistence.caller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,24 +106,30 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 		}
 
 		public List<AsesorDTO> consultarAsesor(AsesorDTO asesorlist) throws SQLException, NamingException, IOException{
-			List<AsesorDTO> list = new ArrayList<>();
+			List<AsesorDTO> listAsesor = new ArrayList<>();
 			try {
 				
 				conn = getConnection();
 				call = conn.prepareCall(getString("AsesorCaller.fn_consultarasesor"));
 				call.registerOutParameter(1,Types.OTHER);
+
+
+				
+				
+				
+				
 				
 				
 	            if (asesorlist.getScasesor() != null) {
 	            	System.out.println("entro");
-	            	call.setBigDecimal(2, asesorlist.getScasesor());
+	            	call.setInt(2, asesorlist.getScasesor().intValue());
 		        } else {
 		        	System.out.println("uno");
 		            call.setNull(2, java.sql.Types.NULL);
 		        }
 	            
 	            if (asesorlist.getTipoidentificacion() != null) {
-	            	call.setObject(3,asesorlist.getTipoidentificacion());
+	            	call.setBigDecimal(3,asesorlist.getTipoidentificacion().getScdatmaestro());
 	            }	else {
 	            	System.out.println("dos");
 		            call.setNull(3, java.sql.Types.NULL);
@@ -156,46 +157,52 @@ public class AsesorCaller extends JDBCResourceManager implements Serializable{
 		            call.setNull(6, java.sql.Types.NULL);
 	            }
 	            
-	            call.execute();
+				call.execute();
 				rs = (ResultSet) call.getObject(1);
 
 	           if (rs!=null){	            		
 				while(rs.next()) {
-					AsesorDTO AsesorDTO = new AsesorDTO();
+					AsesorDTO asesorDTO = new AsesorDTO();
 					DepartamentoDTO departamentoDTO = new DepartamentoDTO();
 					CiudadDTO ciudadDTO = new CiudadDTO();
 					DatosMaestroDTO maestroDTO = new DatosMaestroDTO();
 					EmpresaDTO empresaDTO = new EmpresaDTO();
 					
 					maestroDTO.setScdatmaestro(rs.getBigDecimal("sm_sctipoidentificacion"));
-					AsesorDTO.setCoidentificacion(rs.getString("sm_dsidentificacion"));
-					AsesorDTO.setDspnombre(rs.getString("sm_dspnombre"));
-					AsesorDTO.setDssnombre(rs.getString("sm_dssnombre"));
-					AsesorDTO.setDspapellido(rs.getString("sm_dspapeldo"));
-					AsesorDTO.setDssapellido(rs.getString("sm_dssapellido"));
-					ciudadDTO.setScciudad(rs.getBigDecimal("sm_scciudad"));
-					AsesorDTO.setFhnacimiento(rs.getString("sm_fhnacimiento"));
-					ciudadDTO.setDepartamento(departamentoDTO);
+					asesorDTO.setCoidentificacion(rs.getString("sm_dsidentificacion"));
+					asesorDTO.setDspnombre(rs.getString("sm_dspnombre"));
+					asesorDTO.setDssnombre(rs.getString("sm_dssnombre"));
+					asesorDTO.setDspapellido(rs.getString("sm_dspapellido"));
+					asesorDTO.setDssapellido(rs.getString("sm_dssapellido"));
+					//ciudadDTO.setScciudad(rs.getBigDecimal("sm_scciudad"));
+					asesorDTO.setFhnacimiento(rs.getString("sm_fhnacimiento"));
+					//ciudadDTO.setDepartamento(departamentoDTO);
 					maestroDTO.setScdatmaestro(rs.getBigDecimal("sm_scsexo"));
 					
 					empresaDTO.setScempresa(rs.getBigDecimal("sm_scempresa"));
 					
-					AsesorDTO.setDscelular(rs.getString("sm_dscelular"));
-					AsesorDTO.setDsdireccion(rs.getString("sm_dsdireccion"));
-					AsesorDTO.setDstelefono(rs.getString("sm_dstelefono"));
-					AsesorDTO.setDsemail(rs.getString("sm_dsemail"));
-					AsesorDTO.setCiudad(ciudadDTO);
-					AsesorDTO.setSexo(maestroDTO);
-					AsesorDTO.setTipoidentificacion(maestroDTO);
-					AsesorDTO.setEmpresa(empresaDTO);
-					list.add(AsesorDTO);
+					asesorDTO.setDscelular(rs.getString("sm_dscelular"));
+					asesorDTO.setDsdireccion(rs.getString("sm_dsdireccion"));
+					asesorDTO.setDstelefono(rs.getString("sm_dstelefono"));
+					asesorDTO.setDsemail(rs.getString("sm_dsemail"));
+					//asesorDTO.setCiudad(ciudadDTO);
+					asesorDTO.setSexo(maestroDTO);
+					asesorDTO.setTipoidentificacion(maestroDTO);
+					asesorDTO.setEmpresa(empresaDTO);
+					listAsesor.add(asesorDTO);
 										
 				}
 	           }
-			} finally {
+			}catch (SQLException e) {
+	             e.printStackTrace(System.err);
+	             throw  e;
+	         }catch (Throwable thr) {
+	             thr.printStackTrace(System.err);
+	             throw  thr;
+	         }  finally {
 				closeResources(conn, call);
 			}
-			return list;
+			return listAsesor;
 		}
 
 		public AsesorDTO eliminarAsesor(AsesorDTO asesor) throws SQLException, NamingException, IOException{

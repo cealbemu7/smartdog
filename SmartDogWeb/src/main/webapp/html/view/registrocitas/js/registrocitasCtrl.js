@@ -8,13 +8,14 @@
 angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices) {
 	
 	$scope.maestro = {
-			"comaestro" : null
+		"comaestro" : null
 	}
+	
 	$scope.sexo = {
-			"scdatmaestro" : null,
-			"dsdatmaestro" : null,
-			"dsvalor" : null
-		};	
+		"scdatmaestro" : null,
+		"dsdatmaestro" : null,
+		"dsvalor" : null
+	};	
 	
 	$scope.tipoinmueble = {
 		"scdatmaestro" : null,
@@ -22,12 +23,14 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dsdatmaestro" : null,
 		"dsvalor" : null
 	}
+	
 	$scope.tipodocumento = {
 		"scdatmaestro" : null,
 		"codatmaestro" : null,
 		"dsdatmaestro" : null,
 		"dsvalor" : null
 	}
+	
 	$scope.empresa = {
 		"scempresa" : null,
 		"nitempresa" : null,
@@ -39,43 +42,59 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dstelefono" : null,
 		"dsemail" : null,
 	}
+	
 	$scope.cliente = {
-			"sccliente" : null,
-			"dspnombre" : null,
-			"dssnombre" : null,
-			"dspapellido" : null,
-			"dssapellido" : null,
-			"tipoidentificacion" : null,
-			"dsidentificacion" : null,
-			"dsdireccion" : null,
-			"dstelefono" : null,
-			"dscelular" : null,
-			"dsemail" : null,
-			"sexo" : null,
-			"fhnacimiento" : null,
-			"cousuario" : null,
-			"usuario" : null
+		"sccliente" : null,
+		"dspnombre" : null,
+		"dssnombre" : null,
+		"dspapellido" : null,
+		"dssapellido" : null,
+		"tipoidentificacion" : null,
+		"dsidentificacion" : null,
+		"dsdireccion" : null,
+		"dstelefono" : null,
+		"dscelular" : null,
+		"dsemail" : null,
+		"sexo" : null,
+		"fhnacimiento" : null,
+		"cousuario" : null,
+		"usuario" : null
 
 	};
 	
 	$scope.usuario = {
-			"scusuario":null,
-			"cousuario" : null,
-			"dsusuario":null
+		"scusuario":null,
+		"cousuario" : null,
+		"dsusuario":null
 	}
 	
 	$scope.cita = {
-		  "sccita": null,
-		  "propiedad": null,
-		  "cliente": null,
-		  "fhhorainicio": null,
-		  "usuario": null,
-		  "fhingreso": null,
-		  "fhhorafin": null,
-		  "asesor": null,
-		  "estado": null,
-		  "empresa": null	      
+	  "sccita": null,
+	  "propiedad": null,
+	  "cliente": null,
+	  "fhhorainicio": null,
+	  "usuario": null,
+	  "fhingreso": null,
+	  "fhhorafin": null,
+	  "asesor": null,
+	  "estado": null,
+	  "empresa": null	      
 	}
+	
+	$scope.propiedad = {
+		"scpropiedad": null
+	}
+	
+	$scope.asesor = {
+		"scasesor": null
+	}
+	
+	$scope.estado = {
+		"scdatmaestro" : null,
+		"dsdatmaestro" : null,
+		"dsvalor" : null	
+	}
+	
 	/**
 	 * @Descripcion: Carga Inicial de los envios al servidor
 	 * @Author: SmartJungle S.A.S
@@ -89,8 +108,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	
 	/**
 	* controlador que consulta de los maestros
-	*/
-	
+	*/	
 	$scope.cargaInicial = function() {
 		try {			
 			var exito = function(response){
@@ -112,7 +130,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$.each(tipoinmuebles, function( index , tipoinmueble ) {
 							$scope.tipoinmuebles.push(tipoinmueble);
 						});
-						
+						 $scope.listarCitas();
 					}else{
 						alert("Error al cargar inicial");
 					}
@@ -191,6 +209,34 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
 		}
 	}
+	/***
+	 * metodo para cargar clientes
+	 */
+	$scope.CargarCliente = function(){
+		try {
+			var exito = function(response) {
+				if(response.data != null){
+					$scope.clientes = new Array();
+					var clientes = angular.fromJson(response.data);
+					$.each(clientes, function(index,cliente) {
+						$scope.clientes.push(cliente);
+					});										
+				}else{
+					alert("Advertencia", "No se han encontrado clientes ingresados");
+				}
+			}
+			var error = function(response) {
+				var reponsoObject = angular.fromJson(response.data);
+				alert("Error Ha ocurrido un error al momento de listar clientes");
+			}			
+
+			var sendCliente = $scope.cliente;
+			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
+			
+		} catch (error) {
+			alert("Error Ha ocurrido un error al momento de listar citas");
+		}
+	}
 	
 	/**
 	 * metodo utilizado para grabar clientes 
@@ -232,6 +278,41 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");
 		  }
 	 }
+
+	/**
+	 * metodo utilizado para grabar citas 
+	 */	
+	 $scope.GrabarCita = function() {
+		  try {				 
+			    var exito = function(response) {
+				    var reponsoObject = angular.fromJson(response.data);
+				    if(reponsoObject!=null){
+						alert("Cita almacenado con exito");												
+					   }else{
+						   alert("Error", "Ha ocurrido un error al momento de almacenar el cita ");
+				     }					    
+			    }		 
+			    var error = function(response) {
+				    var reponsoObject = angular.fromJson(response.data);
+				    alert("Error", "Ha ocurrido un error al momento de almacenar el cita ");
+			    }		 
+				   	    
+			    var sendCita = {
+		    		sccita : $scope.cita.sccita,
+		    		propiedad : $scope.propiedad,
+		    		cliente : $scope.cliente,
+		    		fhhorainicio : $scope.cita.fhhorainicio,
+		    		usuario : $scope.usuario,
+		    		fhhorafin : $scope.cita.fhhorafin,
+		    		asesor  : $scope.asesor ,
+		    		estado : $scope.estado,
+		    		empresa :  $scope.empresa				   
+			    };	
+			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
+		  }	catch (error) {
+			  alert("Error", "Ha ocurrido un error al momento de almacenar el cita");
+		  }
+	 }
 	 /**
 	  * Listar citas
 	  */
@@ -264,7 +345,35 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				$scope.mensaje("Error", "Ha ocurrido un error al momento de listar cita", error.message);
 			}
 		}	
-		
+	 /**
+	 *  funcion eliminar citas
+	 */
+	 $scope.eliminarCita = function(c) {
+	 	try {	
+	 		var exito = function(response) {
+	 			var reponsoObject = angular.fromJson(response.data);
+	 			if(reponsoObject!=null){
+	 				alert("Exito", " ",reponsoObject.descripcion);	
+	 			}else{
+	 				alert("Error", "Ha ocurrido un error al momento de eliminar la  cita","");
+	 			}
+	 		};	 		
+	 		var error = function(response) {
+	 			var reponsoObject = angular.fromJson(response.data);
+	 			alert("Error", "Ha ocurrido un error al momento de eliminar la  cita",reponsoObject.descripcion);
+	 		}	 			
+	 		var sendUsuario = $scope.usuario;
+	 		var sendObjectCita = {		    
+ 				sccita : c.sccita,			    	
+ 				usuario: sendUsuario
+				
+		    };			    
+	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
+
+	 	} catch (error) {
+	 		alert("Error Ha ocurrido un error al momento de eliminar la  cita", error.message);
+	 	}	
+	 }	
 
 	/**
 	 * funciones del steps

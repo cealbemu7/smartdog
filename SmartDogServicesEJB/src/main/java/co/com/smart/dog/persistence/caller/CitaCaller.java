@@ -5,14 +5,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,18 +53,18 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 		CitaDTO returnCita = new CitaDTO();
 		try {
 			conn = getConnection();
-			call = conn.prepareCall("CitaCaller.fn_eliminar_citas");
+			call = conn.prepareCall(getString("CitaCaller.fn_eliminar_citas"));
 
 			if (cita.getSccita() != null) {
 				call.setInt(1, cita.getSccita().intValue());
 			} else {
-				call.setNull(1, java.sql.Types.INTEGER);
+				call.setNull(1, java.sql.Types.NULL);
 			}
 
 			if (cita.getUsuario() != null) {
 				call.setString(2, cita.getUsuario().getDsusuario());
 			} else {
-				call.setNull(2, java.sql.Types.VARCHAR);
+				call.setNull(2, java.sql.Types.NULL);
 			}
 
 			call.registerOutParameter(3, java.sql.Types.INTEGER);
@@ -110,31 +107,31 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 			if (cita.getAsesor() != null) {
 				call.setInt(2, cita.getAsesor().getScasesor().intValue());
 			} else {
-				call.setNull(2, java.sql.Types.INTEGER);
+				call.setNull(2, java.sql.Types.NULL);
 			}
 
 			if (cita.getPropiedad() != null) {
 				call.setInt(3, cita.getPropiedad().getScpropiedad().intValue());
 			} else {
-				call.setNull(3, java.sql.Types.INTEGER);
+				call.setNull(3,java.sql.Types.NULL);
 			}
 
 			if (cita.getCliente() != null) {
 				call.setInt(4, cita.getCliente().getSccliente().intValue());
 			} else {
-				call.setNull(4, java.sql.Types.INTEGER);
+				call.setNull(4, java.sql.Types.NULL);
 			}
 
 			if (cita.getEstado() != null) {
 				call.setInt(5, cita.getEstado().getScdatmaestro().intValue());
 			} else {
-				call.setNull(5, java.sql.Types.INTEGER);
+				call.setNull(5, java.sql.Types.NULL);
 			}
 
 			if (cita.getFhhorainicio() != null) {
 				call.setString(6, cita.getFhhorainicio());
 			} else {
-				call.setNull(6, java.sql.Types.VARCHAR);
+				call.setNull(6, java.sql.Types.NULL);
 			}
 
 			call.execute();
@@ -208,8 +205,6 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 	 */
 	public CitaDTO GrabarCita(CitaDTO cita) throws SQLException, NamingException, ParseException {
 		try {
-			 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");	
-			 
 			conn = getConnection();
 			call = conn.prepareCall(getString("CitaCaller.fn_grabar_citas"));
 
@@ -230,18 +225,12 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 			} else {
 				call.setNull(3, java.sql.Types.NULL);
 			}
-			
-			Date parsedDate = (Date)dateFormat.parse( cita.getFhhorainicio());
-			Timestamp  timestamp = new Timestamp(parsedDate.getTime());
-			System.out.println("Esta es la fecha hora>>>>>> " + timestamp);
-			call.setTimestamp(4,timestamp); 
+		
+			call.setString(4,cita.getFhhorainicio()); 
 			
 			call.setString(5, cita.getUsuario().getCousuario());
 			
-			Date parsedD = (Date) dateFormat.parse( cita.getFhhorafin());
-			java.sql.Timestamp times = new java.sql.Timestamp(parsedD.getTime());
 			call.setString(6, cita.getFhhorafin());
-			call.setTimestamp(6,times);
 
 			if (cita.getAsesor() != null) {
 				call.setInt(7, cita.getAsesor().getScasesor().intValue());

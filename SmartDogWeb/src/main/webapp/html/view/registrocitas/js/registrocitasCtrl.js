@@ -58,13 +58,24 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 
 	};
 	
-	
 	$scope.usuario = {
 			"scusuario":null,
 			"cousuario" : null,
 			"dsusuario":null
 	}
 	
+	$scope.cita = {
+		  "sccita": null,
+		  "propiedad": null,
+		  "cliente": null,
+		  "fhhorainicio": null,
+		  "usuario": null,
+		  "fhingreso": null,
+		  "fhhorafin": null,
+		  "asesor": null,
+		  "estado": null,
+		  "empresa": null	      
+	}
 	/**
 	 * @Descripcion: Carga Inicial de los envios al servidor
 	 * @Author: SmartJungle S.A.S
@@ -221,6 +232,39 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");
 		  }
 	 }
+	 /**
+	  * Listar citas
+	  */
+	 $scope.listarCitas = function() {
+			try {
+				var exito = function(response) {
+					if(response.data != null){
+						var citas = response.data;
+						if (citas.length>0){							
+							$scope.citas = new Array();
+							$scope.citas = angular.fromJson(citas);
+							alert("citas consultadas con exito.")
+						}else{
+							
+							alert("Advertencia", "No se han encontrado citas ingresadas","");
+						}						
+					}else{
+						alert("Advertencia", "No se han encontrado citas ingresadas","");
+					}
+				}
+				var error = function(response) {
+					var reponsoObject = angular.fromJson(response.data);
+					alert("Error", "Ha ocurrido un error al momento de listar citas",reponsoObject.descripcion);
+				}			
+
+				var sendCita = $scope.cita;
+				smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodConsultarCita,exito,error);
+				
+			} catch (error) {
+				$scope.mensaje("Error", "Ha ocurrido un error al momento de listar cita", error.message);
+			}
+		}	
+		
 
 	/**
 	 * funciones del steps

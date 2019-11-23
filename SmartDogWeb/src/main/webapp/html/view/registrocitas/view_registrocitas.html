@@ -289,9 +289,8 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Còdigo del inmueble*</label> <input
-									maxlength="100" type="text" readonly="readonly"
-									class="form-control" />
+								<label class="control-label">Còdigo del inmueble*</label> 
+								<input	maxlength="100" type="text" readonly="readonly" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -308,11 +307,20 @@
 									<th scope="col">Estado</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td colspan="7"></td>
+							<tbody class="tbody">
+								<tr ng-show="citas == 0">
+									<th colspan="7" style="text-align: center;">No se encontraron citas</th>
 								</tr>
-
+								<tr ng-repeat="c in citas | orderBy : 'citas'" style="font-size: 12px">
+									<td class="botonera-table" style="width: 10%;">
+										<i class='fa fa-trash-o'></i>
+										<button class='btn btn-xs btn-succses' data-original-title='Trash Row'
+											ng-click="eliminarCita(c)">	<i class='fa fa-trash-o'></i>
+										</button>
+									</td>
+									<td align="right" style="width: 20%;">{{c.empresa.dsrazonsocial}}</td>
+									<td align="right" style="width: 10%;">{{e.dsrazonsocial}}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

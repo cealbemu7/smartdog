@@ -12,3 +12,18 @@ var methodGrabarCliente  = serviceNameCliente+'/GrabarCliente';
  */
 var serviceNameEmpresa = '/SmartServiceEmpresa';
 var methodConsultarEmpresa  = serviceNameEmpresa+'/consultarEmpresa';
+
+/**
+ *	Definicion de los servicios de cita  
+*/
+var serviceNameCita = '/SmartServiceCita';
+var methodGrabarCita = serviceNameCita +'/GrabarCita';
+var methodConsultarCita = serviceNameCita +'/ConsultarCita';
+var methodEliminarCita = serviceNameCita+'/EliminarCita';
+
+
+
+
+
+
+

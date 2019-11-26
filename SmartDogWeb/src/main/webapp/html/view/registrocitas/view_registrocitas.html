@@ -14,7 +14,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">WebSiteName</a>
+				<a class="navbar-brand" href="#">Smart Dog</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>			
@@ -214,7 +214,7 @@
 					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
 				</div>
 			</div>
-
+			<!-- comienzo del codigo del Step 2 ----------------------->
 			<div class="panel panel-info setup-content" id="step-2">
 				<div class="panel-heading">
 					<h3 class="panel-title">Reservar Cita</h3>
@@ -289,9 +289,8 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="form-group">
-								<label class="control-label">Còdigo del inmueble*</label> <input
-									maxlength="100" type="text" readonly="readonly"
-									class="form-control" />
+								<label class="control-label">Còdigo del inmueble*</label> 
+								<input	maxlength="100" type="text" readonly="readonly" class="form-control" />
 							</div>
 						</div>
 					</div>
@@ -303,16 +302,30 @@
 									<th scope="col">Inmobiliaria</th>
 									<th scope="col">Tipo de inmueble</th>
 									<th scope="col">Código del inmueble</th>
-									<th scope="col">Fecha</th>
-									<th scope="col">Hora</th>
+									<th scope="col">Fecha</th>									
 									<th scope="col">Estado</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td colspan="7"></td>
+							<tbody class="tbody">
+								<tr ng-show="citas == 0">
+									<th colspan="7" style="text-align: center;">No se encontraron citas</th>
 								</tr>
-
+								<tr ng-repeat="c in citas | orderBy : 'citas'" style="font-size: 12px">
+									<td style="display: none;">
+														{{c.sccita}}
+													</td>
+									<td class="botonera-table" style="width: 10%;">
+										<i class='fa fa-trash-o'></i>
+										<button class='btn btn-xs btn-succses' data-original-title='Trash Row'
+											ng-click="eliminarCita(c)">	Eliminar<i class='fa fa-trash-o'></i>
+										</button>
+									</td>
+									<td align="right" style="width: 20%;">{{c.empresa.scempresa}}</td>
+									<td align="right" style="width: 20%;">{{c.tipoinmueble.dsdatmaestro}}</td>
+									<td align="right" style="width: 20%;">{{c.propiedad.copropiedad}}</td>
+									<td align="right" style="width: 20%;">{{c.fhhorainicio}}</td>
+									<td align="right" style="width: 10%;">{{c.estado.dsdatmaestro}}</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

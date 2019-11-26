@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="smartApp">
 <head>
 <meta charset="UTF-8">
 <title>Asesores</title>
@@ -52,7 +52,8 @@
 
 
 </head>
-<body ng-controller="AsesorControllerCtrl" ng-init="onInit()">
+<body ng-controller="asesorCtrl" ng-init="onInit()">
+
 	<div class=" container jarviswidget jarviswidget-color-blueDark"
 		data-widget-colorbutton="false" data-widget-custombutton="false"
 		data-widget-editbutton="false" id="wid-id-3">
@@ -74,7 +75,7 @@
 								<label class="label">Tipo documento*</label> <select
 									class="form-control" id="tipodocumento"
 									ng-model="tipodocumento"
-									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos"
+									ng-options="tipoidenticacion as tipoidentificacion.dsdatmaestro for tipoidentificacion in tipoidentificaciones"
 									autofocus>
 									<option value="">Seleccionar</option>
 								</select>

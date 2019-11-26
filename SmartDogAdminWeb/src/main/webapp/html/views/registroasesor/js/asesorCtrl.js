@@ -12,11 +12,28 @@ angular.module('smartApp').controller('asesorCtrl',function($scope, smartService
 	 * @Author: SmartJungle S.A.S
 	 * @Date: 08-11-2019
 	 */
-
+		
+	
 
 	$scope.sw = true;
 	$scope.onInit = function() {
 		
+		
+		$scope.maestro = {
+				"comaestro" : null
+			};
+		$scope.tipoidentificacion = {
+				"scdatmaestro" : null,
+				"codatmaestro" : null,
+				"dsdatmaestro" : null,
+				"dsvalor" : null
+			};
+		
+		$scope.sexo = {
+				"scdatmaestro" : null,
+				"dsdatmaestro" : null,
+				"dsvalor" : null
+			};
 		$scope.pais = {
 				"scpais" : null,
 				"copais" : null,
@@ -34,9 +51,10 @@ angular.module('smartApp').controller('asesorCtrl',function($scope, smartService
 			"dsciudad" : null,
 			"departamento" : $scope.departamento
 		}
+		
 		$scope.asesor = {
 			"scasesor" : null,
-			"sctipoidentificacion" : null,
+			"tipoidentificacion" : null,
 			"dsidentificacion" : null,
 			"dspnombre" : null,
 			"dssnombre" : null,
@@ -52,7 +70,7 @@ angular.module('smartApp').controller('asesorCtrl',function($scope, smartService
 			"dsemail" : null,
 			"fhnacimineto":null,
 			"cousuario":null,
-			"scsexo":null,
+			"sexo":null,
 			
 			
 		}
@@ -61,6 +79,66 @@ angular.module('smartApp').controller('asesorCtrl',function($scope, smartService
 		
 		$scope.listarDepartamento();
 	}
+	
+	$scope.cargaInicial = function() {
+		try {			
+			var exito = function(response){
+				try{
+					if(response.data != null){
+						
+						$scope.tipoidentificacion = new Array();
+						var tipoidentificaciones  = angular.fromJson(response.data.listatipoidentificacion);						
+						$.each(tipoidentificaciones, function( index , tipoidentificacion ) {
+							$scope.tipoidentificaciones.push(tipoidentificacion);
+						});
+						
+						$scope.sexos = new Array();
+						var sexos  = angular.fromJson(response.data.listasexo);
+						$.each(sexos, function( index , sexo ) {
+							$scope.sexos.push(sexo);
+						});
+					}else{
+						alert("Error al cargar inicial: ");
+					}
+				}catch(e){
+					alert("Error en la cargar inicial: ");
+				}
+			}
+	
+			var error = function(response){
+				alert("Error en la carga inicial: ");
+				console.log(angular.toJson(response));
+			}
+			$scope.maestro = {"comaestro" : null}
+			$scope.maestro.comaestro = SmartMaestroTipoDocumento;
+			var sendTipoDocumento = $scope.maestro;
+			var sendobjectTipoDocumento = {
+				maestro : sendTipoDocumento,
+				cousuario: $scope.cousuario
+			};
+			
+			$scope.maestro = {"comaestro" : null}
+		    $scope.maestro.comaestro = SmartMaestroSexo;
+		    var sendMaestroSexo = $scope.maestro;
+		    var sendObjectSexo = {
+				maestro : sendMaestroSexo,
+				cousuario: $scope.usuario
+		    };
+		    
+		
+		   var sendObject = {				   
+				   tipodocumento : sendobjectTipoDocumento,
+				   sexo : sendObjectSexo,
+				  
+		   }; 	   
+		   smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodListaInicial,exito,error);				
+			
+		} catch (error) {
+			alert("Error en cargar inicial: ");
+		}
+	}
+	
+
 	/**
 	 * controlador que consultar departamentos
 	 */
@@ -197,7 +275,7 @@ angular.module('smartApp').controller('asesorCtrl',function($scope, smartService
 				var sendObjectAsesor = {
 						
 					scasesor : $scope.asesor.scasesor,
-					sctipoidentificacion: $cope.asesor.sctipoidentificacion,
+					tipoidentificacion: $cope.asesor.tipoidentificacion,
 					dsidentificacion: $cope.asesor.dsidentificacion,
 					dspnombre: $scope.asesor.dspnombre,
 					dssnombre: $scope.asesor.dssnombre,

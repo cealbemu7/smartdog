@@ -296,12 +296,13 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				    var reponsoObject = angular.fromJson(response.data);
 				    alert("Error", "Ha ocurrido un error al momento de almacenar el cita ");
 			    }		 
-				   	    
+				 var sendfecha  = document.getElementById('fecha').value;
+				 var sendhora = document.getElementById('hora').value;	    
 			    var sendCita = {
 		    		sccita : $scope.cita.sccita,
 		    		propiedad : $scope.propiedad,
 		    		cliente : $scope.cliente,
-		    		fhhorainicio : $scope.cita.fhhorainicio,
+		    		fhhorainicio :sendfecha + sendhora,
 		    		usuario : $scope.usuario,
 		    		fhhorafin : $scope.cita.fhhorafin,
 		    		asesor  : $scope.asesor ,
@@ -357,17 +358,15 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 			}else{
 	 				alert("Error", "Ha ocurrido un error al momento de eliminar la  cita","");
 	 			}
-	 		};	 		
+ 			}	 		
 	 		var error = function(response) {
 	 			var reponsoObject = angular.fromJson(response.data);
 	 			alert("Error", "Ha ocurrido un error al momento de eliminar la  cita",reponsoObject.descripcion);
-	 		}	 			
-	 		var sendUsuario = $scope.usuario;
+	 		} 
+	 		
 	 		var sendObjectCita = {		    
- 				sccita : c.sccita,			    	
- 				usuario: sendUsuario
-				
-		    };			    
+ 				sccita : c.sccita				
+		    }			    
 	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
 
 	 	} catch (error) {

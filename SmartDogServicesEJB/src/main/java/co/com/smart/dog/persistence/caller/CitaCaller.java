@@ -167,10 +167,10 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 				empresa.setScempresa(rs.getBigDecimal("sm_scempresa"));
 				empresa.setDsrazonsocial(rs.getString("sm_dsrazonsocial"));
 				citas.setEmpresa(empresa);
-				
+				/*
 				tipoinmueble.setScdatmaestro(rs.getBigDecimal("sctipoinmueble"));
 				tipoinmueble.setDsdatmaestro(rs.getString("dstipoinmueble"));
-				citas.setTipoinmueble(tipoinmueble);
+				citas.setTipoinmueble(tipoinmueble);*/
 
 				citas.setFhhorainicio(rs.getString("sm_fhhorainicio"));
 				citas.setFhhorafin(rs.getString("sm_fhhorafin"));

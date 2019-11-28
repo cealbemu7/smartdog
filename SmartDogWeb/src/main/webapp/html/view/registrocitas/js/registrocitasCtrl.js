@@ -244,22 +244,36 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 */
 	$scope.ConsultarCliente = function(){
 		try{
-			var exito = function(response){
-				var response = angular.fromJson(response.data);
+			var exito = function(response){				
 				if(response.data != null){
 			  		cliente = angular.fromJson(response.data);
+			  		$scope.tipodocumento.dsdatmaestro = cliente.tipoidentificacion;
+			  		$scope.cliente.dsidentificacion = cliente.dsidentificacion;
 					$scope.cliente.dspnombre = cliente.dspnombre;
-					
+					$scope.cliente.dssnombre = cliente.dssnombre;
+					$scope.cliente.dspapellido = cliente.dspapellido; 
+					$scope.cliente.dssapellido = cliente.dssapellido;
+					$scope.cliente.dstelefono = cliente.dstelefono;
+					$scope.cliente.dscelular = cliente.dscelular;
+					$scope.cliente.dsemail = cliente.dsemail;
+					$scope.cliente.fhnacimiento = cliente.fhnacimiento; 						
+					$scope.sexo = cliente.sexo;				 						
+					$scope.cliente.dsdireccion = cliente.dsdireccion;
+					 
 				}else{
-					alert("No se encontro usuario con este correo");
+					alert("No se encontro clientes con este correo");
 				}
 			}
 			var error = function(){
 				alert("Error", "Ha ocurrido un error al momento de consultar el cliente");
 			}
-			var sendCliente = {
-					dspnombre:""
+			var sendUsuario = {
+					scusuario:$scope.usuario.scusuario
 			}
+			var sendCliente = {
+					usuario: sendUsuario
+			}
+			alert(angular.toJson(sendCliente))
 			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
 			  
 		}catch (error) {

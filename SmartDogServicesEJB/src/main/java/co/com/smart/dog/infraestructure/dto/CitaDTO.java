@@ -23,6 +23,7 @@ public class CitaDTO extends SmartBaseDTO implements Serializable{
 	private EmpresaDTO empresa;
     private Date fhmodificacion;
     private Date fhretiro;
+    private DatosMaestroDTO tipoinmueble;
     
 	public BigDecimal getSccita() {
 		return sccita;
@@ -95,5 +96,12 @@ public class CitaDTO extends SmartBaseDTO implements Serializable{
 	}
 	public void setFhretiro(Date fhretiro) {
 		this.fhretiro = fhretiro;
-	}    
+	}
+	public DatosMaestroDTO getTipoinmueble() {
+		return tipoinmueble;
+	}
+	public void setTipoinmueble(DatosMaestroDTO tipoinmueble) {
+		this.tipoinmueble = tipoinmueble;
+	}
+	
 }

@@ -32,44 +32,160 @@
 				<div class="stepwizard-step col-xs-4">
 					<a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
 					<p>
-						<small>Registro de usuarios</small>
+						<small>Reservar Cita</small>
 					</p>
+					
 				</div>
 				<div class="stepwizard-step col-xs-4">
 					<a href="#step-2" type="button" class="btn btn-default btn-circle"
 						disabled="disabled">2</a>
 					<p>
-						<small>Reservar Cita</small>
+						<small>Citas solicitadas</small>
 					</p>
 				</div>
 				<div class="stepwizard-step col-xs-4">
 					<a href="#step-3" type="button" class="btn btn-default btn-circle"
 						disabled="disabled">3</a>
 					<p>
-						<small>Citas solicitadas</small>
+						<small>Registro de usuarios</small>
 					</p>
 				</div>
 			</div>
 		</div>
-
-		<form role="form">
-			<div class="panel panel-info setup-content" id="step-1">
+		
+		<!-- Step 1 registrar citas -->
+		<div class="panel panel-info setup-content" id="step-1">
+			<div class="panel-heading">
+				<h3 class="panel-title">Reservar Cita</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Cliente</label> <input
+								ng-model="cliente.dspnombre" 
+								maxlength="100" type="text" readonly="readonly"
+								class="form-control" />
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Inmnobiliaria*</label> <select
+								class="form-control select-sm" id="idempresa"
+								ng-model="idrazonsocialempresa"
+								ng-options="empresa as empresa.dsrazonsocial for empresa in empresas"
+								tabindex=3>
+								<option value="">Seleccionar</option>
+							</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Tipo de Inmueble*</label> 
+							<select class="form-control select-sm" id="tipoinmueble"
+								ng-model="tipoinmueble"
+								ng-options="tipoinmueble as tipoinmueble.dsdatmaestro for tipoinmueble in tipoinmuebles"
+								tabindex=3>
+								<option value="">seleccionar</option>									
+							</select>							
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Còdigo del inmueble*</label> <input
+								maxlength="100" type="text" required="required"
+								class="form-control" placeholder="Còdigo del inmueble" />
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Fecha*</label> <input
+								id="fecha" maxlength="100" type="date" required="required"
+								class="form-control" />									
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Hora*</label> <input
+								id="hora" maxlength="100" type="time" required="required"
+								class="form-control" />
+						</div>
+					</div>
+				</div>
+				<input type="submit" class="btn btn-success" value="Reservar cita">
+				<input type="submit" class="btn btn-success" value="Nueva cita">
+				<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+			</div>
+		</div>			
+		<!-- comienzo del codigo del Step 2 ----------------------->
+		<div class="panel panel-info setup-content" id="step-2">
+			<div class="panel-heading">
+				<h3 class="panel-title">Citas solicitadas</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<label class="control-label">Còdigo del inmueble*</label> 
+							<input	maxlength="100" type="text" readonly="readonly" class="form-control" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Acciòn</th>
+								<th scope="col">Inmobiliaria</th>
+								<th scope="col">Tipo de inmueble</th>
+								<th scope="col">Código del inmueble</th>
+								<th scope="col">Fecha</th>									
+								<th scope="col">Estado</th>
+							</tr>
+						</thead>
+						<tbody class="tbody">
+							<tr ng-show="citas == 0">
+								<th colspan="6" style="text-align: center;">No se encontraron citas registradas</th>
+							</tr>
+							<tr ng-repeat="c in citas | orderBy : 'citas'" style="font-size: 12px">
+								<td style="display: none;">{{c.sccita}}</td>
+								<td class="botonera-table">
+									<i class='fa fa-trash-o'></i>
+									<button class='btn btn-xs btn-succses' data-original-title='Trash Row'
+										ng-click="eliminarCita(c)">	Eliminar
+									</button>
+								</td>
+								<td>{{c.empresa.dsrazonsocial}}</td>
+								<td>{{c.tipoinmueble.dsdatmaestro}}</td>
+								<td>{{c.propiedad.copropiedad}}</td>
+								<td>{{c.fhhorainicio}}</td>
+								<td>{{c.estado.dsdatmaestro}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>					
+			</div>				
+		</div>
+		<div class="panel panel-info setup-content" id="step-3">				
+			<form role="form">
 				<div class="panel-heading">
 					<h3 class="panel-title">Registro de usuarios</h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Tipo Identificaciòn *</label> <select
 									id="tipodocumento" class="form-control select-sm"
 									ng-model="tipodocumento"
-									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos">
+									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos" required="required">
 									<option value="">Seleccionar</option>
 								</select>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Nùmero de Identificación*</label> 
 								<input id="dsidentificacion" ng-model="cliente.dsidentificacion"
@@ -81,19 +197,10 @@
 							        </b> 
 						        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Sexo</label> <select id="sexo"
-									class="form-control select-sm" ng-model="sexo"
-									ng-options="sexo as sexo.dsdatmaestro for sexo in sexos">
-									<option value="">Seleccionar</option>
-								</select>
-							</div>
-						</div>
+						</div>						
 					</div>
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Primer Nombre *</label> 
 								<input id="dspnombre" type="text"  
@@ -105,30 +212,19 @@
 					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Segundo Nombre</label> 
 								<input id="dssnombre" type="text"  
 								ng-model="cliente.dssnombre" maxlength="50" 
-								ng-trim="true" tabindex=3 class="form-control"required="required">
+								ng-trim="true" tabindex=3 class="form-control">
 						        <b class="tooltip tooltip-bottom-right">
 						        	<i class="fa fa-warning txt-color-teal"></i> 
 						        	Ingrese su segundo nombre.</b> 
 					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Fecha de Nacimiento</label>
-								<input id="fhnacimiento" type="date" name="request" 
-								placeholder="DD/MM/AAAA" data-dateformat='dd/mm/yy'
-								 ng-model="cliente.fhnacimiento" class="form-control"required="required">
-									<i class="icon-append txt-color-teal fa fa-calendar" title="Botón para buscar en calendario" data-toggle="tooltip"></i> 
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Primer Apellido*</label>
 								<input id="dspapellido" type="text"  ng-model="cliente.dspapellido"
@@ -140,53 +236,27 @@
 					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Segundo Apellido</label> 
 								<input id="dssapellido" type="text"  ng-model="cliente.dssapellido"
 								 maxlength="50" ng-trim="true" tabindex=3
-								 class="form-control"required="required">
+								 class="form-control">
 						        <b class="tooltip tooltip-bottom-right">
 						        	<i class="fa fa-warning txt-color-teal"></i> 
 						       		Segundo apellido.
 						       	</b> 
 					        	<i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Dirección</label> 
-								<input id="dsdireccion" type="text"  ng-model="cliente.dsdireccion"
-								 maxlength="150" ng-trim="true" tabindex=3
-								 class="form-control"required="required">
-						        <b class="tooltip tooltip-bottom-right">
-						        	<i class="fa fa-warning txt-color-teal"></i> 
-						       		Dirección es un dato obligatorio.
-						       	</b> 
-					        	<i class="icon-append txt-color-teal fa fa-home"></i>
-							</div>
-						</div>
+						</div>						
 					</div>
 					<div class="row">
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Teléfono</label> 
-								<input id="dstelefono" type="text"  maxlength="50" 
-								ng-model="cliente.dstelefono" ng-trim="true" tabindex=3
-								class="form-control"required="required">
-						        <b class="tooltip tooltip-bottom-right">
-						        	<i class="fa fa-warning txt-color-teal"></i> 
-						        	Ingrese su numero de telefono.
-					        	</b> 
-					        	<i class="icon-append txt-color-teal fa fa-phone"></i>
-							</div>
-						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Celular</label> 
 								<input id="dscelular" type="text" maxlength="50"  
 								ng-model="cliente.dscelular" ng-trim="true" tabindex=3
-								class="form-control"required="required">
+								class="form-control">
 						        <b class="tooltip tooltip-bottom-right">
 						        	<i class="fa fa-warning txt-color-teal"></i> 
 						        	Insgrese su numero de celular.
@@ -194,12 +264,58 @@
 					        	<i class="icon-append txt-color-teal fa fa-mobile"></i>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
+							<div class="form-group">
+								<label class="control-label">Teléfono</label> 
+								<input id="dstelefono" type="text"  maxlength="50" 
+								ng-model="cliente.dstelefono" ng-trim="true" tabindex=3
+								class="form-control">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						        	Ingrese su numero de telefono.
+					        	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-phone"></i>
+							</div>
+						</div>						
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label class="control-label">Dirección</label> 
+								<input id="dsdireccion" type="text"  ng-model="cliente.dsdireccion"
+								 maxlength="150" ng-trim="true" tabindex=3
+								 class="form-control">
+						        <b class="tooltip tooltip-bottom-right">
+						        	<i class="fa fa-warning txt-color-teal"></i> 
+						       		Dirección es un dato obligatorio.
+						       	</b> 
+					        	<i class="icon-append txt-color-teal fa fa-home"></i>
+							</div>
+						</div>						
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="form-group">
+								<label class="control-label">Fecha de Nacimiento</label>
+								<input id="fhnacimiento" type="date" name="request" 
+								placeholder="DD/MM/AAAA" data-dateformat='dd/mm/yy'
+								 ng-model="cliente.fhnacimiento" class="form-control">
+									<i class="icon-append txt-color-teal fa fa-calendar" title="Botón para buscar en calendario" data-toggle="tooltip"></i> 
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="form-group">
+								<label class="control-label">Sexo</label> <select id="sexo"
+									class="form-control select-sm" ng-model="sexo"
+									ng-options="sexo as sexo.dsdatmaestro for sexo in sexos">
+									<option value="">Seleccionar</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
 							<div class="form-group">
 								<label class="control-label">Email</label> 
 								<input id="dsemail" type="text"  ng-model="cliente.dsemail" 
 								maxlength="150" ng-trim="true" tabindex=3
-								class="form-control"required="required">
+								class="form-control"readonly="readonly">
 						        <b class="tooltip tooltip-bottom-right">
 						        <i class="fa fa-warning txt-color-teal"></i> 
 						        Email es un dato obligatorio.</b> 
@@ -213,122 +329,8 @@
 					 tabindex=3><i class="fa fa-floppy-o"></i> Guardar</a >					
 					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
 				</div>
-			</div>
-			<!-- comienzo del codigo del Step 2 ----------------------->
-			<div class="panel panel-info setup-content" id="step-2">
-				<div class="panel-heading">
-					<h3 class="panel-title">Reservar Cita</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Cliente</label> <input
-									maxlength="100" type="text" readonly="readonly"
-									class="form-control" />
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Inmnobiliaria*</label> <select
-									class="form-control select-sm" id="idempresa"
-									ng-model="idrazonsocialempresa"
-									ng-options="empresa as empresa.dsrazonsocial for empresa in empresas"
-									tabindex=3>
-									<option value="">Seleccionar</option>
-								</select> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Tipo de Inmueble*</label> 
-								<select class="form-control select-sm" id="tipoinmueble"
-									ng-model="tipoinmueble"
-									ng-options="tipoinmueble as tipoinmueble.dsdatmaestro for tipoinmueble in tipoinmuebles"
-									tabindex=3>
-									<option value="">seleccionar</option>									
-								</select>							
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Còdigo del inmueble*</label> <input
-									maxlength="100" type="text" required="required"
-									class="form-control" placeholder="Còdigo del inmueble" />
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Fecha*</label> <input
-									id="fecha" maxlength="100" type="date" required="required"
-									class="form-control" />									
-							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Hora*</label> <input
-									id="hora" maxlength="100" type="time" required="required"
-									class="form-control" />
-							</div>
-						</div>
-					</div>
-					<input type="submit" class="btn btn-success" value="Reservar cita">
-					<input type="submit" class="btn btn-success" value="Nueva cita">
-					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-				</div>
-			</div>
-
-			<div class="panel panel-info setup-content" id="step-3">
-				<div class="panel-heading">
-					<h3 class="panel-title">Citas solicitadas</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="form-group">
-								<label class="control-label">Còdigo del inmueble*</label> 
-								<input	maxlength="100" type="text" readonly="readonly" class="form-control" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">Acciòn</th>
-									<th scope="col">Inmobiliaria</th>
-									<th scope="col">Tipo de inmueble</th>
-									<th scope="col">Código del inmueble</th>
-									<th scope="col">Fecha</th>									
-									<th scope="col">Estado</th>
-								</tr>
-							</thead>
-							<tbody class="tbody">
-								<tr ng-show="citas == 0">
-									<th colspan="6" style="text-align: center;">No se encontraron citas registradas</th>
-								</tr>
-								<tr ng-repeat="c in citas | orderBy : 'citas'" style="font-size: 12px">
-									<td style="display: none;">{{c.sccita}}</td>
-									<td class="botonera-table">
-										<i class='fa fa-trash-o'></i>
-										<button class='btn btn-xs btn-succses' data-original-title='Trash Row'
-											ng-click="eliminarCita(c)">	Eliminar
-										</button>
-									</td>
-									<td>{{c.empresa.dsrazonsocial}}</td>
-									<td>{{c.tipoinmueble.dsdatmaestro}}</td>
-									<td>{{c.propiedad.copropiedad}}</td>
-									<td>{{c.fhhorainicio}}</td>
-									<td>{{c.estado.dsdatmaestro}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>					
-				</div>
-			</div>
-		</form>
+			</form>
+		</div>		
 	</div>
 
 	<!-- Importando js de bootstrap && jquery -->

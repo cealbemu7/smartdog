@@ -40,5 +40,23 @@ public class ClienteBean extends AbstractBean implements ClienteBeanLocal {
 		}
 		return clientes;
 	}
+	/**
+	 * Metodo Utilizado para consultar clientes
+	 */
+	@Override
+	public ClienteDTO ConsultarCliente(ClienteDTO cliente) throws SmartExcepcionSerializada {
+		ClienteDTO returncliente = new ClienteDTO();
+		try {
+			returncliente = facade.ConsultarCliente(cliente);
+		} catch (Throwable ex) {
+			ex.printStackTrace(System.err);
+			SmartExcepcionSerializada smartException = new SmartExcepcionSerializada();
+			smartException.setCode(0);
+			smartException.setMensaje(ex.getMessage());
+			smartException.setStackTrace(ex.getStackTrace());
+			throw smartException;
+		}
+		return returncliente;
+	}
 
 }

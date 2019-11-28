@@ -32,4 +32,18 @@ public class SmartServiceCliente extends SmartResponseBase{
 	public Response GrabarCliente(ClienteDTO json){
 		return getResponse(DelegateContextEJB.getClienteBean().GrabarCliente(json));		
 	}
+	
+	/**
+	 * Servicio que permite consultar cliente
+	 * @param json
+	 * @return
+	 * @throws Throwable 
+	 */	
+	@POST
+	@Path("/ConsultarCliente")
+	@Produces(MediaType.APPLICATION_JSON)
+	@SmartSecurity
+	public Response ConsultarCliente(ClienteDTO json){
+		return getResponse(DelegateContextEJB.getClienteBean().ConsultarCliente(json));		
+	}
 }

@@ -104,6 +104,9 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		$scope.cargaInicial();
 		$scope.usuario = getUserSession();
+		$scope.ConsultarCliente();
+		$scope.listarCitas();
+		$scope.CargarInmobiliaria();
 	}
 	
 	/**
@@ -126,15 +129,15 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						});
 						
 						$scope.tipoinmuebles = new Array();
-						var tipoinmuebles  = angular.fromJson(response.data.listatipoinmueble);
-						$.each(tipoinmuebles, function( index , tipoinmueble ) {
+						var tipoinmuebles  = angular.fromJson(response.data.listaTipoInmueble);						
+						$.each(tipoinmuebles, function( index , tipoinmueble ) {							
 							$scope.tipoinmuebles.push(tipoinmueble);
 						});
-						 $scope.listarCitas();
+						 					 
 					}else{
 						alert("Error al cargar inicial");
 					}
-					$scope.CargarInmobiliaria();
+					
 				}catch(e){
 					alert("Error en la cargar inicial");
 				}
@@ -172,8 +175,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				   tipodocumento: sendobjectTipoDocumento,
 				   sexo: sendObjectSexo,
 				   tipoinmueble: sendObjectInmueble,
-		   }; 
-		   
+		   };		
 		   smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodListaInicial,exito,error);				
 			
 		} catch (error) {
@@ -237,7 +239,33 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			alert("Error Ha ocurrido un error al momento de listar citas");
 		}
 	}
-	
+	/***
+	 * metodo utilizado para consultar cliente logeado
+	 */
+	$scope.ConsultarCliente = function(){
+		try{
+			var exito = function(response){
+				var response = angular.fromJson(response.data);
+				if(response.data != null){
+			  		cliente = angular.fromJson(response.data);
+					$scope.cliente.dspnombre = cliente.dspnombre;
+					
+				}else{
+					alert("No se encontro usuario con este correo");
+				}
+			}
+			var error = function(){
+				alert("Error", "Ha ocurrido un error al momento de consultar el cliente");
+			}
+			var sendCliente = {
+					dspnombre:""
+			}
+			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
+			  
+		}catch (error) {
+		  alert("Error", "Ha ocurrido un error al momento de consultar el cliente");
+	  }
+	}
 	/**
 	 * metodo utilizado para grabar clientes 
 	 */	

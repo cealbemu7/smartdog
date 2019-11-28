@@ -44,5 +44,22 @@ public class ClienteFacade	extends AbstractBean  implements ClienteFacadeLocal {
 			}
 		return clientes;
 	}
+	/**
+	 * Metodo utilizado para consultar cliente
+	 */
+	@Override
+	public ClienteDTO ConsultarCliente(ClienteDTO cliente) throws Throwable {
+		ClienteDTO returncliente = new ClienteDTO();
+		try {
+			ClienteCaller caller = new ClienteCaller(SmartConstant.JDNI_CONNECTION);
+			returncliente = caller.ConsultarCliente(cliente);
+
+		} catch (NamingException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returncliente;
+	}
 
 }

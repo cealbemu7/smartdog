@@ -6,6 +6,7 @@
  */
 var serviceNameCliente = '/SmartServiceCliente';
 var methodGrabarCliente  = serviceNameCliente+'/GrabarCliente';
+var methodConsultarCliente = serviceNameCliente+'/ConsultarCliente';
 
 /**
  * Definicion de servicios de empresa 

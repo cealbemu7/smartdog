@@ -16,6 +16,7 @@ import javax.naming.NamingException;
 
 import co.com.smart.dog.infraestructure.dto.MensajeSQLDTO;
 import co.com.smart.dog.infraestructure.dto.PropiedadDTO;
+import co.com.smart.dog.infraestructure.dto.UsuarioDTO;
 import co.com.smart.dog.persistence.entity.util.JDBCResourceManager;
 
 public class PropiedadCaller extends JDBCResourceManager implements Serializable {
@@ -46,37 +47,36 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 			call = conn.prepareCall(getString("PropiedadCaller.fn_consultarpropiedad"));
 			call.registerOutParameter(1,Types.OTHER);
 			
-            if (propiedad.getScpropiedad() != null) {
-            	System.out.println("entro");
-            	call.setBigDecimal(2, propiedad.getScpropiedad());
-	        } else {
-	        	System.out.println("uno");
+            if (propiedad.getScpropiedad() != null) {          
+            	call.setInt(2, propiedad.getScpropiedad().intValue());
+	        } else {	        	
 	            call.setNull(2, java.sql.Types.NULL);
 	        }
-            if (propiedad.getCopropiedad() != null) {
-            	System.out.println("entro");
+            
+            if (propiedad.getCopropiedad() != null) {            	
             	call.setString(3, propiedad.getCopropiedad());
-	        } else {
-	        	System.out.println("2");
+	        } else {	        	
 	            call.setNull(3, java.sql.Types.NULL);
 	        }
-            if (propiedad.getDspropiedad() != null) {
-            	System.out.println("entro");
+            
+            if (propiedad.getDspropiedad() != null) {            	
             	call.setString(4, propiedad.getDspropiedad());
-	        } else {
-	        	System.out.println("3");
+	        } else {	        	
 	            call.setNull(4, java.sql.Types.NULL);
 	        }
+            
 			call.execute();
 			rs = (ResultSet) call.getObject(1);
 			while(rs.next()) {
-				PropiedadDTO propiedadDTO = new PropiedadDTO();				
+				
+				PropiedadDTO propiedadDTO = new PropiedadDTO();	
+				UsuarioDTO usuario = new UsuarioDTO();
+				
+				propiedadDTO.setScpropiedad(rs.getBigDecimal("sm_scpropiedad"));
 				propiedadDTO.setCopropiedad(rs.getString("sm_copropiedad"));
-				propiedadDTO.setDspropiedad(rs.getString("sm_dsprpopiedad"));
-				propiedadDTO.setFhingreso(rs.getDate("sm_fhingreso"));
-				propiedadDTO.setFhmodificacion(rs.getDate("sm_fhmodificacion"));
-				propiedadDTO.setFhretiro(rs.getDate("sm_fhretiro"));
-				propiedadDTO.setCousuario(rs.getString("sm_cousuario"));
+				propiedadDTO.setDspropiedad(rs.getString("sm_dspropiedad"));				
+				usuario.setCousuario(rs.getString("sm_cousuario"));
+				propiedadDTO.setUsuario(usuario);
 				propiedadDTO.setDsdireccion(rs.getString("sm_dsdireccion"));
 				
 				propiedadreturn.add(propiedadDTO);
@@ -104,13 +104,13 @@ public class PropiedadCaller extends JDBCResourceManager implements Serializable
 				if (propiedad.getScpropiedad() != null) {
 					call.setInt(1, propiedad.getScpropiedad().intValue());
 	            } else {
-	                call.setNull(1, java.sql.Types.INTEGER);
+	                call.setNull(1, java.sql.Types.NULL);
 	            }
 				
 				call.setString(2,propiedad.getCopropiedad());
 				call.setString(3,propiedad.getDspropiedad());
 				call.setString(4,propiedad.getDsdireccion());
-				call.setString(5,propiedad.getCousuario());
+				call.setString(5,propiedad.getUsuario().getCousuario());
 				call.setInt(6, propiedad.getCiudad().getScciudad().intValue());
 				call.setInt(7, propiedad.getCiudad().getDepartamento().getScdepartamento().intValue());
 

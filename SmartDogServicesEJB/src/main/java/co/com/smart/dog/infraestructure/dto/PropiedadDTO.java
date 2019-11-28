@@ -21,7 +21,7 @@ public class PropiedadDTO extends SmartBaseDTO implements Serializable {
 	private Date fhingreso;
 	private Date fhmodificacion;
 	private Date fhretiro;
-	private String cousuario;
+	private UsuarioDTO usuario;
 	private CiudadDTO ciudad;
 	
 	
@@ -75,16 +75,11 @@ public class PropiedadDTO extends SmartBaseDTO implements Serializable {
 	public void setDspropiedad(String dspropiedad) {
 		this.dspropiedad = dspropiedad;
 	}
-	public String getCousuario() {
-		return cousuario;
+	public UsuarioDTO getUsuario() {
+		return usuario;
 	}
-	public void setCousuario(String cousuario) {
-		this.cousuario = cousuario;
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	
-
 }

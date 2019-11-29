@@ -22,9 +22,11 @@ var methodGrabarCita = serviceNameCita +'/GrabarCita';
 var methodConsultarCita = serviceNameCita +'/ConsultarCita';
 var methodEliminarCita = serviceNameCita+'/EliminarCita';
 
-
-
-
+/**
+ * Definicion de los servicios de propiedad
+ */
+var serviceNamePropiedad = '/SmartServicePropiedad';
+var methodConsultarPropiedad = serviceNamePropiedad + '/consultarPropiedad';
 
 
 

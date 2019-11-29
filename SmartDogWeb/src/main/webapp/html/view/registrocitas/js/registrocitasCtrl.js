@@ -57,8 +57,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dsemail" : null,
 		"sexo" : null,
 		"fhnacimiento" : null,
-		"cousuario" : null,
 		"usuario" : null
+		
 
 	};
 	
@@ -95,6 +95,21 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dsvalor" : null	
 	}
 	
+	$scope.ciudad = {
+		"scciudad": null,
+	    "cociudad": null,
+	    "dsciudad": null,
+	   "cousuario": null	
+	}
+	
+	$scope.propiedad = {
+		"scpropiedad": null,
+		"copropiedad": null,
+		"dspropiedad":null,
+		"dsdireccion": null,
+		"usuario": null,
+		"ciudad": null
+	}
 	/**
 	 * @Descripcion: Carga Inicial de los envios al servidor
 	 * @Author: SmartJungle S.A.S
@@ -107,6 +122,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		$scope.ConsultarCliente();
 		$scope.listarCitas();
 		$scope.CargarInmobiliaria();
+		$scope.CargarPropiedad();
 	}
 	
 	/**
@@ -211,6 +227,36 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
 		}
 	}
+	
+	/***
+	 * metodo para cargar propiedad
+	 */
+	$scope.CargarPropiedad = function(){
+		try {
+			var exito = function(response) {
+				if(response.data != null){
+					$scope.propiedades = new Array();
+					var propiedades = angular.fromJson(response.data);
+					$.each(propiedades, function(index,propiedad) {
+						$scope.propiedades.push(propiedad);
+					});										
+				}else{
+					alert("Advertencia", "No se han encontrado propiedades ingresados");
+				}
+			}
+			var error = function(response) {
+				var reponsoObject = angular.fromJson(response.data);
+				alert("Error Ha ocurrido un error al momento de listar propiedades");
+			}			
+
+			var sendPropiedad = $scope.propiedad;
+			smartServices.sendPost(angular.toJson(sendPropiedad),hostSmart+context+methodConsultarPropiedad,exito,error);
+			
+		} catch (error) {
+			alert("Error Ha ocurrido un error al momento de listar propiedad");
+		}
+	}
+
 	/***
 	 * metodo para cargar clientes
 	 */
@@ -247,6 +293,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			var exito = function(response){				
 				if(response.data != null){
 			  		cliente = angular.fromJson(response.data);
+			  		$scope.cliente.sccliente = cliente.sccliente;
 			  		$scope.tipodocumento.dsdatmaestro = cliente.tipoidentificacion;
 			  		$scope.cliente.dsidentificacion = cliente.dsidentificacion;
 					$scope.cliente.dspnombre = cliente.dspnombre;
@@ -272,8 +319,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			}
 			var sendCliente = {
 					usuario: sendUsuario
-			}
-			alert(angular.toJson(sendCliente))
+			}			
 			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
 			  
 		}catch (error) {
@@ -330,13 +376,13 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				    var reponsoObject = angular.fromJson(response.data);
 				    if(reponsoObject!=null){
 						alert("Cita almacenado con exito");												
-					   }else{
-						   alert("Error", "Ha ocurrido un error al momento de almacenar el cita ");
-				     }					    
+					}else{
+						   alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
+				    }					    
 			    }		 
 			    var error = function(response) {
 				    var reponsoObject = angular.fromJson(response.data);
-				    alert("Error", "Ha ocurrido un error al momento de almacenar el cita ");
+				    alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
 			    }		 
 				 var sendfecha  = document.getElementById('fecha').value;
 				 var sendhora = document.getElementById('hora').value;	    
@@ -344,13 +390,14 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		    		sccita : $scope.cita.sccita,
 		    		propiedad : $scope.propiedad,
 		    		cliente : $scope.cliente,
-		    		fhhorainicio :sendfecha + sendhora,
+		    		fhhorainicio :sendfecha +" "+ sendhora+":00",
 		    		usuario : $scope.usuario,
 		    		fhhorafin : $scope.cita.fhhorafin,
 		    		asesor  : $scope.asesor ,
 		    		estado : $scope.estado,
 		    		empresa :  $scope.empresa				   
 			    };	
+			    alert(angular.toJson(sendCita));
 			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
 		  }	catch (error) {
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cita");

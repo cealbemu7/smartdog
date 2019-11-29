@@ -15,9 +15,9 @@ var optionsbar     = ['news'];
  * @Descripcion : Definicion de endpoint del consumo de los servios de smart
  */
 var app = 'Dog';
-var port = '8082';
-var protocol = 'http';
-var server = 'localhost';
+var port = '8443';
+var protocol = 'https';
+var server = 'parrot.com.co';
 var hostSmart = protocol+'://'+server+':'+port;
 var context = '/Smart'+app+'Services/SmartBussServices';
 
@@ -54,8 +54,8 @@ var userSession = {};
 var appProperties = {
     developer: "SmartJungle S.A.S",
     version: "1.0.0",
-    environment: "P",
-    releaseDate: "2019-07-11",
+    environment: "QA",
+    releaseDate: "2019-11-29",
     printServer: "127.0.0.1",
     printPort: "5000"
 }

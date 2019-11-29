@@ -397,7 +397,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		    		estado : $scope.estado,
 		    		empresa :  $scope.empresa				   
 			    };	
-			    alert(angular.toJson(sendCita));
+			    
 			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
 		  }	catch (error) {
 			  alert("Error", "Ha ocurrido un error al momento de almacenar el cita");

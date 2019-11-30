@@ -238,13 +238,13 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 			
 			call.setString(6, cita.getFhhorafin());
 
-			if (cita.getAsesor() != null) {
+			if (cita.getAsesor() != null && cita.getAsesor().getScasesor() != null) {
 				call.setInt(7, cita.getAsesor().getScasesor().intValue());
 			} else {
 				call.setNull(7, java.sql.Types.NULL);
 			}
 
-			if (cita.getEstado() != null) {
+			if (cita.getEstado() != null && cita.getEstado().getScdatmaestro() != null) {
 				call.setInt(8, cita.getEstado().getScdatmaestro().intValue());
 			} else {
 				call.setNull(8, java.sql.Types.NULL);

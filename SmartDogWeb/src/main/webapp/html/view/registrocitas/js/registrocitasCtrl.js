@@ -387,17 +387,21 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				    alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
 			    }		 
 				 var sendfecha  = document.getElementById('fecha').value;
-				 var sendhora = document.getElementById('hora').value;	    
+				 var sendhora = document.getElementById('hora').value;
+				 var horafin = sendhora.split(":");
+				 var hora = parseInt(horafin[1])+30;
+				 horafin[1]=hora.toString();
+				 horafin = horafin[0]+":"+horafin[1];
+				
 			    var sendCita = {
 		    		sccita : $scope.cita.sccita,
 		    		propiedad : $scope.propiedad,
 		    		cliente : $scope.cliente,
 		    		fhhorainicio :sendfecha +" "+ sendhora+":00",
 		    		usuario : $scope.usuario,
-		    		fhhorafin : $scope.cita.fhhorafin,
-		    		asesor  : $scope.asesor ,
-		    		estado : $scope.estado,
-		    		empresa :  $scope.empresa				   
+		    		fhhorafin : sendfecha +" "+ horafin+":00",
+		    		asesor  : $scope.asesor,		    	
+		    		empresa : $scope.empresa				   
 			    };	
 			    
 			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);

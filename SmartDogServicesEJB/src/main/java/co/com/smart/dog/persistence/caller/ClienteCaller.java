@@ -154,6 +154,7 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 				tipoidentificacion.setScdatmaestro(rs.getBigDecimal("sm_sctipoidentificacion"));
 				returncliente.setTipoidentificacion(tipoidentificacion);
 				returncliente.setDsidentificacion(rs.getString("sm_dsidentificacion"));
+				returncliente.setNombrecompleto(rs.getString("nombrecompleto"));
 				returncliente.setDspnombre(rs.getString("sm_dspnombre"));
 				returncliente.setDssnombre(rs.getString("sm_dssnombre"));
 				returncliente.setDspapellido(rs.getString("sm_dspapellido"));

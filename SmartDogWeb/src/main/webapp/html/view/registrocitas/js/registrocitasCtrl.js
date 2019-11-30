@@ -45,6 +45,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	
 	$scope.cliente = {
 		"sccliente" : null,
+		"nombrecompleto": null,
 		"dspnombre" : null,
 		"dssnombre" : null,
 		"dspapellido" : null,
@@ -294,6 +295,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 				if(response.data != null){
 			  		cliente = angular.fromJson(response.data);
 			  		$scope.cliente.sccliente = cliente.sccliente;
+			  		$scope.cliente.nombrecompleto = cliente.nombrecompleto;
 			  		$scope.tipodocumento.dsdatmaestro = cliente.tipoidentificacion;
 			  		$scope.cliente.dsidentificacion = cliente.dsidentificacion;
 					$scope.cliente.dspnombre = cliente.dspnombre;

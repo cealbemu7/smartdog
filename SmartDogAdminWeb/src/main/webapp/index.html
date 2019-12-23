@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html>
+<html ng-app="smartApp">
 <head>
-<meta charset="ISO-8859-1">
-<title>SmartJungle S.A.S</title>
+<meta charset="utf-8">
+<title>Smart Citas</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="mdb/css/mdb.min.css">
+<link rel="stylesheet" href="fa/css/all.css">
+<link rel="stylesheet" href="css/smartparrot.css">
+<link rel="apple-touch-icon-precomposed" href="img/favicon/favicon.ico">
+<link rel="icon" href="img/favicon/favicon.ico">
+<script>
+	function resizeIframe(obj) {
+		obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+	}
+</script>
 </head>
-<body>
- <header>CODIFICAME !!</header>
+<body class="page-background" ng-controller="loginCtrl"
+	ng-init="onInit()">
+		<script type="text/ng-template" id="treeMenu">
+        <a ng-if="(SiteMenu | filter:{idemenufather : menu.idemenu}).length == 0" href="{{menu.contextPath}}{{menu.uri}}" 
+           target="{{menu.application}}" >{{menu.description}}</a>
+		<a ng-if="(SiteMenu | filter:{idemenufather : menu.idemenu}).length > 0" href="#" 
+           class="dropdown-toggle" data-toggle="dropdown"
+           role="button" aria-haspopup="true" aria-expanded="false"
+           target="{{menu.application}}" >{{menu.description}} <span class="caret"></span></a>
+		<ul ng-if="(SiteMenu | filter:{idemenufather : menu.idemenu}).length > 0" class="dropdown-menu">
+           <li ng-repeat="menu in SiteMenu | filter:{idemenufather : menu.idemenu} : true" ng-include="'treeMenu'"></li>
+        </ul>
+    </script>
+	<!-- .Navbar-->
+	<nav class="navbar navbar-expand-lg mb-1 bar-transparent">
+
+		<!-- Navbar brand -->
+		<a href="#" class="navbar-brand text-white"> <img
+			src="img/icon.png" class="d-inline-block align-top" alt="" width="40"
+			height="40"> Smart Citas
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavDropdown" aria-expanded="true"
+			aria-controls="navbarNavDropdown" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse" id="menuNav">
+		  <ul class="nav navbar-nav">
+				<li ng-repeat="menu in SiteMenu | filter:{idemenufather : 0} : true"
+					ng-include="'treeMenu'"
+					ng-if="(SiteMenu | filter:{idemenufather : menu.idemenu}).length == 0"></li>
+				<li ng-repeat="menu in SiteMenu | filter:{idemenufather : 0} : true"
+					ng-include="'treeMenu'"
+					ng-if="(SiteMenu | filter:{idemenufather : menu.idemenu}).length > 0"
+					class="dropdown"></li>
+			</ul>
+		   <div class="md-form my-0 form-inline right">
+				<span class ="form-control mr-sm-2" title="Usuario"></span> <i>
+					{{session.user}} </i> <a id="btnlogout"
+					class="btn bg-color-blueDark txt-color-white"
+					title="Cerrar sesi&oacute;n" data-toggle="tooltip"
+					data-original-title='Cerrar sesi&oacute;n' ng-click="logout()"
+					tabindex=3><i class="fas fa-sign-out-alt"
+					style="font-size: 18px;"></i> </a>
+			</div>
+		
+		</div>
+
+	</nav>
+	<!--/.Navbar-->
+    <div class="container-fluid text-center p-3 text-white rgba-gradient">    
+		<iframe id="SmartParrotAdminWeb" name="SmartParrotAdminWeb"
+			allowfullscreen frameborder="0" scrolling="no" style="width: 100%;"
+			onload="resizeIframe(this)"></iframe>
+    </div>
+
+
+	
+ 
+	<!-- Bootstrap -->
+	<script type="text/javascript" src="js/jquery/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/popper/popper.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Importarmos angular JS -->
+	<script type="text/javascript" src="js/angular-1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-3.2.0/js/ui-bootstrap-tpls-0.10.0.js"></script>
+	<script type="text/javascript" src="js/ngdialog-0.2.3/ngDialog.min.js"></script>
+	<script type="text/javascript" src="js/angucomplete/angucomplete.js"></script>
+	<script type="text/javascript" src="js/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="mdb/js/mdb.min.js"></script>
+	<script type="text/javascript" src="js/smartmessagebox/app.min.js">
+		
+	</script>
+	<script type="text/javascript"
+		src="js/smartmessagebox/notification/SmartNotification.min.js">
+		
+	</script>
+
+	<!-- Smart javascript framework -->
+	<script type="text/javascript" src="js/smart/angular-websocket.js"></script>
+	<script type="text/javascript" src="js/smart/SmartUtil.js"></script>
+	<script type="text/javascript" src="js/smart/SmartApp.js"></script>
+	<script type="text/javascript" src="js/smart/loginCtrl.js"></script>
+	<script type="text/javascript" src="js/smart/SmartServices.js"></script>
+
 </body>
 </html>

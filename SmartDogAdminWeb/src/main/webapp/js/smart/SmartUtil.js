@@ -14,13 +14,33 @@ var optionsbar     = ['news'];
 /**
  * @Descripcion : Definicion de endpoint del consumo de los servios de smart
  */
-var app = 'Dog';
+var app = 'DogAdmin';
 var port = '8082';
 var protocol = 'http';
 var server = 'localhost';
 var hostSmart = protocol+'://'+server+':'+port;
 var context = '/Smart'+app+'Services/SmartBussServices';
 var reportsContext = '/Smart'+app+'Services/SmartGeneratorReport?';
+
+
+/**
+ * @Descripcion: Definicion de los servicios a consumir para el login de la aplicacion y el menu principal.
+ * @Author: SmartJungle
+ * @Date: 23-12-2019
+ * @Date Modifi: 23-12-2019
+ */
+var serviceNameLogin = '/SmartServiceLogin';
+var application =   'Smart'+app+'Web';
+var contextLogin = '/'+application+'/SmartWebService';
+
+var methodLogin = serviceNameLogin+'/login';
+var methodResource = serviceNameLogin+'/resources';
+var methodEntitiesUser = serviceNameLogin+'/entitiesUser';
+var methodLogout = serviceNameLogin+'/logout';
+var methodInfoSession = serviceNameLogin+'/infoSession';
+var methodEmpresaEntity = serviceNameLogin+'/getEmpresaEntidad';
+
+
 
 
 var userSession = {};

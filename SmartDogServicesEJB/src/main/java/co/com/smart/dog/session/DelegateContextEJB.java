@@ -7,6 +7,7 @@ import co.com.smart.dog.bean.ClienteBeanLocal;
 import co.com.smart.dog.bean.DatosMaestroBeanLocal;
 import co.com.smart.dog.bean.DepartamentoBeanLocal;
 import co.com.smart.dog.bean.EmpresaBeanLocal;
+import co.com.smart.dog.bean.LoginBeanLocal;
 import co.com.smart.dog.bean.MaestroBeanLocal;
 import co.com.smart.dog.bean.PaisBeanLocal;
 import co.com.smart.dog.bean.PropiedadBeanLocal;
@@ -18,6 +19,7 @@ import co.com.smart.dog.persistence.ClienteFacadeLocal;
 import co.com.smart.dog.persistence.DatosMaestroFacadeLocal;
 import co.com.smart.dog.persistence.DepartamentoFacadeLocal;
 import co.com.smart.dog.persistence.EmpresaFacadeLocal;
+import co.com.smart.dog.persistence.LoginFacadeLocal;
 import co.com.smart.dog.persistence.MaestroFacadeLocal;
 import co.com.smart.dog.persistence.PaisFacadeLocal;
 import co.com.smart.dog.persistence.PropiedadFacadeLocal;
@@ -48,7 +50,8 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static AsesorBeanLocal getAsesorBean;
 	private static ClienteBeanLocal getClienteBean;
 	private static CitaBeanLocal getCitaBean;
-
+	private static LoginBeanLocal getLoginBean;
+	
 	/**
 	 * Instancia unica del bean getPaisBean
 	 *
@@ -201,6 +204,20 @@ public class DelegateContextEJB extends SmartContextLookUp {
 
 		return getCitaBean;
 	}
+	
+	/**
+	 * Instancia unica del bean de LoginBean
+	 * 
+	 * @return
+	 */
+	public static synchronized LoginBeanLocal getLoginBean() {
+
+		if (getLoginBean == null) {
+			getLoginBean = (LoginBeanLocal) getSmartContext("LoginBean");
+		}
+
+		return getLoginBean;
+	}
 
 	/**
 	 * Facade ----------------------------------------------
@@ -217,6 +234,7 @@ public class DelegateContextEJB extends SmartContextLookUp {
 	private static AsesorFacadeLocal getAsesorFacade;
 	private static ClienteFacadeLocal getClienteFacade;
 	private static CitaFacadeLocal getCitaFacade;
+	private static LoginFacadeLocal getLoginFacade;
 
 	/**
 	 * Instancia unica de la facade getPaisFacade
@@ -356,5 +374,18 @@ public class DelegateContextEJB extends SmartContextLookUp {
 			getCitaFacade = (CitaFacadeLocal) getSmartContext("CitaFacade");
 		}
 		return getCitaFacade;
+	}
+	
+	/**
+	 * Instancia unica de la facade getLoginFacade
+	 * @return
+	 */
+	public static synchronized LoginFacadeLocal getLoginFacade() {
+
+		if (getLoginFacade == null) {
+			getLoginFacade = (LoginFacadeLocal) getSmartContext("LoginFacade");
+		}
+
+		return getLoginFacade;
 	}
 }

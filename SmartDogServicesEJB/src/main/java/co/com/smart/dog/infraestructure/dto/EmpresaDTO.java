@@ -25,7 +25,6 @@ public class EmpresaDTO extends SmartBaseDTO implements Serializable{
 	private String dsemail;
 	private BigDecimal scempresa;
 	
-	
 	public String getNitempresa() {
 		return nitempresa;
 	}

@@ -21,7 +21,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-						Salir</a></li>
+						Usuario: {{usuario.dsusuario}}  Salir</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -105,14 +105,14 @@
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="control-label">Fecha*</label> <input
-								id="fecha" maxlength="100" type="date" required="required"
+								id="fecha" ng-model="fhcita" maxlength="100" type="date" required="required"
 								class="form-control" />									
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="control-label">Hora*</label> <input
-								id="hora" maxlength="100" type="time" required="required"
+								id="hora" ng-model="fhhoracita" maxlength="100" type="time" required="required"
 								class="form-control" />
 						</div>
 					</div>
@@ -157,7 +157,7 @@
 								<td class="botonera-table">
 									<i class='fa fa-trash-o'></i>
 									<button class='btn btn-xs btn-succses' data-original-title='Trash Row'
-										ng-click="eliminarCita(c)">	Eliminar
+										ng-click="eliminarCita(c);">	Eliminar
 									</button>
 								</td>
 								<td>{{c.empresa.dsrazonsocial}}</td>

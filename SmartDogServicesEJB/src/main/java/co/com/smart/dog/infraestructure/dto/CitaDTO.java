@@ -15,6 +15,8 @@ public class CitaDTO extends SmartBaseDTO implements Serializable{
 	private PropiedadDTO propiedad;
 	private ClienteDTO cliente;
 	private String fhhorainicio;
+	private String fhhoracita;
+	private String fhcita;
 	private UsuarioDTO usuario;
 	private Date fhingreso;
 	private String fhhorafin;
@@ -103,5 +105,16 @@ public class CitaDTO extends SmartBaseDTO implements Serializable{
 	public void setTipoinmueble(DatosMaestroDTO tipoinmueble) {
 		this.tipoinmueble = tipoinmueble;
 	}
-	
+	public String getFhhoracita() {
+		return fhhoracita;
+	}
+	public void setFhhoracita(String fhhoracita) {
+		this.fhhoracita = fhhoracita;
+	}
+	public String getFhcita() {
+		return fhcita;
+	}
+	public void setFhcita(String fhcita) {
+		this.fhcita = fhcita;
+	}
 }

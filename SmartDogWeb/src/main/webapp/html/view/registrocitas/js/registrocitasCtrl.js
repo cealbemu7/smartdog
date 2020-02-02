@@ -76,6 +76,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	  "fhhorainicio": null,
 	  "usuario": null,
 	  "fhingreso": null,
+	  "fhhoracita": null,
+	  "fhcita": null,
 	  "fhhorafin": null,
 	  "asesor": null,
 	  "estado": null,
@@ -91,9 +93,9 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	}
 	
 	$scope.estado = {
-		"scdatmaestro" : null,
-		"dsdatmaestro" : null,
-		"dsvalor" : null	
+		"scdatmaestro" : 1,
+		"dsdatmaestro" : "pendiente",
+		"dsvalor" : "pendiente"	
 	}
 	
 	$scope.ciudad = {
@@ -385,24 +387,34 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			    var error = function(response) {
 				    var reponsoObject = angular.fromJson(response.data);
 				    alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
-			    }		 
-				 var sendfecha  = document.getElementById('fecha').value;
-				 var sendhora = document.getElementById('hora').value;
-				 var horafin = sendhora.split(":");
-				 var hora = parseInt(horafin[1])+30;
-				 horafin[1]=hora.toString();
-				 horafin = horafin[0]+":"+horafin[1];
-				
+			    }			    
+			    horafin = $scope.fhhoracita.getHours();			    
+			    var minutosfin = parseInt($scope.fhhoracita.getMinutes())+30;
+			    
+			    if(minutosfin > 60){
+			    	minutosfin = minutosfin - 60;
+			    	horafin = horafin + 1;
+			    }
+			    			     
+			    fechacita = $scope.fhcita.getDate().toString()+'/'+(($scope.fhcita.getMonth())+1).toString()+'/'+$scope.fhcita.getFullYear().toString()
+			    horainicita = $scope.fhhoracita.getHours().toString()+':'+$scope.fhhoracita.getMinutes().toString()+':'+$scope.fhhoracita.getSeconds().toString();
+			    horafincita = horafin+':'+minutosfin+':00';  
+			    
 			    var sendCita = {
 		    		sccita : $scope.cita.sccita,
 		    		propiedad : $scope.propiedad,
 		    		cliente : $scope.cliente,
-		    		fhhorainicio :sendfecha +" "+ sendhora+":00",
+		    		fhcita : $scope.fhcita,
+		    		fhhoracita :  $scope.fhhoracita,
+		    		fhhorainicio :fechacita+' '+horainicita,
 		    		usuario : $scope.usuario,
-		    		fhhorafin : sendfecha +" "+ horafin+":00",
+		    		fhhorafin : fechacita+' '+horafincita,
 		    		asesor  : $scope.asesor,		    	
-		    		empresa : $scope.empresa				   
+		    		empresa : $scope.empresa,
+		    		estado: $scope.estado
 			    };	
+			    
+			   alert(angular.toJson(sendCita));
 			    
 			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
 		  }	catch (error) {
@@ -460,7 +472,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 		} 
 	 		
 	 		var sendObjectCita = {		    
- 				sccita : c.sccita				
+ 				sccita: c.sccita,
+ 				usuario: $scope.usuario
 		    }			    
 	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
 

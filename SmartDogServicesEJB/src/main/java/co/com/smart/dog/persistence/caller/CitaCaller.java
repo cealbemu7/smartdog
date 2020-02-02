@@ -58,7 +58,7 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 			if (cita.getSccita() != null) {
 				call.setInt(1, cita.getSccita().intValue());
 			} else {
-				call.setNull(1, java.sql.Types.NULL);
+				call.setInt(1, java.sql.Types.NULL);
 			}
 
 			if (cita.getUsuario() != null) {
@@ -234,7 +234,7 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 		
 			call.setString(4,cita.getFhhorainicio()); 
 			
-			call.setString(5, cita.getUsuario().getCousuario());
+			call.setString(5, cita.getUsuario().getDsusuario());
 			
 			call.setString(6, cita.getFhhorafin());
 
@@ -244,7 +244,7 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 				call.setNull(7, java.sql.Types.NULL);
 			}
 
-			if (cita.getEstado() != null && cita.getEstado().getScdatmaestro() != null) {
+			if (cita.getEstado() != null && cita.getEstado() != null) {
 				call.setInt(8, cita.getEstado().getScdatmaestro().intValue());
 			} else {
 				call.setNull(8, java.sql.Types.NULL);
@@ -252,8 +252,10 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 
 			if (cita.getEmpresa() != null) {
 				call.setInt(9, cita.getEmpresa().getScempresa().intValue());
+				System.out.println("llegue con : "+cita.getEmpresa().getScempresa().intValue());	
 			} else {
 				call.setNull(9, java.sql.Types.NULL);
+				System.out.println("llegue por el null : ");
 			}
 
 			call.registerOutParameter(10, java.sql.Types.INTEGER);

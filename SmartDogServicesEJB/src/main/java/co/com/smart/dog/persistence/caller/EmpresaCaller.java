@@ -126,7 +126,7 @@ public class EmpresaCaller extends JDBCResourceManager implements Serializable {
 				EmpresaDTO empresaDTO = new EmpresaDTO();
 				DepartamentoDTO departamentoDTO = new DepartamentoDTO();
 				CiudadDTO ciudadDTO = new CiudadDTO();
-				
+				empresaDTO.setScempresa(rs.getBigDecimal("sm_scempresa"));
 				empresaDTO.setNitempresa(rs.getString("sm_nitempresa"));
 				empresaDTO.setDsrazonsocial(rs.getString("sm_dsrazonsocial"));
 				empresaDTO.setCousuario(rs.getString("sm_cousuario"));

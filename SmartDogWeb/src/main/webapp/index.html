@@ -1,201 +1,223 @@
 <!doctype html>
 <html ng-app="smartApp" lang="es">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Ingreso al sistema</title>
-	
-	<script type="text/javascript" src="js/jquery/jquery-3.4.1.min.js"></script>
-	<link href="bootstrap-3/css/bootstrap.min.css" rel="stylesheet" type="text/css">		
-	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'rel='stylesheet' type='text/css'>
-	<link href='css/custom.css' rel='stylesheet' type='text/css'>
-		
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ingreso al sistema</title>
+
+<script type="text/javascript" src="js/jquery/jquery-3.4.1.min.js"></script>
+<link href="bootstrap-3/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400,500'
+	rel='stylesheet' type='text/css'>
+<link href='css/custom.css' rel='stylesheet' type='text/css'>
+
 </head>
 <body ng-controller="ingresoAlSistemaCtrl" ng-init="onInit()">
-    
-    <!-- Solicitud registro -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Sistema Administrador de Citas
+					Inmobiliarias</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
+						Usuario: {{usuario.dsusuario}} Salir</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Solicitud registro -->
 	<div ng-if="isRequest == 'S'">
 		<div class="container">
-			<div class="card card-container">				
-				<img id="profile-img" class="profile-img-card" src="img/avatar.png"/>
-				<p id="profile-name" class="profile-name-card"></p>
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-8 offset-xl-2">
-							<form id="contact-form" method="post" role="form">							
-								<div class="controls">								
-									<div class="row">
-										<div class="col-lg-4">
-											<div class="form-group">
-												<label for="form_email">Email *</label> <input id="dsemail"
-													type="text" class="form-control"
-													placeholder="Ingrese su contrasena" 
-													data-error="El email es obligatorio."
-													ng-model="usuario.dsemail" />
-												<div class="help-block with-errors"></div>
-											</div>
-										</div>
-										<div class="col-lg-4">
-											<div class="form-group">
-												<label for="form_lastname">Contraseña *</label> 
-												<input id="dscontrasena" type="password" class="form-control"
-													placeholder="Ingrese su contrasena" 
-													data-error="La contrasena es obligatoria."
-													ng-model="usuario.dscontrasena" />
-												<div class="help-block with-errors"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-8">
-										  <div class="form-group">
-					                            <div class="g-recaptcha" data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S" data-callback="verifyRecaptchaCallback" data-expired-callback="expiredRecaptchaCallback"></div>
-					                            <input class="form-control d-none" type="hidden" data-recaptcha="true" required="required" data-error="complete el Captcha">
-					                            <div class="help-block with-errors"></div>
-					                        </div>										
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-4">
-											<a href="" id="btnIniciarSesion" class="btn btn-success"
-												ng-click="consultarUsuario()">Iniciar Sesiòn</a>
-											<br> 
-											<a href="#"	class="forgot-password"> Recuperar Contraseña? </a>
-										</div>
-										<div class="col-lg-4">
-											<a class="btn btn-primary" data-toggle="collapse"
-												href="#collapseExample" role="button" aria-expanded="false"
-												aria-controls="collapseExample"> Incribirse ahora </a>
-										</div>
-									</div>								
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel panel-login">
+						<div class="panel-heading">
+							<h3>Bienvenido</h3>
+							<img id="profile-img" class="profile-img-card"
+								src="img/avatar.png" />
+							<div class="row">
+								<div class="col-xs-6">
+									<a href="#" class="active" id="login-form-link">Iniciar
+										sesión</a>
 								</div>
-							</form>
+								<div class="col-xs-6">
+									<a href="#" id="register-form-link">Regístrate ahora</a>
+								</div>
+							</div>
+							<hr>
 						</div>
-						<div class="col-xl-8 offset-xl-2">
-							<form id="contact-form" method="post" action="" role="form">							
-								<div class="controls">	
-									<div class="collapse" id="collapseExample">
-										<div class="container">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<form id="login-form" method="post" role="form"
+										style="display: block;">
+										<div class="form-group">
+											<input ng-model="usuario.dsemail" type="email" name="dsemail"
+												id="dsemail" tabindex="1" class="form-control"
+												placeholder="Email" value="">
+										</div>
+										<div class="form-group">
+											<input ng-model="usuario.dscontrasena" type="password"
+												name="dscontrasena" id="dscontrasena" tabindex="2"
+												class="form-control" placeholder="Contraseña">
+										</div>
+										<div class="form-group text-center">
+											<div class="g-recaptcha"
+												data-sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
+												data-callback="verifyRecaptchaCallback"
+												data-expired-callback="expiredRecaptchaCallback"></div>
+											<input class="form-control d-none" type="hidden"
+												data-recaptcha="true" required="required"
+												data-error="complete el Captcha">
+											<div class="help-block with-errors"></div>
+										</div>
+										<div class="form-group">
 											<div class="row">
-												<div class="col-lg-4">
-													<div class="form-group">
-														<label for="dsemail1">Correo *</label> 
-														 <input
-															id="dsemail1" type="email" name="email"
-															class="form-control" placeholder="Ingrese su email *"
-															required="required" data-error="El email es obligatorio."
-															ng-model="usuario.dsemail"
-															>
-														<div class="help-block with-errors"></div>
+												<div class="col-sm-6 col-sm-offset-3">
+													<input ng-click="consultarUsuario()" type="submit"
+														name="login-submit" id="login-submit" tabindex="4"
+														class="form-control btn btn-login" value="Iniciar sesión">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="text-center">
+														<a href="#" tabindex="5" class="forgot-password">¿Has
+															olvidado tu contraseña?</a>
 													</div>
 												</div>
-												<div class="col-lg-4">
-													<div class="form-group">
-														<label for="dsemail2">Confirmación *</label> 
-														<input id="dsemail2" type="email" name="email"
-															class="form-control" placeholder="Ingrese su email *"
-															required="required" data-error="Confirmar su email."
-															ng-model="usuario.dsemail">
-														<div class="help-block with-errors"></div>
-													</div>
-												</div>												
-											</div>											
-											<input type="submit" class="btn btn-success btn-send"
-													ng-click="solicitarRegistro()" value="Registrarme" >
-										</div>				
-									</div>
-								</div>	
-							</form>
+											</div>
+										</div>
+									</form>
+									<form id="register-form" method="post" role="form"
+										style="display: none;">
+
+										<div class="form-group">
+											<input type="email" name="email" id="email" tabindex="1"
+												class="form-control" placeholder="Correo electronico"
+												value="">
+										</div>
+										<div class="form-group">
+											<input type="email" name="email" id="email" tabindex="1"
+												class="form-control"
+												placeholder="Confirmar correo electronico" value="">
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<input ng-click="solicitarRegistro()" type="submit"
+														name="register-submit" id="register-submit" tabindex="4"
+														class="form-control btn btn-register" value="Crear cuenta">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>			
-			</div>
-		</div>
-	</div>
-	
-	<!-- Completar solicitud registro -->
-	<div ng-if="isRequest == 'N' >
-		<div class="container">
-			<div class="card card-container">
-				<img id="profile-img" class="profile-img-card"
-					src="/SmartDogWeb/src/main/webapp/img/avatar.png" /> 
-				<p id="profile-name" class="profile-name-card"></p>
-				<div class="row">
-					<div class="col-xl-8 offset-xl-2">
-						<form id="contact-form" method="post" action="" role="form">
-							<div class="messages"></div>
-							<div class="controls">
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_email">Email</label> <input id="form_email"
-												disabled="disabled" type="email" name="email"
-												class="form-control" required="required"
-												data-error="El email es obligatorio.">
-											<div class="help-block with-errors"></div>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_lastname">Código confirmacion*</label> <input
-												id="form_lastname" type="text" name="codigo"
-												class="form-control" placeholder="Ingrese su codigo"
-												required="required" data-error="Ingrese el código">
-											<div class="help-block with-errors"></div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_lastname">Constraseña *</label> <input
-												id="form_lastname" type="text" name="codigo"
-												class="form-control" placeholder="Ingrese su codigo"
-												required="required" data-error="Ingrese el código">
-											<div class="help-block with-errors"></div>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="form_lastname">Confirma contraseña *</label> <input
-												id="form_lastname" type="text" name="codigo"
-												class="form-control" placeholder="Confirmar contraseña"
-												required="required" data-error="Ingrese el código">
-											<div class="help-block with-errors"></div>
-										</div>
-									</div>
-								</div>
-								<input type="submit" class="btn btn-success"value="Guardar">
-							</div>
-						</form>
-					</div>
-	
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Importando js de bootstrap && jquery -->	
-	<script	type="text/javascript" src="../../../bootstrap-3/js/bootstrap.min.js"></script>	
-	<script src='https://www.google.com/recaptcha/api.js'></script>	
-	
-		<!-- Importarmos angular JS -->
+	<!-- Completar solicitud registro -->
+	<div ng-if="isRequest == 'N' >
+		<div class="container">
+		<div class="card card-container">
+			<img id="profile-img" class="profile-img-card"
+				src="/SmartDogWeb/src/main/webapp/img/avatar.png" />
+			<p id="profile-name" class="profile-name-card"></p>
+			<div class="row">
+				<div class="col-xl-8 offset-xl-2">
+					<form id="contact-form" method="post" action="" role="form">
+						<div class="messages"></div>
+						<div class="controls">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_email">Email</label> <input id="form_email"
+											disabled="disabled" type="email" name="email"
+											class="form-control" required="required"
+											data-error="El email es obligatorio.">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Código confirmacion*</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Ingrese su codigo"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Constraseña *</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Ingrese su codigo"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="form_lastname">Confirma contraseña *</label> <input
+											id="form_lastname" type="text" name="codigo"
+											class="form-control" placeholder="Confirmar contraseña"
+											required="required" data-error="Ingrese el código">
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+							</div>
+							<input type="submit" class="btn btn-success" value="Guardar">
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="footer">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3">© 2020 Copyright:
+			Smart Jungles S.A.S</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+	<!-- Importando js de bootstrap && jquery -->
+	<script type="text/javascript"
+		src="../../../bootstrap-3/js/bootstrap.min.js"></script>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+
+	<!-- Importarmos angular JS -->
 	<script type="text/javascript" src="js/angular-1.4.7/angular.min.js"></script>
 	<script type="text/javascript" src="js/ngdialog-0.2.3/ngDialog.min.js"></script>
 	<script type="text/javascript" src="js/angucomplete/angucomplete.js"></script>
 	<script type="text/javascript" src="js/smartmessagebox/app.min.js"> </script>
-	<script type="text/javascript" src="js/smartmessagebox/notification/SmartNotification.min.js"> </script>
+	<script type="text/javascript"
+		src="js/smartmessagebox/notification/SmartNotification.min.js"> </script>
 	<script type="text/javascript" src="js/smart/SmartConstantes.js"></script>
-	
+
 	<!-- Smart javascript framework -->
 	<script type="text/javascript" src="js/smart/angular-websocket.js"></script>
 	<script type="text/javascript" src="js/smart/SmartUtil.js"></script>
 	<script type="text/javascript" src="js/smart/SmartApp.js"></script>
 	<script type="text/javascript" src="login-js/ingresoAlSistemaCtrl.js"></script>
 	<script type="text/javascript" src="js/smart/SmartServices.js"></script>
-	
+
 	<!-- Importarmos Resources Services JS -->
-	<script type="text/javascript" src="login-js/resourceServicesIngresoAlSistema.js"></script>
-		
+	<script type="text/javascript"
+		src="login-js/resourceServicesIngresoAlSistema.js"></script>
+
 </body>
 
 </html>

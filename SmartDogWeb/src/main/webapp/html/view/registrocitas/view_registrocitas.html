@@ -142,31 +142,29 @@
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col">Acciòn</th>
-								<th scope="col">Inmobiliaria</th>
-								<th scope="col">Tipo de inmueble</th>
-								<th scope="col">Código del inmueble</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Estado</th>
+								<th style="width: 10%;">Acci&oacoute;n</th>
+								<th style="width: 25%;">Inmobiliaria</th>
+								<th style="width: 20%;">Tipo de inmueble</th>
+								<th style="width: 20%;">C&oacoute;digo del inmueble</th>
+								<th style="width: 10%;">Fecha</th>
+								<th style="width: 15%;">Estado</th>
 							</tr>
 						</thead>
 						<tbody class="tbody">
-							<tr ng-show="citas == 0">
-								<th colspan="6" style="text-align: center;">No se
-									encontraron citas registradas</th>
+							<tr ng-show="citas.length == 0">
+								<th colspan="6" style="text-align: center;">No se encontraron citas registradas</th>
 							</tr>
 							<tr ng-repeat="c in citas | orderBy : 'citas'"
 								style="font-size: 12px">
 								<td style="display: none;">{{c.sccita}}</td>
-								<td class="botonera-table"><i class='fa fa-trash-o'></i>
-									<button class='btn btn-xs btn-succses'
-										data-original-title='Trash Row' ng-click="eliminarCita(c);">
-										Eliminar</button></td>
-								<td>{{c.empresa.dsrazonsocial}}</td>
-								<td>{{c.tipoinmueble.dsdatmaestro}}</td>
-								<td>{{c.propiedad.copropiedad}}</td>
-								<td>{{c.fhhorainicio}}</td>
-								<td>{{c.estado.dsdatmaestro}}</td>
+								<td class="botonera-table" style="width: 10%;">
+									<button class='btn btn-xs btn-succses' title="Cancelar citas" data-toggle="tooltip" data-original-title='Cancelar' ng-click="eliminarCita(c);"><i class='fa fa-eye'></i></button>
+								</td>
+								<td style="width: 25%;">{{c.empresa.dsrazonsocial}}</td>
+								<td style="width: 20%;">{{c.tipoinmueble.dsdatmaestro}}</td>
+								<td style="width: 20%;">{{c.propiedad.copropiedad}}</td>
+								<td style="width: 10%;">{{c.fhhorainicio}}</td>
+								<td style="width: 15%;">{{c.estado.dsdatmaestro}}</td>
 							</tr>
 						</tbody>
 					</table>

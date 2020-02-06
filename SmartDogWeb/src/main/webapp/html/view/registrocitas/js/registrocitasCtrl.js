@@ -461,7 +461,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 		var exito = function(response) {
 	 			var reponsoObject = angular.fromJson(response.data);
 	 			if(reponsoObject!=null){
-	 				alert("Exito", " ",reponsoObject.descripcion);	
+	 				$scope.listarCitas();
+	 				$scope.mensaje("Exito", reponsoObject.descripcion, "");
 	 			}else{
 	 				alert("Error", "Ha ocurrido un error al momento de eliminar la  cita","");
 	 			}
@@ -474,7 +475,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 		var sendObjectCita = {		    
  				sccita: c.sccita,
  				usuario: $scope.usuario
-		    }			    
+		    }			
+	 		alert(angular.toJson(sendObjectCita));
 	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
 
 	 	} catch (error) {

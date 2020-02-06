@@ -144,7 +144,7 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 				EmpresaDTO empresa = new EmpresaDTO();
 				DatosMaestroDTO tipoidentificacion = new DatosMaestroDTO();
 				DatosMaestroDTO tipoidentificacionasesor = new DatosMaestroDTO();
-				DatosMaestroDTO tipoinmueble = new DatosMaestroDTO();
+				//DatosMaestroDTO tipoinmueble = new DatosMaestroDTO();
 				DatosMaestroDTO estado = new DatosMaestroDTO();
 
 				propiedad.setScpropiedad(rs.getBigDecimal("sm_scpropiedad"));
@@ -167,13 +167,14 @@ public class CitaCaller extends JDBCResourceManager implements Serializable {
 				empresa.setScempresa(rs.getBigDecimal("sm_scempresa"));
 				empresa.setDsrazonsocial(rs.getString("sm_dsrazonsocial"));
 				citas.setEmpresa(empresa);
-				/*
-				tipoinmueble.setScdatmaestro(rs.getBigDecimal("sctipoinmueble"));
+				
+				/*tipoinmueble.setScdatmaestro(rs.getBigDecimal("sctipoinmueble"));
 				tipoinmueble.setDsdatmaestro(rs.getString("dstipoinmueble"));
 				citas.setTipoinmueble(tipoinmueble);*/
 
 				citas.setFhhorainicio(rs.getString("sm_fhhorainicio"));
 				citas.setFhhorafin(rs.getString("sm_fhhorafin"));
+				citas.setSccita(rs.getBigDecimal("sm_sccita"));
 				asesor.setScasesor(rs.getBigDecimal("sm_scasesor"));
 				asesor.setCoidentificacion(rs.getString("sm_dsidentificacion"));
 				asesor.setNombrecompleto(rs.getString("nombreasesor"));

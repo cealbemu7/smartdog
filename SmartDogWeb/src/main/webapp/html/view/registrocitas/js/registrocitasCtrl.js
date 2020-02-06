@@ -5,7 +5,7 @@
  * @Date Modificación: 30-10-2019
  */
 
-angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices) {
+angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices, messageFactory) {
 	
 	$scope.maestro = {
 		"comaestro" : null
@@ -121,6 +121,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	$scope.onInit = function(){			
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		$scope.cargaInicial();
+		messageFactory.showMessage($scope,"Informativo", " ","Lista de citas solicitadas");
 		$scope.usuario = getUserSession();
 		$scope.ConsultarCliente();
 		$scope.listarCitas();
@@ -462,9 +463,9 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 			var reponsoObject = angular.fromJson(response.data);
 	 			if(reponsoObject!=null){
 	 				$scope.listarCitas();
-	 				$scope.mensaje("Exito", reponsoObject.descripcion, "");
+	 				messageFactory.showMessage($scope,"Exito", " ","La cita ha sido eliminada");
 	 			}else{
-	 				alert("Error", "Ha ocurrido un error al momento de eliminar la  cita","");
+	 				messageFactory.showMessage($scope,"Error", " ","Ha ocurrido un error al momento de eliminar la cita");
 	 			}
  			}	 		
 	 		var error = function(response) {
@@ -476,7 +477,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
  				sccita: c.sccita,
  				usuario: $scope.usuario
 		    }			
-	 		alert(angular.toJson(sendObjectCita));
+
 	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
 
 	 	} catch (error) {

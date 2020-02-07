@@ -5,7 +5,10 @@
  * @Date Modificación: 30-10-2019
  */
 
-angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices, messageFactory) {
+angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices, messageFactory, messageFactoryDos, messageFactoryTres) {
+	
+	var validarcamporegistro = true;
+	var validarcampocita = true;
 	
 	$scope.maestro = {
 		"comaestro" : null
@@ -58,9 +61,8 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		"dsemail" : null,
 		"sexo" : null,
 		"fhnacimiento" : null,
-		"usuario" : null
-		
-
+		"usuario" : null,
+		"dsidentificacion" : null
 	};
 	
 	$scope.usuario = {
@@ -121,9 +123,11 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	$scope.onInit = function(){			
 		// TODO: Controlar si el usuario hace reloadpage, F5 o recarga la pagina y no termino el formulario de registro completo
 		$scope.cargaInicial();
-		messageFactory.showMessage($scope,"Informativo", " ","Lista de citas solicitadas");
+		messageFactory.showMessage($scope,"Informativo", " ","Ingresa los datos para agendar la cita");
+		messageFactoryDos.showMessageDos($scope,"Informativo", " ","Lista de citas solicitadas");
+		messageFactoryTres.showMessageTres($scope,"Informativo", " ","Ingresa los datos para completar su registro de usuario");
 		$scope.usuario = getUserSession();
-		$scope.ConsultarCliente();
+		
 		$scope.listarCitas();
 		$scope.CargarInmobiliaria();
 		$scope.CargarPropiedad();
@@ -153,42 +157,40 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$.each(tipoinmuebles, function( index , tipoinmueble ) {							
 							$scope.tipoinmuebles.push(tipoinmueble);
 						});
-						 					 
+						 		
+						$scope.ConsultarCliente();
 					}else{
-						alert("Error al cargar inicial");
+						messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de realizar la carga inicial de datos");
 					}
 					
 				}catch(e){
-					alert("Error en la cargar inicial");
+					messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de realizar la carga inicial de datos");
 				}
 			}
 	
 			var error = function(response){
-				alert("Error en la carga inicial: ");
+				messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de realizar la carga inicial de datos");
 				var reponsoObject = console.log(angular.toJson(response));
 			}
 			$scope.maestro = {"comaestro" : null}
 			$scope.maestro.comaestro = SmartMaestroTipoDocumento;
 			var sendTipoDocumento = $scope.maestro;
 			var sendobjectTipoDocumento = {
-				maestro : sendTipoDocumento,
-				//cousuario: $scope.cousuario
+				maestro : sendTipoDocumento
 			};	
 			
 			$scope.maestro = {"comaestro" : null}
 		    $scope.maestro.comaestro = SmartMaestroSexo;
 		    var sendMaestroSexo = $scope.maestro;
 		    var sendObjectSexo = {
-				maestro : sendMaestroSexo,
-				//cousuario: $scope.usuario
+				maestro : sendMaestroSexo
 		    };
 		    
 			$scope.maestro = {"comaestro" : null}
 		    $scope.maestro.comaestro = SmartMaestroTipoInmueble;
 		    var sendMaestroTipoInmueble = $scope.maestro;
 		    var sendObjectInmueble = {
-				maestro : sendMaestroTipoInmueble,
-				//cousuario: $scope.usuario
+				maestro : sendMaestroTipoInmueble
 		    };
 		    
 		   var sendObject = {				   
@@ -199,7 +201,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		   smartServices.sendPost(angular.toJson(sendObject),hostSmart+context+methodListaInicial,exito,error);				
 			
 		} catch (error) {
-			alert("Error en cargar inicial: ");
+			messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de realizar la carga inicial de datos");
 		}
 	}
 
@@ -216,19 +218,19 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$scope.empresas.push(empresa);
 					});										
 				}else{
-					alert("Advertencia", "No se han encontrado inmobiliaria ingresadas");
+					messageFactory.showMessage($scope,"Informativo", " ","No se encontraron inmobiliarias configuradas");
 				}
 			}
 			var error = function(response) {
 				var reponsoObject = angular.fromJson(response.data);
-				alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
+				messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de cargar las inmobiliarias");
 			}			
 
 			var sendInmobiliaria = $scope.empresa;
 			smartServices.sendPost(angular.toJson(sendInmobiliaria),hostSmart+context+methodConsultarEmpresa,exito,error);
 			
 		} catch (error) {
-			alert("Error Ha ocurrido un error al momento de listar inmobiliaria");
+			messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de cargar las inmobiliarias");
 		}
 	}
 	
@@ -245,19 +247,19 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$scope.propiedades.push(propiedad);
 					});										
 				}else{
-					alert("Advertencia", "No se han encontrado propiedades ingresados");
+					messageFactory.showMessage($scope,"Informativo", " ","No se encontraron inmuebles configurados");
 				}
 			}
 			var error = function(response) {
 				var reponsoObject = angular.fromJson(response.data);
-				alert("Error Ha ocurrido un error al momento de listar propiedades");
+				messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de cargar los inmuebles");
 			}			
 
 			var sendPropiedad = $scope.propiedad;
 			smartServices.sendPost(angular.toJson(sendPropiedad),hostSmart+context+methodConsultarPropiedad,exito,error);
 			
 		} catch (error) {
-			alert("Error Ha ocurrido un error al momento de listar propiedad");
+			messageFactory.showMessage($scope,"Error", " ","Se ha producido un error al momento de cargar los inmuebles");
 		}
 	}
 
@@ -274,19 +276,19 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						$scope.clientes.push(cliente);
 					});										
 				}else{
-					alert("Advertencia", "No se han encontrado clientes ingresados");
+					messageFactoryTres.showMessageTres($scope,"Informativo", " ","El usuario no se encuentra registrado, debe registrarse");
 				}
 			}
 			var error = function(response) {
 				var reponsoObject = angular.fromJson(response.data);
-				alert("Error Ha ocurrido un error al momento de listar clientes");
+				messageFactoryTres.showMessageTres($scope,"Error", " ","Se ha producido un error al momento de cargar el usuario");
 			}			
 
 			var sendCliente = $scope.cliente;
 			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
 			
 		} catch (error) {
-			alert("Error Ha ocurrido un error al momento de listar citas");
+			messageFactoryTres.showMessageTres($scope,"Error", " ","Se ha producido un error al momento de cargar el usuario");
 		}
 	}
 	/***
@@ -299,7 +301,13 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			  		cliente = angular.fromJson(response.data);
 			  		$scope.cliente.sccliente = cliente.sccliente;
 			  		$scope.cliente.nombrecompleto = cliente.nombrecompleto;
-			  		$scope.tipodocumento.dsdatmaestro = cliente.tipoidentificacion;
+			  		
+			  		$.each($scope.tipodocumentos, function( index , tipodocumento ) {
+						if(tipodocumento.scdatmaestro == cliente.tipoidentificacion.scdatmaestro){
+							$scope.tipodocumento = tipodocumento;
+						}
+					});
+
 			  		$scope.cliente.dsidentificacion = cliente.dsidentificacion;
 					$scope.cliente.dspnombre = cliente.dspnombre;
 					$scope.cliente.dssnombre = cliente.dssnombre;
@@ -308,16 +316,22 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 					$scope.cliente.dstelefono = cliente.dstelefono;
 					$scope.cliente.dscelular = cliente.dscelular;
 					$scope.cliente.dsemail = cliente.dsemail;
-					$scope.cliente.fhnacimiento = cliente.fhnacimiento; 						
-					$scope.sexo = cliente.sexo;				 						
+					$scope.cliente.fhnacimiento = cliente.fhnacimiento; 	
+					
+					$.each($scope.sexos, function( index , sexo ) {
+						if(sexo.scdatmaestro == cliente.sexo.scdatmaestro){
+							$scope.sexo = sexo;
+						}
+					});
+								 						
 					$scope.cliente.dsdireccion = cliente.dsdireccion;
 					 
 				}else{
-					alert("No se encontro clientes con este correo");
+					messageFactoryTres.showMessageTres($scope,"Informativo", " ","El usuario no se encuentra registrado, debe registrarse");
 				}
 			}
 			var error = function(){
-				alert("Error", "Ha ocurrido un error al momento de consultar el cliente");
+				messageFactoryTres.showMessageTres($scope,"Error", " ","Se ha producido un error al momento de cargar el usuario");
 			}
 			var sendUsuario = {
 					scusuario:$scope.usuario.scusuario
@@ -328,98 +342,179 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 			smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodConsultarCliente,exito,error);
 			  
 		}catch (error) {
-		  alert("Error", "Ha ocurrido un error al momento de consultar el cliente");
+			messageFactoryTres.showMessageTres($scope,"Error", " ","Se ha producido un error al momento de cargar el usuario");
 	  }
 	}
+	
+	/**
+	 * metodo utilizado para validar los datos obligatorios en el almacenamiento del registro de usuario
+	 */
+	$scope.validarDatosRegistro = function(){
+		validarcamporegistro = true;
+		
+		if($scope.tipodocumento == null){
+			messageFactoryTres.showMessageTres($scope,"Advertencia", " ","El tipo de identificaci&oacuten es un dato abligatorio");
+			$("#tipodocumento").focus();
+			validarcamporegistro = false;
+			return;
+		}
+		
+		if($scope.cliente.dsidentificacion == null || $scope.cliente.dsidentificacion == ""){
+			messageFactoryTres.showMessageTres($scope,"Advertencia", " ","El n&uacute;mero de identificaci&oacuten es un dato abligatorio");
+			$("#dsidentificacion").focus();
+			validarcamporegistro = false;
+			return;
+		}
+		
+		if($scope.cliente.dspnombre == null || $scope.cliente.dspnombre == ""){
+			messageFactoryTres.showMessageTres($scope,"Advertencia", " ","El primer nombre es un dato abligatorio");
+			$("#dspnombre").focus();
+			validarcamporegistro = false;
+			return;
+		}
+		
+		if($scope.cliente.dspapellido == null || $scope.cliente.dspapellido == ""){
+			messageFactoryTres.showMessageTres($scope,"Advertencia", " ","El primer apellido es un dato abligatorio");
+			$("#dspapellido").focus();
+			validarcamporegistro = false;
+			return;
+		}
+	}
+	
 	/**
 	 * metodo utilizado para grabar clientes 
 	 */	
 	 $scope.GrabarCliente = function() {
-		  try {				 
-			    var exito = function(response) {
-				    var reponsoObject = angular.fromJson(response.data);
-				    if(reponsoObject!=null){
-						alert("Cliente almacenado con exito");												
-					   }else{
-						   alert("Error", "Ha ocurrido un error al momento de almacenar el cliente ");
-				     }					    
-			    }		 
-			    var error = function(response) {
-				    var reponsoObject = angular.fromJson(response.data);
-				    alert("Error", "Ha ocurrido un error al momento de almacenar el cliente ");
-			    }		 
-				   	    
-			    var sendCliente = {
-			    		sccliente : $scope.cliente.sccliente,
-			    		tipoidentificacion : $scope.tipodocumento,
-			    		dsidentificacion : $scope.cliente.dsidentificacion,
-						dspnombre : $scope.cliente.dspnombre,
-						dssnombre : $scope.cliente.dssnombre,
-						dspapellido : $scope.cliente.dspapellido,
-						dssapellido : $scope.cliente.dssapellido,
-						dstelefono : $scope.cliente.dstelefono,
-						dscelular :  $scope.cliente.dscelular,
-						dsemail : $scope.cliente.dsemail,						
-						fhnacimiento : $scope.cliente.fhnacimiento,
-						sexo : $scope.sexo,						
-						usuario : $scope.usuario,
-						dsdireccion : $scope.cliente.dsdireccion
-			   
-			    };	
-			    smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodGrabarCliente,exito,error);
+		  try {				
+			  if($scope.validarDatosRegistro()){
+					var exito = function(response) {
+					    var reponsoObject = angular.fromJson(response.data);
+					    if(reponsoObject!=null){
+							messageFactoryTres.showMessageTres($scope,"Exito", " ","El usuario se registro con éxito");
+					    }else{
+							messageFactoryTres.showMessageTres($scope,"Error", " ","Se produjo un error al momento de registrar al usuario");
+					    }					    
+					}		 
+					var error = function(response) {
+					    var reponsoObject = angular.fromJson(response.data);
+					    messageFactoryTres.showMessageTres($scope,"Error", " ","Se produjo un error al momento de registrar al usuario");
+					    }		 
+						   	    
+					    var sendCliente = {
+					    		sccliente : $scope.cliente.sccliente,
+					    		tipoidentificacion : $scope.tipodocumento,
+					    		dsidentificacion : $scope.cliente.dsidentificacion,
+								dspnombre : $scope.cliente.dspnombre,
+								dssnombre : $scope.cliente.dssnombre,
+								dspapellido : $scope.cliente.dspapellido,
+								dssapellido : $scope.cliente.dssapellido,
+								dstelefono : $scope.cliente.dstelefono,
+								dscelular :  $scope.cliente.dscelular,
+								dsemail : $scope.cliente.dsemail,						
+								fhnacimiento : $scope.cliente.fhnacimiento,
+								sexo : $scope.sexo,						
+								usuario : $scope.usuario,
+								dsdireccion : $scope.cliente.dsdireccion
+					   
+					    };	
+					    smartServices.sendPost(angular.toJson(sendCliente),hostSmart+context+methodGrabarCliente,exito,error);
+			  }
 		  }	catch (error) {
-			  alert("Error", "Ha ocurrido un error al momento de almacenar el cliente");
+			  messageFactoryTres.showMessageTres($scope,"Error", " ","Se produjo un error al momento de registrar al usuario");
 		  }
 	 }
+	 
+	 /**
+		 * metodo utilizado para validar los datos obligatorios en el almacenamiento de la cita
+		 */
+		$scope.validarDatosCita = function(){
+			validarcampocita = true;
+			
+			if($scope.empresa == null){
+				messageFactory.showMessage($scope,"Advertencia", " ","La inmobiliaria es un dato obligatorio");
+				$("#empresa").focus();
+				validarcampocita = false;
+				return;
+			}
+			
+			if($scope.tipoinmueble == null){
+				messageFactory.showMessage($scope,"Advertencia", " ","El tipo de inmueble es un dato obligatorio");
+				$("#tipoinmueble").focus();
+				validarcampocita = false;
+				return;
+			}
+			
+			if($scope.propiedad == null){
+				messageFactory.showMessage($scope,"Advertencia", " ","El inmueble es un dato obligatorio");
+				$("#propiedad").focus();
+				validarcampocita = false;
+				return;
+			}
+			
+			if($scope.fhcita == null){
+				messageFactory.showMessage($scope,"Advertencia", " ","La fecha de la cita es un dato obligatorio");
+				$("#fecha").focus();
+				validarcampocita = false;
+				return;
+			}
+			
+			if($scope.fhhoracita == null){
+				messageFactory.showMessage($scope,"Advertencia", " ","La hora de la cita es un dato obligatorio");
+				$("#hora").focus();
+				validarcampocita = false;
+				return;
+			}
+		}
 
 	/**
 	 * metodo utilizado para grabar citas 
 	 */	
 	 $scope.GrabarCita = function() {
-		  try {				 
-			    var exito = function(response) {
-				    var reponsoObject = angular.fromJson(response.data);
-				    if(reponsoObject!=null){
-						alert("Cita almacenado con exito");												
-					}else{
-						   alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
-				    }					    
-			    }		 
-			    var error = function(response) {
-				    var reponsoObject = angular.fromJson(response.data);
-				    alert("Error", "Ha ocurrido un error al momento de almacenar la cita ");
-			    }			    
-			    horafin = $scope.fhhoracita.getHours();			    
-			    var minutosfin = parseInt($scope.fhhoracita.getMinutes())+30;
-			    
-			    if(minutosfin > 60){
-			    	minutosfin = minutosfin - 60;
-			    	horafin = horafin + 1;
-			    }
-			    			     
-			    fechacita = $scope.fhcita.getDate().toString()+'/'+(($scope.fhcita.getMonth())+1).toString()+'/'+$scope.fhcita.getFullYear().toString()
-			    horainicita = $scope.fhhoracita.getHours().toString()+':'+$scope.fhhoracita.getMinutes().toString()+':'+$scope.fhhoracita.getSeconds().toString();
-			    horafincita = horafin+':'+minutosfin+':00';  
-			    
-			    var sendCita = {
-		    		sccita : $scope.cita.sccita,
-		    		propiedad : $scope.propiedad,
-		    		cliente : $scope.cliente,
-		    		fhcita : $scope.fhcita,
-		    		fhhoracita :  $scope.fhhoracita,
-		    		fhhorainicio :fechacita+' '+horainicita,
-		    		usuario : $scope.usuario,
-		    		fhhorafin : fechacita+' '+horafincita,
-		    		asesor  : $scope.asesor,		    	
-		    		empresa : $scope.empresa,
-		    		estado: $scope.estado
-			    };	
-			    
-			   alert(angular.toJson(sendCita));
-			    
-			    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
+		  try {				
+			 if ($scope.validarDatosCita()){
+				    var exito = function(response) {
+					    var reponsoObject = angular.fromJson(response.data);
+					    if(reponsoObject!=null){
+					    	messageFactory.showMessage($scope,"Exito", " ","La cita ha sido almacenada con éxito, un asesor se comunicará con usted para confirmar la cita");
+					    	$scope.listarCitas();
+						}else{
+							messageFactory.showMessage($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
+					    }					    
+				    }		 
+				    var error = function(response) {
+					    var reponsoObject = angular.fromJson(response.data);
+					    messageFactory.showMessage($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
+				    }			    
+				    horafin = $scope.fhhoracita.getHours();			    
+				    var minutosfin = parseInt($scope.fhhoracita.getMinutes())+30;
+				    
+				    if(minutosfin > 60){
+				    	minutosfin = minutosfin - 60;
+				    	horafin = horafin + 1;
+				    }
+				    			     
+				    fechacita = $scope.fhcita.getDate().toString()+'/'+(($scope.fhcita.getMonth())+1).toString()+'/'+$scope.fhcita.getFullYear().toString()
+				    horainicita = $scope.fhhoracita.getHours().toString()+':'+$scope.fhhoracita.getMinutes().toString()+':'+$scope.fhhoracita.getSeconds().toString();
+				    horafincita = horafin+':'+minutosfin+':00';  
+				    
+				    var sendCita = {
+			    		sccita : $scope.cita.sccita,
+			    		propiedad : $scope.propiedad,
+			    		cliente : $scope.cliente,
+			    		fhcita : $scope.fhcita,
+			    		fhhoracita :  $scope.fhhoracita,
+			    		fhhorainicio :fechacita+' '+horainicita,
+			    		usuario : $scope.usuario,
+			    		fhhorafin : fechacita+' '+horafincita,
+			    		asesor  : $scope.asesor,		    	
+			    		empresa : $scope.empresa,
+			    		estado: $scope.estado
+				    };
+				    
+				    smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodGrabarCita,exito,error);
+			 }
 		  }	catch (error) {
-			  alert("Error", "Ha ocurrido un error al momento de almacenar el cita");
+			  messageFactory.showMessage($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
 		  }
 	 }
 	 /**
@@ -433,25 +528,23 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 						if (citas.length>0){							
 							$scope.citas = new Array();
 							$scope.citas = angular.fromJson(citas);
-							alert("citas consultadas con exito.")
 						}else{
-							
-							alert("Advertencia", "No se han encontrado citas ingresadas","");
+							messageFactoryDos.showMessageDos($scope,"Informativo", " ","No se encontraron citas agendadas para este usuario");
 						}						
 					}else{
-						alert("Advertencia", "No se han encontrado citas ingresadas","");
+						messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
 					}
 				}
 				var error = function(response) {
 					var reponsoObject = angular.fromJson(response.data);
-					alert("Error", "Ha ocurrido un error al momento de listar citas",reponsoObject.descripcion);
+					messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
 				}			
 
 				var sendCita = $scope.cita;
 				smartServices.sendPost(angular.toJson(sendCita),hostSmart+context+methodConsultarCita,exito,error);
 				
 			} catch (error) {
-				$scope.mensaje("Error", "Ha ocurrido un error al momento de listar cita", error.message);
+				messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de grabar la cita");
 			}
 		}	
 	 /**
@@ -463,14 +556,14 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 			var reponsoObject = angular.fromJson(response.data);
 	 			if(reponsoObject!=null){
 	 				$scope.listarCitas();
-	 				messageFactory.showMessage($scope,"Exito", " ","La cita ha sido eliminada");
+	 				messageFactoryDos.showMessageDos($scope,"Exito", " ","La cita ha sido eliminada con éxito");
 	 			}else{
-	 				messageFactory.showMessage($scope,"Error", " ","Ha ocurrido un error al momento de eliminar la cita");
+	 				messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de eliminar la cita");
 	 			}
  			}	 		
 	 		var error = function(response) {
 	 			var reponsoObject = angular.fromJson(response.data);
-	 			alert("Error", "Ha ocurrido un error al momento de eliminar la  cita",reponsoObject.descripcion);
+	 			messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de eliminar la cita");
 	 		} 
 	 		
 	 		var sendObjectCita = {		    
@@ -481,7 +574,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 	 		smartServices.sendPost(angular.toJson(sendObjectCita),hostSmart+context+methodEliminarCita,exito,error);	
 
 	 	} catch (error) {
-	 		alert("Error Ha ocurrido un error al momento de eliminar la  cita", error.message);
+	 		messageFactoryDos.showMessageDos($scope,"Error", " ","Se produjo un error al momento de eliminar la cita");
 	 	}	
 	 }	
 

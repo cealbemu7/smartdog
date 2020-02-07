@@ -174,6 +174,7 @@ angular
 	        var messageFac = {};
 	        var divMessages  = document.querySelector('#messageBox');
 	    	var iMessagesImage  = document.querySelector('#messageBoxImage');
+	    	
 	        
 	    	var getComplemnent = function(msg){
 	        	return (msg != null && msg != '' ? " - "+msg : '');
@@ -213,6 +214,97 @@ angular
 	        return messageFac;
 	    })
 
+	    
+	    .factory('messageFactoryDos', function () {
+	        var messageFacDos = {};
+	        var divMessagesDos  = document.querySelector('#messageBoxDos');
+	    	var iMessagesImageDos  = document.querySelector('#messageBoxImageDos');
+	    	
+	        
+	    	var getComplemnent = function(msg){
+	        	return (msg != null && msg != '' ? " - "+msg : '');
+	        }
+	    	
+	    	var moveScrollTop = function(){
+	    		window.scrollTo(0,0);
+	    	}
+	        
+	        messageFacDos.showMessageDos = function(scope, title, description, system_description){
+	        	
+	        	scope.titulo_mensajesDos = title;
+	        	scope.descripcion_mensajesDos  = description + getComplemnent(system_description);
+    			
+	        	if(title==="Exito"){
+	    			divMessagesDos.className = "alert alert-success fade in";
+	    			iMessagesImageDos.className = "fa-fw fa fa-check";
+	    		}
+	    		
+	    		if(title==="Informativo"){
+	    			divMessagesDos.className = "alert alert-info fade in";
+	    			iMessagesImageDos.className = "fa-fw fa fa-info";
+	    		}
+	    		
+	    		if(title==="Advertencia"){
+	    			divMessagesDos.className = "alert alert-warning fade in";
+	    			iMessagesImageDos.className = "fa-fw fa fa-warning";
+	    		}
+	    		
+	    		if(title==="Error"){
+	    			divMessagesDos.className = "alert alert-danger fade in";
+	    			iMessagesImageDos.className = "fa-fw fa fa-times";
+	    		}
+	    		
+	    		moveScrollTop();
+	        };
+	        return messageFacDos;
+	    })
+	    
+	    
+	    .factory('messageFactoryTres', function () {
+	        var messageFacTres = {};
+	        var divMessagesTres  = document.querySelector('#messageBoxTres');
+	    	var iMessagesImageTres  = document.querySelector('#messageBoxImageTres');
+	    	
+	        
+	    	var getComplemnent = function(msg){
+	        	return (msg != null && msg != '' ? " - "+msg : '');
+	        }
+	    	
+	    	var moveScrollTop = function(){
+	    		window.scrollTo(0,0);
+	    	}
+	        
+	        messageFacTres.showMessageTres = function(scope, title, description, system_description){
+	        	
+	        	scope.titulo_mensajesTres = title;
+	        	scope.descripcion_mensajesTres  = description + getComplemnent(system_description);
+    			
+	        	if(title==="Exito"){
+	    			divMessagesTres.className = "alert alert-success fade in";
+	    			iMessagesImageTres.className = "fa-fw fa fa-check";
+	    		}
+	    		
+	    		if(title==="Informativo"){
+	    			divMessagesTres.className = "alert alert-info fade in";
+	    			iMessagesImageTres.className = "fa-fw fa fa-info";
+	    		}
+	    		
+	    		if(title==="Advertencia"){
+	    			divMessagesTres.className = "alert alert-warning fade in";
+	    			iMessagesImageTres.className = "fa-fw fa fa-warning";
+	    		}
+	    		
+	    		if(title==="Error"){
+	    			divMessagesTres.className = "alert alert-danger fade in";
+	    			iMessagesImageTres.className = "fa-fw fa fa-times";
+	    		}
+	    		
+	    		moveScrollTop();
+	        };
+	        return messageFacTres;
+	    })
+	    
+	    
 		.filter('mapStatusNew', function(StatusNewConstant) {
 			return function(input) {
 				if (StatusNewConstant[input]) {

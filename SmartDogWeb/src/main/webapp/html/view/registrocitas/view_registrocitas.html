@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Insert title here</title>
+<title>Registro de citas</title>
 <script type="text/javascript"
 	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
 <link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet"
@@ -12,8 +12,6 @@
 <link href="../../../css/custom.css" rel="stylesheet" type="text/css">
 </head>
 <body ng-controller="registroCitasCtrl" ng-init="onInit()">
-	<!-- Autenticar usaurio existente -->
-
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -56,9 +54,16 @@
 		<!-- Step 1 registrar citas -->
 		<div class="panel panel-info setup-content" id="step-1">
 			<div class="panel-heading">
-				<h3 class="panel-title">Reservar Cita</h3>
+				<h3 class="panel-title">Reservar Citas</h3>
 			</div>
 			<div class="panel-body">
+			
+				<div class="alert alert-info fade in" id="messageBox">
+					<button class="close" data-dismiss="alert"></button>
+					<i class="fa-fw fa fa-info" id="messageBoxImage"></i> <strong>{{titulo_mensajes}}</strong>
+					{{descripcion_mensajes}}
+				</div>
+				
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group">
@@ -130,12 +135,12 @@
 			</div>
 			<div class="panel-body">
 				
-				<div class="alert alert-info fade in" id="messageBox">
+				<div class="alert alert-info fade in" id="messageBoxDos">
 					<button class="close" data-dismiss="alert"></button>
-					<i class="fa-fw fa fa-info" id="messageBoxImage"></i> <strong>{{titulo_mensajes}}</strong>
-					{{descripcion_mensajes}}
+					<i class="fa-fw fa fa-info" id="messageBoxImageDos"></i> <strong>{{titulo_mensajesDos}}</strong>
+					{{descripcion_mensajesDos}}
 				</div>
-
+				
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="form-group">
@@ -149,10 +154,10 @@
 					<table class="table">
 						<thead class="thead-dark">
 							<tr>
-								<th style="width: 10%;">Acci&oacoute;n</th>
+								<th style="width: 10%;">Acci&oacute;n</th>
 								<th style="width: 25%;">Inmobiliaria</th>
 								<th style="width: 20%;">Tipo de inmueble</th>
-								<th style="width: 20%;">C&oacoute;digo del inmueble</th>
+								<th style="width: 20%;">C&oacute;digo del inmueble</th>
 								<th style="width: 10%;">Fecha</th>
 								<th style="width: 15%;">Estado</th>
 							</tr>
@@ -180,15 +185,21 @@
 			</div>
 		</div>
 		<div class="panel panel-info setup-content" id="step-3">
+			<div class="panel-heading">
+				<h3 class="panel-title">Registro de usuarios</h3>
+			</div>
 			<form role="form">
-				<div class="panel-heading">
-					<h3 class="panel-title">Registro de usuarios</h3>
-				</div>
 				<div class="panel-body">
+					<div class="alert alert-info fade in" id="messageBoxTres">
+						<button class="close" data-dismiss="alert"></button>
+						<i class="fa-fw fa fa-info" id="messageBoxImageTres"></i> <strong>{{titulo_mensajesTres}}</strong>
+						{{descripcion_mensajesTres}}
+					</div>
+					
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Tipo Identificaciòn *</label> <select
+								<label class="control-label">Tipo identificaci&oacute;n *</label> <select
 									id="tipodocumento" class="form-control select-sm"
 									ng-model="tipodocumento"
 									ng-options="tipodocumento as tipodocumento.dsdatmaestro for tipodocumento in tipodocumentos"
@@ -199,12 +210,12 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Nùmero de Identificación*</label> <input
-									id="dsidentificacion" ng-model="cliente.dsidentificacion"
+								<label class="control-label">N&uacute;mero de identificaci&oacute;n*</label> 
+									<input id="dsidentificacion" ng-model="cliente.dsidentificacion"
 									maxlength="100" type="text" ng-trim="true" tabindex=3
 									class="form-control" required="required" /> <b
 									class="tooltip tooltip-bottom-right"> <i
-									class="fa fa-warning txt-color-teal"></i> La identificación es
+									class="fa fa-warning txt-color-teal"></i> La identificaci&oacute;n es
 									un campo obligatorio
 								</b> <i class="icon-append txt-color-teal fa fa-question-circle"></i>
 							</div>
@@ -213,7 +224,7 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Primer Nombre *</label> <input
+								<label class="control-label">Primer nombre *</label> <input
 									id="dspnombre" type="text" ng-model="cliente.dspnombre"
 									maxlength="150" ng-trim="true" tabindex=3 class="form-control"
 									required="required"> <b
@@ -225,7 +236,7 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Segundo Nombre</label> <input
+								<label class="control-label">Segundo nombre</label> <input
 									id="dssnombre" type="text" ng-model="cliente.dssnombre"
 									maxlength="50" ng-trim="true" tabindex=3 class="form-control">
 								<b class="tooltip tooltip-bottom-right"> <i
@@ -236,7 +247,7 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Primer Apellido*</label> <input
+								<label class="control-label">Primer apellido*</label> <input
 									id="dspapellido" type="text" ng-model="cliente.dspapellido"
 									maxlength="50" ng-trim="true" tabindex=3 class="form-control"
 									required="required"> <b
@@ -248,7 +259,7 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Segundo Apellido</label> <input
+								<label class="control-label">Segundo apellido</label> <input
 									id="dssapellido" type="text" ng-model="cliente.dssapellido"
 									maxlength="50" ng-trim="true" tabindex=3 class="form-control">
 								<b class="tooltip tooltip-bottom-right"> <i
@@ -265,7 +276,7 @@
 									ng-model="cliente.dscelular" ng-trim="true" tabindex=3
 									class="form-control"> <b
 									class="tooltip tooltip-bottom-right"> <i
-									class="fa fa-warning txt-color-teal"></i> Insgrese su numero de
+									class="fa fa-warning txt-color-teal"></i> Insgrese su n&uacute;mero de
 									celular.
 								</b> <i class="icon-append txt-color-teal fa fa-mobile"></i>
 							</div>
@@ -277,18 +288,18 @@
 									ng-model="cliente.dstelefono" ng-trim="true" tabindex=3
 									class="form-control"> <b
 									class="tooltip tooltip-bottom-right"> <i
-									class="fa fa-warning txt-color-teal"></i> Ingrese su numero de
-									telefono.
+									class="fa fa-warning txt-color-teal"></i> Ingrese su n&uacute;mero de
+									tel&eacute;fono.
 								</b> <i class="icon-append txt-color-teal fa fa-phone"></i>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
-								<label class="control-label">Dirección</label> <input
+								<label class="control-label">Direcci&oacute;n</label> <input
 									id="dsdireccion" type="text" ng-model="cliente.dsdireccion"
 									maxlength="150" ng-trim="true" tabindex=3 class="form-control">
 								<b class="tooltip tooltip-bottom-right"> <i
-									class="fa fa-warning txt-color-teal"></i> Dirección es un dato
+									class="fa fa-warning txt-color-teal"></i> Direcci&oacute;n es un dato
 									obligatorio.
 								</b> <i class="icon-append txt-color-teal fa fa-home"></i>
 							</div>
@@ -297,7 +308,7 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Fecha de Nacimiento</label> <input
+								<label class="control-label">Fecha de nacimiento</label> <input
 									id="fhnacimiento" type="date" name="request"
 									placeholder="DD/MM/AAAA" data-dateformat='dd/mm/yy'
 									ng-model="cliente.fhnacimiento" class="form-control"> <i

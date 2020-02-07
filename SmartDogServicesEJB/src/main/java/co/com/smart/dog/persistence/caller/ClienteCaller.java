@@ -47,12 +47,11 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 	 * @throws ParseException 
 	 */
 	public ClienteDTO GrabarCliente (ClienteDTO cliente) throws SQLException, NamingException, ParseException{
-		SimpleDateFormat outFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat outFormat = new SimpleDateFormat("dd/MM/yyyy");
 		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
 		try { 
 			conn = getConnection();
 			call = conn.prepareCall(getString("ClienteCaller.fn_grabar_cliente"));
-			System.out.println(cliente);
 			if (cliente.getSccliente() != null) {
 				call.setInt(1, cliente.getSccliente().intValue());
             } else {
@@ -72,8 +71,14 @@ public class ClienteCaller extends JDBCResourceManager implements Serializable{
 			call.setString(8, cliente.getDstelefono());
 			call.setString(9, cliente.getDscelular());
 			call.setString(10, cliente.getDsemail());
-			Date fechanacimiento = inputFormat.parse(cliente.getFhnacimiento());
-			call.setString(11, outFormat.format(fechanacimiento));
+			
+			if(cliente.getFhnacimiento() != null){
+				Date fechanacimiento = inputFormat.parse(cliente.getFhnacimiento());
+				call.setString(11, outFormat.format(fechanacimiento));
+			}else{
+				call.setNull(13, java.sql.Types.VARCHAR);
+			}
+
 			call.setString(12, cliente.getUsuario().getDsusuario());
 			
 			if (cliente.getSexo() != null) {

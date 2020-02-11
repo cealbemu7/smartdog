@@ -2,7 +2,7 @@
  * @Descripcion: Controlador encargado de gestionar las vista de Ingreso al sistema 
  * @Author: SmartJungle S.A.S
  * @Date: 30-10-2019
- * @Date Modificación: 30-10-2019
+ * @Date Modificación: 10-02-2020
  */
 
 angular.module('smartApp').controller('registroCitasCtrl',function($scope, smartServices, messageFactory, messageFactoryDos, messageFactoryTres) {
@@ -430,21 +430,23 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 		$scope.validarDatosCita = function(){
 			validarcampocita = true;
 			
-			if($scope.empresa == null){
+
+			if($scope.empresa == null || angular.toJson($scope.empresa.dsrazonsocial) === 'null'){
 				messageFactory.showMessage($scope,"Advertencia", " ","La inmobiliaria es un dato obligatorio");
 				$("#empresa").focus();
 				validarcampocita = false;
 				return;
 			}
+				
 			
-			if($scope.tipoinmueble == null){
+			if($scope.tipoinmueble == null || angular.toJson($scope.tipoinmueble.scdatmaestro) == 'null'){
 				messageFactory.showMessage($scope,"Advertencia", " ","El tipo de inmueble es un dato obligatorio");
 				$("#tipoinmueble").focus();
 				validarcampocita = false;
 				return;
 			}
 			
-			if($scope.propiedad == null){
+			if($scope.propiedad == null || angular.toJson($scope.propiedad.scpropiedad) == 'null'){
 				messageFactory.showMessage($scope,"Advertencia", " ","El inmueble es un dato obligatorio");
 				$("#propiedad").focus();
 				validarcampocita = false;

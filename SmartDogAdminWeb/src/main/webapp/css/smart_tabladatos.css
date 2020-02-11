@@ -1,0 +1,94 @@
+table.tabledatos {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.4em;
+    font-style: normal;
+    border-collapse:separate;
+    width: 100%;
+
+}
+thead{
+	width: 100%;
+}
+.tbody{
+  height: auto; /*la que necesites*/
+  overflow: auto; /*obligado*/
+  width: 100%;
+}
+.container{
+	height: 100%;
+	width: 100%;
+/*	background: red;*/
+}
+
+.tabledatos thead th{
+    padding:3px;
+    color:black;
+    text-shadow:1px 1px 1px #329b1d;
+    border:1px solid #93CE37;
+    border-bottom:3px solid rgb(198,224,180);
+    background-color: rgb(198,224,180);
+    background:-webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.02, rgb(198,224,180)),
+        color-stop(0.51, rgb(198,224,180)),
+        color-stop(0.87, rgb(198,224,180))
+        );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(198,224,180) 2%,
+        rgb(198,224,180) 51%,
+        rgb(198,224,180) 87%
+        );
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-radius:5px 5px 0px 0px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    
+}
+
+.tabledatos thead th:empty{
+    background:transparent;
+    border:none;
+}
+
+.tabledatos caption {
+	background-color: rgb(169,208,142);
+	color:black;
+	font-size:15px;
+	padding:5px;
+	text-shadow:1px 1px 1px #329b1d;
+}
+
+.tabledatos tfoot td{
+    color: #9CD009;
+    font-size:32px;
+    text-align:center;
+    padding:5px 0px;
+    text-shadow:1px 1px 1px #444;
+    
+}
+.tabledatos tfoot th{
+    color:#666;
+}
+
+.tabledatos tbody tr td{
+    text-align:center;
+    background-color: rgb(244,250,241);
+    border: 1px solid #E7EFE0;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    color:#666;
+    text-shadow:1px 1px 1px #fff;
+    width: 100%;
+    text-transform:uppercase;
+}
+
+.tabledatos tbody span.check::before{
+    content : url(../images/aceptar.PNG)
+}

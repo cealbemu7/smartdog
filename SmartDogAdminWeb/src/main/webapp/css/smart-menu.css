@@ -1,0 +1,60 @@
+
+p {font-size:0; /* Fixes inline block spacing */  }
+span { width:100%; display:inline-block; }
+span.align-right { text-align:right;}
+span a { font-size:16px; }
+
+div { width:100%; display:inline-block; }
+div.align-right { text-align:right;}
+div a { font-size:16px; }
+
+body {
+	background-color: #333333;
+	font-family: "Open Sans", Helvetica;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: #000000;
+}
+ 
+ul li {
+  display: block;
+  position: relative;
+  float: left;
+  background: #000000;
+}
+li ul { display: none; }
+ 
+ul li a {
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  white-space: nowrap;
+  color: #fff;
+}
+ 
+ul li a:hover { background: #c0c0c0; }
+li:hover > ul {
+  display: block;
+  position: absolute;
+}
+ 
+li:hover li { float: none; }
+ 
+li:hover a { background: #000000; }
+ 
+li:hover li a:hover { background: #c0c0c0; }
+ 
+.main-navigation li ul li { border-top: 0; }
+ul ul ul {
+  left: 100%;
+  top: 0;
+}
+ul:before,
+ul:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+ul:after { clear: both; }

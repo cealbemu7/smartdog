@@ -316,7 +316,7 @@ angular.module('smartApp').controller('registroCitasCtrl',function($scope, smart
 					$scope.cliente.dstelefono = cliente.dstelefono;
 					$scope.cliente.dscelular = cliente.dscelular;
 					$scope.cliente.dsemail = cliente.dsemail;
-					$scope.cliente.fhnacimiento = cliente.fhnacimiento; 	
+					$scope.cliente.fhnacimiento = new Date(cliente.fhnacimiento);
 					
 					$.each($scope.sexos, function( index , sexo ) {
 						if(sexo.scdatmaestro == cliente.sexo.scdatmaestro){

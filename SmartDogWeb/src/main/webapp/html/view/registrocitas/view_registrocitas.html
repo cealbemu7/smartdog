@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html ng-app="smartApp" lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Registro de citas</title>
-<script type="text/javascript"
-	src="../../../js/jquery/jquery-3.4.1.min.js"></script>
-<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css">
-<link href="../../../css/custom.css" rel="stylesheet" type="text/css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
+	<title>Registro de citas</title>
+	<script type="text/javascript" src="../../../js/jquery/jquery-3.4.1.min.js"></script>
+	<link href="../../../bootstrap-3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="../../../css/custom.css" rel="stylesheet" type="text/css">
+
+	<!-- Importando js de bootstrap && jquery -->
+	<script type="text/javascript" src="../../../bootstrap-3/js/bootstrap.min.js"></script>
+
+	<!-- Importarmos angular JS -->
+	<script type="text/javascript" src="../../../js/angular-1.4.7/angular.min.js"></script>
+	<script type="text/javascript" src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
+	<script type="text/javascript" src="../../../js/angucomplete/angucomplete.js"></script>
+	<script type="text/javascript" src="../../../js/smartmessagebox/app.min.js"> </script>
+	<script type="text/javascript" src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
+	<script type="text/javascript" src="../../../js/smart/SmartConstantes.js"></script>
+
+	<!-- Smart javascript framework -->
+	<script type="text/javascript" src="../../../js/smart/angular-websocket.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
+	<script type="text/javascript" src="js/registrocitasCtrl.js"></script>
+	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
+
+	<!-- Importarmos Resources Services JS -->
+	<script type="text/javascript" src="js/resourceServicesRegistrocitas.js"></script>
+	<script type="text/javascript" src="../cargainicial/js/resourceServicesCargaInicial.js"></script>
 </head>
 <body ng-controller="registroCitasCtrl" ng-init="onInit()">
 	<nav class="navbar navbar-inverse">
@@ -35,15 +55,13 @@
 
 				</div>
 				<div class="stepwizard-step col-xs-4">
-					<a href="#step-2" type="button" class="btn btn-default btn-circle"
-						disabled="disabled">2</a>
+					<a href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
 					<p>
 						<small>Citas solicitadas</small>
 					</p>
 				</div>
 				<div class="stepwizard-step col-xs-4">
-					<a href="#step-3" type="button" class="btn btn-default btn-circle"
-						disabled="disabled">3</a>
+					<a href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
 					<p>
 						<small>Registro de usuarios</small>
 					</p>
@@ -109,9 +127,8 @@
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
-							<label class="control-label">Fecha*</label> <input id="fecha"
-								ng-model="fhcita" maxlength="100" type="date"
-								required="required" class="form-control" />
+							<label class="control-label">Fecha*</label> 
+							<input id="fecha" ng-model="fhcita" maxlength="100" type="date" required="required" class="form-control" />
 						</div>
 					</div>
 					<div class="col-lg-4">
@@ -122,10 +139,8 @@
 						</div>
 					</div>
 				</div>
-				<input ng-click="GrabarCita();" type="submit"
-					class="btn btn-success" value="Reservar cita"> <input
-					type="submit" class="btn btn-success" value="Nueva cita">
-				<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+				<button type="button" class="btn btn-dark" ng-click="GrabarCita();">Reservar cita</button> 
+				<button type="button" class="btn btn-dark">Nueva cita</button>
 			</div>
 		</div>
 		<!-- comienzo del codigo del Step 2 ----------------------->
@@ -137,7 +152,8 @@
 				
 				<div class="alert alert-info fade in" id="messageBoxDos">
 					<button class="close" data-dismiss="alert"></button>
-					<i class="fa-fw fa fa-info" id="messageBoxImageDos"></i> <strong>{{titulo_mensajesDos}}</strong>
+					<i class="fas fa fa-info" id="messageBoxImageDos"></i> <strong>{{titulo_mensajesDos}}</strong>
+					
 					{{descripcion_mensajesDos}}
 				</div>
 				
@@ -170,7 +186,7 @@
 								style="font-size: 12px">
 								<td style="display: none;">{{c.sccita}}</td>
 								<td class="botonera-table" style="width: 10%;">
-									<button class='btn btn-xs btn-succses' title="Cancelar citas" data-toggle="tooltip" data-original-title='Cancelar' ng-click="eliminarCita(c);"><i class='fa fa-eye'></i></button>
+									<button type="button" class="btn btn-danger" title="Cancelar citas" data-toggle="tooltip" data-original-title='Cancelar' ng-click="eliminarCita(c);">Cancelar</button>
 								</td>
 								<td style="width: 25%;">{{c.empresa.dsrazonsocial}}</td>
 								<td style="width: 20%;">{{c.tipoinmueble.dsdatmaestro}}</td>
@@ -180,7 +196,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
 				</div>
 			</div>
 		</div>
@@ -224,8 +239,8 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Primer nombre *</label> <input
-									id="dspnombre" type="text" ng-model="cliente.dspnombre"
+								<label class="control-label">Primer nombre *</label> 
+									<input id="dspnombre" type="text" ng-model="cliente.dspnombre"
 									maxlength="150" ng-trim="true" tabindex=3 class="form-control"
 									required="required"> <b
 									class="tooltip tooltip-bottom-right"> <i
@@ -308,12 +323,8 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Fecha de nacimiento</label> <input
-									id="fhnacimiento" type="date" name="request"
-									placeholder="DD/MM/AAAA" data-dateformat='dd/mm/yy'
-									ng-model="cliente.fhnacimiento" class="form-control"> <i
-									class="icon-append txt-color-teal fa fa-calendar"
-									title="Botón para buscar en calendario" data-toggle="tooltip"></i>
+								<label class="control-label">Fecha de nacimiento</label> 
+								<input id="fhnacimiento" ng-model="cliente.fhnacimiento" maxlength="100" type="date" class="form-control" />
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -338,11 +349,9 @@
 							</div>
 						</div>
 					</div>
-					<a href="#" type="button" id="btnguardar" class='btn btn-success'
-						title="Botón para Guardar cliente" data-toggle="tooltip"
-						data-original-title='Guardar cliente' ng-click="GrabarCliente()"
-						tabindex=3><i class="fa fa-floppy-o"></i> Guardar</a>
-					<button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+					<button type="button" class="btn btn-dark" id="btnguardar" title="Botón para Guardar cliente" data-toggle="tooltip" data-original-title='Guardar cliente' ng-click="GrabarCliente()">Guardar</button>
+					<br>
+					<br>
 				</div>
 			</form>
 		</div>
@@ -356,37 +365,5 @@
 		<!-- Copyright -->
 	</footer>
 	<!-- Footer -->
-
-	<!-- Importando js de bootstrap && jquery -->
-	<script type="text/javascript"
-		src="../../../bootstrap-3/js/bootstrap.min.js"></script>
-
-	<!-- Importarmos angular JS -->
-	<script type="text/javascript"
-		src="../../../js/angular-1.4.7/angular.min.js"></script>
-	<script type="text/javascript"
-		src="../../../js/ngdialog-0.2.3/ngDialog.min.js"></script>
-	<script type="text/javascript"
-		src="../../../js/angucomplete/angucomplete.js"></script>
-	<script type="text/javascript"
-		src="../../../js/smartmessagebox/app.min.js"> </script>
-	<script type="text/javascript"
-		src="../../../js/smartmessagebox/notification/SmartNotification.min.js"> </script>
-	<script type="text/javascript"
-		src="../../../js/smart/SmartConstantes.js"></script>
-
-	<!-- Smart javascript framework -->
-	<script type="text/javascript"
-		src="../../../js/smart/angular-websocket.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartUtil.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartApp.js"></script>
-	<script type="text/javascript" src="js/registrocitasCtrl.js"></script>
-	<script type="text/javascript" src="../../../js/smart/SmartServices.js"></script>
-
-	<!-- Importarmos Resources Services JS -->
-	<script type="text/javascript"
-		src="js/resourceServicesRegistrocitas.js"></script>
-	<script type="text/javascript"
-		src="../cargainicial/js/resourceServicesCargaInicial.js"></script>
 </body>
 </html>
